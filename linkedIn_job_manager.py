@@ -227,10 +227,25 @@ class LinkedInJobManager:
             utils.scroll_slow(self.driver, job_results)
             utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
 
-            job_list_elements = self.driver.find_elements(By.CLASS_NAME, 'jobs-search-results__list-item')
+            # Try multiple selectors for job listings
+            job_list_selectors = [
+                'div[data-job-id]',
+                '.job-card-container--clickable',
+                '.jobs-search-results__list-item',
+                '.jobs-search-two-pane__job-card-container',
+                '.job-card-list__footer'
+            ]
+            
+            job_list_elements = []
+            for selector in job_list_selectors:
+                elements = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                if elements:
+                    job_list_elements = elements
+                    utils.printyellow(f"Found job listings with selector: {selector}")
+                    break
 
             if not job_list_elements:
-                raise Exception("No job class elements found on page")
+                raise Exception("No job elements found on page with any selector")
 
             for job_element in job_list_elements:
                 job_info = self.extract_job_information_from_tile(job_element)
