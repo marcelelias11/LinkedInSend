@@ -198,18 +198,31 @@ class LinkedInJobManager:
                     if any(msg in element.text.lower() for msg in ['no matching jobs', 'no results', 'unfortunately']):
                         raise Exception("No more jobs on this page")
 
-            # Try multiple possible selectors for job results
+            # Try multiple possible selectors for job results with expanded options
             job_results = None
-            for selector in [".jobs-search-results-list", ".jobs-search-results__list"]:
+            result_selectors = [
+                ".jobs-search-results-list",
+                ".jobs-search-results__list",
+                ".scaffold-layout__list-container",
+                ".jobs-search-results-container",
+                ".jobs-search__job-card-list",
+                ".jobs-search-results__list-item",
+                "div[data-occludable-job-id]"
+            ]
+            
+            for selector in result_selectors:
                 try:
-                    job_results = WebDriverWait(self.driver, 5).until(
+                    job_results = WebDriverWait(self.driver, 10).until(
                         EC.presence_of_element_located((By.CSS_SELECTOR, selector))
                     )
-                    break
-                except TimeoutException:
+                    if job_results.is_displayed():
+                        utils.printyellow(f"Found job results with selector: {selector}")
+                        break
+                except:
                     continue
 
             if not job_results:
+                utils.printred("Could not find job results list")
                 raise Exception("Could not find job results list")
 
             utils.scroll_slow(self.driver, job_results)
