@@ -159,13 +159,18 @@ class LinkedInJobManager:
                     continue
 
                 try:
-                    if job.apply_method not in {"Continue", "Applied", "Apply"}:
+                    if job.apply_method in {"Easy Apply", "Apply"}:
+                        utils.printyellow(f"Attempting to apply for {job.title} at {job.company}...")
                         self.easy_applier_component.job_apply(job)
+                        utils.printyellow(f"Successfully applied to {job.title} at {job.company}")
+                        self.write_to_file(job.company, job.location, job.title, job.link, "success")
+                    else:
+                        utils.printyellow(f"Skipping {job.title} - not an Easy Apply job")
+                        self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
                 except Exception as e:
+                    utils.printred(f"Failed to apply for {job.title} at {job.company}: {str(e)}")
                     utils.printred(traceback.format_exc())
                     self.write_to_file(job.company, job.location, job.title, job.link, "failed")
-                    continue  
-                self.write_to_file(job.company, job.location, job.title, job.link, "success")
         
         except Exception as e:
             traceback.format_exc()
