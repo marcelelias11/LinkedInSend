@@ -357,7 +357,10 @@ class LinkedInJobManager:
                 '.jobs-search-results__list-item-title',
                 '.job-card-container__title',
                 '.job-card-list__entity-lockup',
-                '.jobs-unified-top-card__job-title'
+                '.jobs-unified-top-card__job-title',
+                '.job-card-list',
+                '.artdeco-entity-lockup__title',
+                'h3.base-search-card__title'
             ]
 
             # Try each title selector
