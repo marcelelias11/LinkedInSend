@@ -227,29 +227,49 @@ class LinkedInJobManager:
             utils.scroll_slow(self.driver, job_results)
             utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
 
-            # Wait for job listings to be present
+            # Wait for job listings to be present with multiple selector attempts
             job_list_elements = []
             wait = WebDriverWait(self.driver, base_timeout)
             
+            selectors = [
+                '.jobs-search-results-list',
+                '.job-card-container--clickable',
+                '.jobs-search__job-card-list',
+                '.jobs-s-apply',
+                '.job-details-jobs-unified-top-card__primary-description-container'
+            ]
+            
             try:
-                # First wait for the container to be present
-                container = wait.until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-search-results-list'))
-                )
+                # Try each selector
+                for selector in selectors:
+                    try:
+                        utils.printyellow(f"Trying selector: {selector}")
+                        job_list_elements = wait.until(
+                            EC.presence_of_all_elements_located((By.CSS_SELECTOR, selector))
+                        )
+                        if job_list_elements:
+                            utils.printyellow(f"Found {len(job_list_elements)} job listings with selector {selector}")
+                            break
+                    except:
+                        continue
+                        
+                if not job_list_elements:
+                    # Try the new job card structure
+                    try:
+                        container = wait.until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-search__job-details--wrapper'))
+                        )
+                        job_list_elements = container.find_elements(By.CSS_SELECTOR, '.job-details-jobs-unified-top-card')
+                    except:
+                        pass
                 
-                # Then wait for the job cards
-                job_list_elements = wait.until(
-                    EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.job-card-container'))
-                )
-                
-                if job_list_elements:
-                    utils.printyellow(f"Found {len(job_list_elements)} job listings")
-                else:
-                    utils.printyellow("No job listings found in container")
+                if not job_list_elements:
+                    utils.printred("No job listings found with any selector")
+                    raise Exception("No job elements found on page")
                     
-            except TimeoutException:
-                utils.printred("Timeout waiting for job listings")
-                raise Exception("No job elements found within timeout period")
+            except Exception as e:
+                utils.printred(f"Error finding job listings: {str(e)}")
+                raise Exception("Failed to find job listings")
             
             if not job_list_elements:
                 raise Exception("No job elements found on page")
