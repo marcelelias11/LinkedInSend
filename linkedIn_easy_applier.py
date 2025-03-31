@@ -73,44 +73,76 @@ class LinkedInEasyApplier:
 
     def _get_job_description(self) -> str:
         try:
-            # Wait for job details to load
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-description__content'))
-            )
-
-            # Try to find and click "see more" button if it exists
-            try:
-                see_more_buttons = self.driver.find_elements(By.XPATH, 
-                    '//*[contains(@aria-label, "Click to see more")]|//button[contains(@class, "show-more-less-html__button")]')
-                if see_more_buttons:
-                    see_more_buttons[0].click()
-                    time.sleep(0.5)
-            except:
-                pass  # Button may not exist if description is short
-
-            # Try multiple selectors for job description
+            # Wait for either of these elements to be present
             description_selectors = [
-                '.jobs-description-content__text',
-                '.jobs-box__html-content',
                 '.jobs-description__content',
-                '.jobs-unified-top-card__job-details'
+                '.jobs-unified-top-card__job-details',
+                '.jobs-search-results-list',
+                '.jobs-description',
+                '[data-member-id]',
+                '.job-details-jobs-unified-top-card__primary-description-container'
             ]
-
+            
+            # Wait for any of the selectors to be present
             for selector in description_selectors:
                 try:
-                    description = self.driver.find_element(By.CSS_SELECTOR, selector).text
-                    if description.strip():
-                        return description
+                    WebDriverWait(self.driver, 3).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    )
+                    break
+                except:
+                    continue
+            
+            time.sleep(1)  # Allow dynamic content to load
+
+            # Try to find and click "see more" button if it exists
+            see_more_selectors = [
+                '//*[contains(@aria-label, "Click to see more")]',
+                '//button[contains(@class, "show-more-less-html__button")]',
+                '//button[contains(text(), "more")]',
+                '//button[contains(text(), "See more")]'
+            ]
+            
+            for selector in see_more_selectors:
+                try:
+                    buttons = self.driver.find_elements(By.XPATH, selector)
+                    if buttons:
+                        buttons[0].click()
+                        time.sleep(0.5)
+                        break
                 except:
                     continue
 
+            # Updated list of description selectors
+            content_selectors = [
+                '.jobs-description__content span',
+                '.jobs-box__html-content',
+                '.jobs-unified-top-card__job-details',
+                '.jobs-description',
+                '.jobs-description-content__text',
+                '.job-details-jobs-unified-top-card__primary-description-container',
+                '.jobs-unified-top-card__job-details p',
+                '.jobs-description__content div'
+            ]
+
+            full_description = []
+            for selector in content_selectors:
+                try:
+                    elements = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                    for element in elements:
+                        text = element.text.strip()
+                        if text:
+                            full_description.append(text)
+                except:
+                    continue
+
+            if full_description:
+                return '\n'.join(full_description)
+
             raise Exception("Could not find job description with any selector")
-        except NoSuchElementException:
+        except Exception as e:
             tb_str = traceback.format_exc()
-            raise Exception("Job description 'See more' button not found: \nTraceback:\n{tb_str}")
-        except Exception :
-            tb_str = traceback.format_exc()
-            raise Exception(f"Error getting Job description: \nTraceback:\n{tb_str}")
+            raise Exception(f"Error getting Job description: {str(e)}\nTraceback:\n{tb_str}")
 
     def _scroll_page(self) -> None:
         scrollable_element = self.driver.find_element(By.TAG_NAME, 'html')
