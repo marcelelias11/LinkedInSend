@@ -117,14 +117,33 @@ class LinkedInJobManager:
 
     def apply_jobs(self):
         try:
-            # Check for no results using more reliable method
-            no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner, .jobs-search-two-pane__no-results-banner')
-            
-            # Verify if we actually have no results
+            # Wait for either job results or no results message
+            try:
+                WebDriverWait(self.driver, 10).until(
+                    lambda d: d.find_elements(By.CSS_SELECTOR, '.jobs-search-results-list, .jobs-search-no-results-banner')
+                )
+            except TimeoutException:
+                raise Exception("Page did not load job results within timeout")
+
+            # Check for no results
+            no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner')
             if no_jobs_elements and any(msg in no_jobs_elements[0].text.lower() for msg in ['no matching jobs found', 'unfortunately, things aren']):
                 raise Exception("No more jobs on this page")
 
-            job_results = self.driver.find_element(By.CLASS_NAME, "jobs-search-results-list")
+            # Try multiple possible selectors for job results
+            job_results = None
+            for selector in [".jobs-search-results-list", ".jobs-search-results__list"]:
+                try:
+                    job_results = WebDriverWait(self.driver, 5).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    )
+                    break
+                except TimeoutException:
+                    continue
+
+            if not job_results:
+                raise Exception("Could not find job results list")
+
             utils.scroll_slow(self.driver, job_results)
             utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
             
