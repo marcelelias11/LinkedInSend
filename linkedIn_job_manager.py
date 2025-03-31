@@ -222,27 +222,37 @@ class LinkedInJobManager:
     def extract_job_information_from_tile(self, job_tile):
         job_title, company, job_location, apply_method, link = "", "", "", "", ""
         try:
-            job_title = job_tile.find_element(By.CLASS_NAME, 'job-card-list__title').text
-            link = job_tile.find_element(By.CLASS_NAME, 'job-card-list__title').get_attribute('href').split('?')[0]
-            company = job_tile.find_element(By.CLASS_NAME, 'job-card-container__primary-description').text
-        except:
-            pass
-        try:
-            hiring_line = job_tile.find_element(By.XPATH, '//span[contains(.,\' is hiring for this\')]')
-            hiring_line_text = hiring_line.text
-            name_terminating_index = hiring_line_text.find(' is hiring for this')
-        except:
-            pass
-        try:
-            job_location = job_tile.find_element(By.CLASS_NAME, 'job-card-container__metadata-item').text
-        except:
-            pass
-        try:
-            apply_method = job_tile.find_element(By.CLASS_NAME, 'job-card-container__apply-method').text
-        except:
-            apply_method = "Applied"
-
-        return job_title, company, job_location, link, apply_method
+            # Get job title and link
+            title_element = job_tile.find_element(By.CSS_SELECTOR, '.job-card-list__title')
+            job_title = title_element.text.strip()
+            link = title_element.get_attribute('href').split('?')[0]
+            
+            # Get company name
+            company = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__primary-description').text.strip()
+            
+            # Get location
+            job_location = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__metadata-item').text.strip()
+            
+            # Get apply method - look for "Easy Apply" button specifically
+            try:
+                apply_button = job_tile.find_element(By.CSS_SELECTOR, '.jobs-apply-button')
+                apply_method = apply_button.text.strip()
+            except:
+                try:
+                    # Fallback to general apply method
+                    apply_method = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__apply-method').text.strip()
+                except:
+                    apply_method = "Apply"
+                    
+            if not all([job_title, company, link]):
+                utils.printred(f"Missing critical job information: Title={job_title}, Company={company}, Link={link}")
+                return None, None, None, None, None
+                
+            return job_title, company, job_location, link, apply_method
+            
+        except Exception as e:
+            utils.printred(f"Error extracting job information: {str(e)}")
+            return None, None, None, None, None
     
     def is_blacklisted(self, job_title, company, link):
         job_title_words = job_title.lower().split(' ')
