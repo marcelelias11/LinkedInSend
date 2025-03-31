@@ -164,7 +164,7 @@ class LinkedInJobManager:
             job_container = None
             for attempt in range(max_retries):
                 utils.printyellow(f"Attempt {attempt + 1} to find job listings...")
-                
+
                 # Try each selector
                 for selector in container_selectors:
                     try:
@@ -176,10 +176,10 @@ class LinkedInJobManager:
                             break
                     except:
                         continue
-                
+
                 if job_container:
                     break
-                    
+
                 if attempt < max_retries - 1:
                     utils.printyellow("Refreshing page and waiting...")
                     self.driver.refresh()
@@ -208,7 +208,7 @@ class LinkedInJobManager:
                 ".job-card-list__title-link",
                 ".artdeco-entity-lockup__content"
             ]
-            
+
             for selector in result_selectors:
                 try:
                     job_results = WebDriverWait(self.driver, 10).until(
@@ -229,7 +229,7 @@ class LinkedInJobManager:
             # Wait for job listings to be present with multiple selector attempts
             job_list_elements = []
             wait = WebDriverWait(self.driver, base_timeout)
-            
+
             selectors = [
                 '.jobs-search-results-list',
                 '.job-card-container--clickable',
@@ -237,7 +237,7 @@ class LinkedInJobManager:
                 '.jobs-s-apply',
                 '.job-details-jobs-unified-top-card__primary-description-container'
             ]
-            
+
             try:
                 # Try each selector
                 for selector in selectors:
@@ -251,7 +251,7 @@ class LinkedInJobManager:
                             break
                     except:
                         continue
-                        
+
                 if not job_list_elements:
                     # Try the new job card structure
                     try:
@@ -261,15 +261,15 @@ class LinkedInJobManager:
                         job_list_elements = container.find_elements(By.CSS_SELECTOR, '.job-details-jobs-unified-top-card')
                     except:
                         pass
-                
+
                 if not job_list_elements:
                     utils.printred("No job listings found with any selector")
                     raise Exception("No job elements found on page")
-                    
+
             except Exception as e:
                 utils.printred(f"Error finding job listings: {str(e)}")
                 raise Exception("Failed to find job listings")
-            
+
             if not job_list_elements:
                 raise Exception("No job elements found on page")
 
@@ -359,7 +359,7 @@ class LinkedInJobManager:
                 '.job-card-list__entity-lockup',
                 '.jobs-unified-top-card__job-title'
             ]
-            
+
             # Try each title selector
             title_element = None
             for selector in title_selectors:
@@ -369,48 +369,59 @@ class LinkedInJobManager:
                         break
                 except:
                     continue
-                    
+
             if not title_element:
                 raise Exception("Could not find job title element")
-                
+
             job_title = title_element.text.strip()
             link = title_element.get_attribute('href')
             if link:
                 link = link.split('?')[0]
-            
-            # Multiple selectors for company name
+
+            # Multiple selectors for company name with expanded coverage
             company_selectors = [
                 '.job-card-container__primary-description',
                 '.job-card-container__company-name',
-                'a[data-control-name="company_link"]',
+                '.artdeco-entity-lockup__subtitle',
                 '.job-card-container__company-link',
-                '.job-card-list__company-name',
                 '.job-search-card__company-name',
                 '.jobs-unified-top-card__company-name',
-                'a[data-test-app-aware-link]',
-                '.ember-view.job-card-container__link.job-card-list__entity-lockup.typing-read-only',
-                '.job-card-container__company-name-link',
-                '.job-card-container__company-info',
-                '.jobs-unified-top-card__company-name-link'
+                '.jobs-unified-top-card__primary-description',
+                'a[data-test-job-card-company-link]',
+                '.job-card-list__company-name',
+                '.jobs-company__name'
             ]
-            
-            # Try each company selector
+
+            # Try each company selector with improved error handling
             for selector in company_selectors:
                 try:
-                    company_element = job_tile.find_element(By.CSS_SELECTOR, selector)
-                    if company_element.is_displayed():
-                        company = company_element.text.strip()
+                    company_elements = job_tile.find_elements(By.CSS_SELECTOR, selector)
+                    for company_element in company_elements:
+                        if company_element.is_displayed():
+                            company_text = company_element.text.strip()
+                            if company_text:
+                                company = company_text
+                                break
+                    if company:  # If we found a company name, break the outer loop
                         break
-                except:
+                except Exception as e:
                     continue
-                    
+
+            # If no company found, try parent elements
+            if not company:
+                try:
+                    parent = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__company-info')
+                    company = parent.text.strip().split('\n')[0]
+                except:
+                    pass
+
             # Multiple selectors for location
             location_selectors = [
                 '.job-card-container__metadata-item',
                 '.job-card-container__location',
                 '.job-card-container__location-text'
             ]
-            
+
             # Try each location selector
             for selector in location_selectors:
                 try:
