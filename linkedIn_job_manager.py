@@ -120,17 +120,28 @@ class LinkedInJobManager:
     def apply_jobs(self):
         try:
             # Wait for either job results or no results message
+            # Wait for either search results container or no results message
             try:
-                WebDriverWait(self.driver, 10).until(
-                    lambda d: d.find_elements(By.CSS_SELECTOR, '.jobs-search-results-list, .jobs-search-no-results-banner')
+                WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-search-results-list, .scaffold-layout__list-container, .jobs-search-no-results-banner'))
                 )
+                time.sleep(2)  # Allow for dynamic content to load
             except TimeoutException:
-                raise Exception("Page did not load job results within timeout")
+                utils.printyellow("Waiting longer for job results to load...")
+                time.sleep(5)  # Extra wait time for slow connections
+                try:
+                    WebDriverWait(self.driver, 10).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-search-results-list, .scaffold-layout__list-container, .jobs-search-no-results-banner'))
+                    )
+                except TimeoutException:
+                    raise Exception("Page did not load job results after extended wait")
 
-            # Check for no results
-            no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner')
-            if no_jobs_elements and any(msg in no_jobs_elements[0].text.lower() for msg in ['no matching jobs found', 'unfortunately, things aren']):
-                raise Exception("No more jobs on this page")
+            # Check for no results with expanded selector set
+            no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner, .jobs-search-two-pane__no-results-banner')
+            if no_jobs_elements:
+                for element in no_jobs_elements:
+                    if any(msg in element.text.lower() for msg in ['no matching jobs', 'no results', 'unfortunately']):
+                        raise Exception("No more jobs on this page")
 
             # Try multiple possible selectors for job results
             job_results = None
