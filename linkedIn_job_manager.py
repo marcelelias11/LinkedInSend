@@ -119,22 +119,38 @@ class LinkedInJobManager:
 
     def apply_jobs(self):
         try:
-            # Wait for either job results or no results message
-            # Wait for either search results container or no results message
-            try:
-                WebDriverWait(self.driver, 15).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-search-results-list, .scaffold-layout__list-container, .jobs-search-no-results-banner'))
-                )
-                time.sleep(2)  # Allow for dynamic content to load
-            except TimeoutException:
-                utils.printyellow("Waiting longer for job results to load...")
-                time.sleep(5)  # Extra wait time for slow connections
+            # Wait for either job results or no results message with expanded selectors
+            selectors = [
+                '.jobs-search-results-list',
+                '.scaffold-layout__list-container',
+                '.jobs-search-results__list',
+                '.jobs-search-no-results-banner',
+                '.jobs-search-results-container'
+            ]
+
+            selector_found = False
+            for selector in selectors:
                 try:
                     WebDriverWait(self.driver, 10).until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-search-results-list, .scaffold-layout__list-container, .jobs-search-no-results-banner'))
+                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    )
+                    selector_found = True
+                    utils.printyellow(f"Found job results with selector: {selector}")
+                    break
+                except TimeoutException:
+                    continue
+
+            if not selector_found:
+                utils.printyellow("Initial selectors not found, waiting longer...")
+                time.sleep(5)  # Give page more time to load
+
+                # Try one more time with all selectors
+                try:
+                    WebDriverWait(self.driver, 15).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, ', '.join(selectors)))
                     )
                 except TimeoutException:
-                    raise Exception("Page did not load job results after extended wait")
+                    raise Exception("Could not find job results after extended wait")
 
             # Check for no results with expanded selector set
             no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner, .jobs-search-two-pane__no-results-banner')
@@ -194,40 +210,6 @@ class LinkedInJobManager:
             utils.printred(traceback.format_exc())
             raise e
 
-            job_results = self.driver.find_element(By.CLASS_NAME, "jobs-search-results-list")
-            utils.scroll_slow(self.driver, job_results)
-            utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
-
-            job_list_elements = self.driver.find_elements(By.CLASS_NAME, 'scaffold-layout__list-container')[0].find_elements(By.CLASS_NAME, 'jobs-search-results__list-item')
-
-            if not job_list_elements:
-                raise Exception("No job class elements found on page")
-
-            job_list = [Job(*self.extract_job_information_from_tile(job_element)) for job_element in job_list_elements]
-
-            for job in job_list:
-                if self.is_blacklisted(job.title, job.company, job.link):
-                    utils.printyellow(f"Blacklisted {job.title} at {job.company}, skipping...")
-                    self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
-                    continue
-
-                try:
-                    if job.apply_method in {"Easy Apply", "Apply"}:
-                        utils.printyellow(f"Attempting to apply for {job.title} at {job.company}...")
-                        self.easy_applier_component.job_apply(job)
-                        utils.printyellow(f"Successfully applied to {job.title} at {job.company}")
-                        self.write_to_file(job.company, job.location, job.title, job.link, "success")
-                    else:
-                        utils.printyellow(f"Skipping {job.title} - not an Easy Apply job")
-                        self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
-                except Exception as e:
-                    utils.printred(f"Failed to apply for {job.title} at {job.company}: {str(e)}")
-                    utils.printred(traceback.format_exc())
-                    self.write_to_file(job.company, job.location, job.title, job.link, "failed")
-
-        except Exception as e:
-            traceback.format_exc()
-            raise e
 
     def write_to_file(self, company, job_title, link, job_location, file_name):
         to_write = [company, job_title, link, job_location]
