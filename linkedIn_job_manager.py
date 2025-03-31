@@ -159,17 +159,17 @@ class LinkedInJobManager:
 
             utils.scroll_slow(self.driver, job_results)
             utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
-            
+
             job_list_elements = self.driver.find_elements(By.CLASS_NAME, 'jobs-search-results__list-item')
-            
+
             if not job_list_elements:
                 raise Exception("No job class elements found on page")
-            
+
             for job_element in job_list_elements:
                 job_info = self.extract_job_information_from_tile(job_element)
                 if not any(info is None for info in job_info):
                     job = Job(*job_info)
-                    
+
                     if self.is_blacklisted(job.title, job.company, job.link):
                         utils.printyellow(f"Blacklisted {job.title} at {job.company}, skipping...")
                         self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
@@ -188,23 +188,23 @@ class LinkedInJobManager:
                         utils.printred(f"Failed to apply for {job.title} at {job.company}: {str(e)}")
                         utils.printred(traceback.format_exc())
                         self.write_to_file(job.company, job.location, job.title, job.link, "failed")
-        
+
         except Exception as e:
             utils.printred(f"Error in apply_jobs: {str(e)}")
             utils.printred(traceback.format_exc())
             raise e
-            
+
             job_results = self.driver.find_element(By.CLASS_NAME, "jobs-search-results-list")
             utils.scroll_slow(self.driver, job_results)
             utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
-            
+
             job_list_elements = self.driver.find_elements(By.CLASS_NAME, 'scaffold-layout__list-container')[0].find_elements(By.CLASS_NAME, 'jobs-search-results__list-item')
-            
+
             if not job_list_elements:
                 raise Exception("No job class elements found on page")
-            
+
             job_list = [Job(*self.extract_job_information_from_tile(job_element)) for job_element in job_list_elements]
-            
+
             for job in job_list:
                 if self.is_blacklisted(job.title, job.company, job.link):
                     utils.printyellow(f"Blacklisted {job.title} at {job.company}, skipping...")
@@ -224,11 +224,11 @@ class LinkedInJobManager:
                     utils.printred(f"Failed to apply for {job.title} at {job.company}: {str(e)}")
                     utils.printred(traceback.format_exc())
                     self.write_to_file(job.company, job.location, job.title, job.link, "failed")
-        
+
         except Exception as e:
             traceback.format_exc()
             raise e
-    
+
     def write_to_file(self, company, job_title, link, job_location, file_name):
         to_write = [company, job_title, link, job_location]
         file_path = self.output_file_directory / f"{file_name}.csv"
@@ -268,10 +268,10 @@ class LinkedInJobManager:
         url_parts.append("f_LF=f_AL")  # Easy Apply
         base_url = "&".join(url_parts)
         return f"?{base_url}{date_param}"
-    
+
     def next_job_page(self, position, location, job_page):
         self.driver.get(f"https://www.linkedin.com/jobs/search/{self.base_search_url}&keywords={position}{location}&start={job_page * 25}")
-    
+
     def extract_job_information_from_tile(self, job_tile):
         job_title, company, job_location, apply_method, link = "", "", "", "", ""
         try:
@@ -279,16 +279,16 @@ class LinkedInJobManager:
             title_element = job_tile.find_element(By.CSS_SELECTOR, '.job-card-list__title')
             job_title = title_element.text.strip()
             link = title_element.get_attribute('href').split('?')[0]
-            
+
             # Get company name
             company = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__primary-description').text.strip()
-            
+
             # Get location
             job_location = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__metadata-item').text.strip()
-            
+
             # Get apply method - look for "Easy Apply" button specifically
             try:
-                apply_button = job_tile.find_element(By.CSS_SELECTOR, '.jobs-apply-button')
+                apply_button = job_tile.find_element(By.CSS_SELECTOR, '.jobs-apply-button.artdeco-button--primary')
                 apply_method = apply_button.text.strip()
             except:
                 try:
@@ -296,17 +296,17 @@ class LinkedInJobManager:
                     apply_method = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__apply-method').text.strip()
                 except:
                     apply_method = "Apply"
-                    
+
             if not all([job_title, company, link]):
                 utils.printred(f"Missing critical job information: Title={job_title}, Company={company}, Link={link}")
                 return None, None, None, None, None
-                
+
             return job_title, company, job_location, link, apply_method
-            
+
         except Exception as e:
             utils.printred(f"Error extracting job information: {str(e)}")
             return None, None, None, None, None
-    
+
     def is_blacklisted(self, job_title, company, link):
         job_title_words = job_title.lower().split(' ')
         title_blacklisted = any(word in job_title_words for word in self.title_blacklist)
