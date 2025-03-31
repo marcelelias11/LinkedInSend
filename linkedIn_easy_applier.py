@@ -333,30 +333,66 @@ class LinkedInEasyApplier:
             print(f"An error occurred: {e}")
 
     def _handle_textbox_question(self, element: WebElement) -> None:
+        max_retries = 3
         try:
             question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
             question_text = question.find_element(By.TAG_NAME, 'label').text.lower()
             text_field = self._find_text_field(question)
+            
             if not text_field:
-                print("Textbox element not found(early). Skipping...")
+                print("Textbox element not found. Skipping...")
                 return
-            # Check if the text field is already filled
+                
             if text_field.get_attribute('value').strip():
                 print("Textbox already filled. Skipping...")
-                return  # Early exit if the textbox is already filled
+                return
 
             is_numeric = self._is_numeric_field(text_field)
-            answer = self._get_answer_from_set('numeric' if is_numeric else 'text', question_text)
-
-            if not answer:
-                answer = self.gpt_answerer.answer_question_numeric(question_text) if is_numeric else self.gpt_answerer.answer_question_textual_wide_range(question_text)
-
-            self._enter_text(text_field, answer)
-            self._handle_form_errors(element, question_text, answer, text_field)
+            field_type = 'numeric' if is_numeric else 'text'
+            
+            for attempt in range(max_retries):
+                try:
+                    # First try to get answer from previous responses
+                    answer = self._get_answer_from_set(field_type, question_text)
+                    
+                    if not answer:
+                        # If no previous answer, get new one from GPT
+                        answer = (self.gpt_answerer.answer_question_numeric(question_text) 
+                                if is_numeric 
+                                else self.gpt_answerer.answer_question_textual_wide_range(question_text))
+                    
+                    # Clear and enter text
+                    text_field.clear()
+                    text_field.send_keys(answer)
+                    time.sleep(0.5)
+                    
+                    # Check for validation errors
+                    error_elements = element.find_elements(By.CSS_SELECTOR, '.artdeco-inline-feedback--error')
+                    if not error_elements:
+                        print(f"Successfully filled {question_text} with {answer}")
+                        return
+                    
+                    error_text = error_elements[0].text.lower()
+                    if 'valid' in error_text:
+                        print(f"Invalid answer format for {question_text}, retrying...")
+                        if attempt < max_retries - 1:
+                            # Get a new answer for next attempt, explicitly telling GPT about the error
+                            answer = self.gpt_answerer.try_fix_answer(question_text, answer, error_text)
+                            continue
+                    
+                    raise Exception(f"Failed to provide valid answer for {question_text}: {error_text}")
+                    
+                except Exception as e:
+                    if attempt == max_retries - 1:
+                        raise Exception(f"Max retries reached for {question_text}: {str(e)}")
+                    print(f"Attempt {attempt + 1} failed: {str(e)}")
+                    time.sleep(1)
+                    
         except NoSuchElementException:
             print("Textbox element not found.")
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred while handling textbox question: {str(e)}")
+            raise
 
 
     def _handle_date_question(self, element: WebElement) -> None:
