@@ -119,38 +119,76 @@ class LinkedInJobManager:
 
     def apply_jobs(self):
         try:
-            # Wait for either job results or no results message with expanded selectors
-            selectors = [
+            max_retries = 3
+            retry_delay = 2
+            page_load_timeout = 10
+
+            def wait_for_any_element(selectors, timeout):
+                for selector in selectors:
+                    try:
+                        element = WebDriverWait(self.driver, timeout).until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                        )
+                        utils.printyellow(f"Found element with selector: {selector}")
+                        return element
+                    except TimeoutException:
+                        continue
+                return None
+
+            def verify_page_loaded():
+                try:
+                    return self.driver.execute_script("return document.readyState") == "complete"
+                except:
+                    return False
+
+            # Wait for page to be fully loaded
+            for _ in range(max_retries):
+                if verify_page_loaded():
+                    break
+                time.sleep(retry_delay)
+
+            # Primary selectors for job listings
+            primary_selectors = [
                 '.jobs-search-results-list',
                 '.scaffold-layout__list-container',
                 '.jobs-search-results__list',
-                '.jobs-search-no-results-banner',
+                'div[data-view-name="job-search-results"]',
                 '.jobs-search-results-container'
             ]
 
-            selector_found = False
-            for selector in selectors:
-                try:
-                    WebDriverWait(self.driver, 10).until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
-                    )
-                    selector_found = True
-                    utils.printyellow(f"Found job results with selector: {selector}")
+            # Backup selectors that might indicate job listings
+            backup_selectors = [
+                '.job-card-container',
+                '.jobs-search-results__list-item',
+                '.job-card-list',
+                'div[data-job-id]'
+            ]
+
+            # Progressive element detection
+            element = None
+            for attempt in range(max_retries):
+                utils.printyellow(f"Attempt {attempt + 1} to find job listings...")
+                
+                # Try primary selectors first
+                element = wait_for_any_element(primary_selectors, page_load_timeout)
+                if element:
                     break
-                except TimeoutException:
-                    continue
+                    
+                # If primary selectors fail, try backup selectors
+                element = wait_for_any_element(backup_selectors, page_load_timeout)
+                if element:
+                    break
+                    
+                # If both fail, refresh page and wait
+                if attempt < max_retries - 1:
+                    utils.printyellow("Refreshing page and retrying...")
+                    self.driver.refresh()
+                    time.sleep(retry_delay * (attempt + 1))
 
-            if not selector_found:
-                utils.printyellow("Initial selectors not found, waiting longer...")
-                time.sleep(5)  # Give page more time to load
-
-                # Try one more time with all selectors
-                try:
-                    WebDriverWait(self.driver, 15).until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, ', '.join(selectors)))
-                    )
-                except TimeoutException:
-                    raise Exception("Could not find job results after extended wait")
+            if not element:
+                utils.printred("Could not find job listings after multiple attempts")
+                self.driver.save_screenshot("debug_screenshot.png")
+                raise Exception("Failed to find job listings container")
 
             # Check for no results with expanded selector set
             no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner, .jobs-search-two-pane__no-results-banner')
@@ -257,16 +295,66 @@ class LinkedInJobManager:
     def extract_job_information_from_tile(self, job_tile):
         job_title, company, job_location, apply_method, link = "", "", "", "", ""
         try:
-            # Get job title and link
-            title_element = job_tile.find_element(By.CSS_SELECTOR, '.job-card-list__title')
+            # Multiple selectors for job title
+            title_selectors = [
+                '.job-card-list__title',
+                '.job-card-container__link',
+                'a[data-control-name="job_card_title"]',
+                '.jobs-search-results__list-item-title'
+            ]
+            
+            # Try each title selector
+            title_element = None
+            for selector in title_selectors:
+                try:
+                    title_element = job_tile.find_element(By.CSS_SELECTOR, selector)
+                    if title_element.is_displayed():
+                        break
+                except:
+                    continue
+                    
+            if not title_element:
+                raise Exception("Could not find job title element")
+                
             job_title = title_element.text.strip()
-            link = title_element.get_attribute('href').split('?')[0]
-
-            # Get company name
-            company = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__primary-description').text.strip()
-
-            # Get location
-            job_location = job_tile.find_element(By.CSS_SELECTOR, '.job-card-container__metadata-item').text.strip()
+            link = title_element.get_attribute('href')
+            if link:
+                link = link.split('?')[0]
+            
+            # Multiple selectors for company name
+            company_selectors = [
+                '.job-card-container__primary-description',
+                '.job-card-container__company-name',
+                'a[data-control-name="company_link"]',
+                '.job-card-container__company-link'
+            ]
+            
+            # Try each company selector
+            for selector in company_selectors:
+                try:
+                    company_element = job_tile.find_element(By.CSS_SELECTOR, selector)
+                    if company_element.is_displayed():
+                        company = company_element.text.strip()
+                        break
+                except:
+                    continue
+                    
+            # Multiple selectors for location
+            location_selectors = [
+                '.job-card-container__metadata-item',
+                '.job-card-container__location',
+                '.job-card-container__location-text'
+            ]
+            
+            # Try each location selector
+            for selector in location_selectors:
+                try:
+                    location_element = job_tile.find_element(By.CSS_SELECTOR, selector)
+                    if location_element.is_displayed():
+                        job_location = location_element.text.strip()
+                        break
+                except:
+                    continue
 
             # Get apply method - look for "Easy Apply" button specifically
             try:
