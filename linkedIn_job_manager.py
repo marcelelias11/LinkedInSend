@@ -121,8 +121,8 @@ class LinkedInJobManager:
         try:
             # Constants for retry logic
             max_retries = 5
-            base_timeout = 15
-            retry_delay = 3
+            base_timeout = 10
+            retry_delay = 1
 
             def wait_for_page_load():
                 try:
@@ -224,8 +224,7 @@ class LinkedInJobManager:
                 utils.printred("Could not find job results list")
                 raise Exception("Could not find job results list")
 
-            utils.scroll_slow(self.driver, job_results)
-            utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
+            utils.scroll_slow(self.driver, job_results, step=400)
 
             # Wait for job listings to be present with multiple selector attempts
             job_list_elements = []
