@@ -5,8 +5,10 @@ import time
 import traceback
 from itertools import product
 from pathlib import Path
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import utils
 from job import Job
 from linkedIn_easy_applier import LinkedInEasyApplier
