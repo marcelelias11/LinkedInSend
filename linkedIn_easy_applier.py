@@ -73,12 +73,38 @@ class LinkedInEasyApplier:
 
     def _get_job_description(self) -> str:
         try:
-            see_more_button = self.driver.find_element(By.XPATH, '//button[@aria-label="Click to see more description"]')
-            see_more_button.click()
-            time.sleep(.2)
-            description = self.driver.find_element(By.CSS_SELECTOR, '.jobs-description-content__text').text
-            # self._scroll_page()
-            return description
+            # Wait for job details to load
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, '.jobs-description__content'))
+            )
+
+            # Try to find and click "see more" button if it exists
+            try:
+                see_more_buttons = self.driver.find_elements(By.XPATH, 
+                    '//*[contains(@aria-label, "Click to see more")]|//button[contains(@class, "show-more-less-html__button")]')
+                if see_more_buttons:
+                    see_more_buttons[0].click()
+                    time.sleep(0.5)
+            except:
+                pass  # Button may not exist if description is short
+
+            # Try multiple selectors for job description
+            description_selectors = [
+                '.jobs-description-content__text',
+                '.jobs-box__html-content',
+                '.jobs-description__content',
+                '.jobs-unified-top-card__job-details'
+            ]
+
+            for selector in description_selectors:
+                try:
+                    description = self.driver.find_element(By.CSS_SELECTOR, selector).text
+                    if description.strip():
+                        return description
+                except:
+                    continue
+
+            raise Exception("Could not find job description with any selector")
         except NoSuchElementException:
             tb_str = traceback.format_exc()
             raise Exception("Job description 'See more' button not found: \nTraceback:\n{tb_str}")
@@ -192,10 +218,10 @@ class LinkedInEasyApplier:
 
                 # file_name_pdf = f"resume_{uuid.uuid4().hex}.pdf"
                 # file_path_pdf = os.path.join(folder_path, file_name_pdf)
-                
+
                 # with open(file_path_pdf, "wb") as f:
                 #     f.write(base64.b64decode(utils.HTML_to_PDF(file_name_HTML)))
-                    
+
                 # element.send_keys(os.path.abspath(file_path_pdf))
                 # time.sleep(2)  # Give some time for the upload process
                 # os.remove(file_name_HTML)
@@ -307,7 +333,7 @@ class LinkedInEasyApplier:
             if not date_picker:
                 print("Date picker element not found(early).")
                 return
-            
+
             # Check if the date picker is already filled
             if date_picker.get_attribute('value').strip():
                 print("Date already selected. Skipping...")
