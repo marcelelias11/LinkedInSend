@@ -120,26 +120,47 @@ class LinkedInJobManager:
             # Check for no results using more reliable method
             no_jobs_elements = self.driver.find_elements(By.CSS_SELECTOR, '.jobs-search-no-results-banner, .jobs-search-two-pane__no-results-banner')
             
-            # Alternative text check if elements not found via classes
-            if not no_jobs_elements:
-                no_jobs_elements = self.driver.find_elements(By.XPATH, '//*[contains(., "No matching jobs found")]')
-
             # Verify if we actually have no results
-            if no_jobs_elements:
-                no_jobs_text = no_jobs_elements[0].text.lower()
-                if any(msg in no_jobs_text for msg in ['no matching jobs found', 'unfortunately, things aren']):
-                    raise Exception("No more jobs on this page")
-
-            # Additional check in page source as fallback
-            if 'unfortunately, things aren' in self.driver.page_source.lower():
+            if no_jobs_elements and any(msg in no_jobs_elements[0].text.lower() for msg in ['no matching jobs found', 'unfortunately, things aren']):
                 raise Exception("No more jobs on this page")
 
-            # If we get here, jobs are present
-            # ... rest of your job application logic ...
+            job_results = self.driver.find_element(By.CLASS_NAME, "jobs-search-results-list")
+            utils.scroll_slow(self.driver, job_results)
+            utils.scroll_slow(self.driver, job_results, step=300, reverse=True)
+            
+            job_list_elements = self.driver.find_elements(By.CLASS_NAME, 'jobs-search-results__list-item')
+            
+            if not job_list_elements:
+                raise Exception("No job class elements found on page")
+            
+            for job_element in job_list_elements:
+                job_info = self.extract_job_information_from_tile(job_element)
+                if not any(info is None for info in job_info):
+                    job = Job(*job_info)
+                    
+                    if self.is_blacklisted(job.title, job.company, job.link):
+                        utils.printyellow(f"Blacklisted {job.title} at {job.company}, skipping...")
+                        self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
+                        continue
 
-        except NoSuchElementException:
-            # This exception is now redundant and can be removed
-            pass
+                    try:
+                        if job.apply_method in {"Easy Apply", "Apply"}:
+                            utils.printyellow(f"Attempting to apply for {job.title} at {job.company}...")
+                            self.easy_applier_component.job_apply(job)
+                            utils.printyellow(f"Successfully applied to {job.title} at {job.company}")
+                            self.write_to_file(job.company, job.location, job.title, job.link, "success")
+                        else:
+                            utils.printyellow(f"Skipping {job.title} - not an Easy Apply job")
+                            self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
+                    except Exception as e:
+                        utils.printred(f"Failed to apply for {job.title} at {job.company}: {str(e)}")
+                        utils.printred(traceback.format_exc())
+                        self.write_to_file(job.company, job.location, job.title, job.link, "failed")
+        
+        except Exception as e:
+            utils.printred(f"Error in apply_jobs: {str(e)}")
+            utils.printred(traceback.format_exc())
+            raise e
             
             job_results = self.driver.find_element(By.CLASS_NAME, "jobs-search-results-list")
             utils.scroll_slow(self.driver, job_results)
