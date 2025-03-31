@@ -201,13 +201,12 @@ class LinkedInJobManager:
             # Try multiple possible selectors for job results with expanded options
             job_results = None
             result_selectors = [
-                ".jobs-search-results-list",
-                ".jobs-search-results__list",
-                ".scaffold-layout__list-container",
-                ".jobs-search-results-container",
-                ".jobs-search__job-card-list",
-                ".jobs-search-results__list-item",
-                "div[data-occludable-job-id]"
+                ".job-card-container--clickable",
+                ".jobs-search-two-pane__job-card-container--viewport-tracking-0",
+                ".display-flex.job-card-container",
+                ".ember-view.IspRkqvswCKn5tIZoOXAsMzxtPjaCOKmY.occludable-update",
+                ".job-card-list__title-link",
+                ".artdeco-entity-lockup__content"
             ]
             
             for selector in result_selectors:
