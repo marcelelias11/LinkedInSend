@@ -119,71 +119,72 @@ class LinkedInJobManager:
 
     def apply_jobs(self):
         try:
-            max_retries = 3
-            retry_delay = 2
-            page_load_timeout = 10
+            # Constants for retry logic
+            max_retries = 5
+            base_timeout = 15
+            retry_delay = 3
 
-            def wait_for_any_element(selectors, timeout):
-                for selector in selectors:
-                    try:
-                        element = WebDriverWait(self.driver, timeout).until(
-                            EC.presence_of_element_located((By.CSS_SELECTOR, selector))
-                        )
-                        utils.printyellow(f"Found element with selector: {selector}")
-                        return element
-                    except TimeoutException:
-                        continue
-                return None
-
-            def verify_page_loaded():
+            def wait_for_page_load():
                 try:
-                    return self.driver.execute_script("return document.readyState") == "complete"
+                    WebDriverWait(self.driver, base_timeout).until(
+                        lambda d: d.execute_script('return document.readyState') == 'complete'
+                    )
+                    time.sleep(2)  # Additional buffer for dynamic content
+                    return True
                 except:
                     return False
 
-            # Wait for page to be fully loaded
-            for _ in range(max_retries):
-                if verify_page_loaded():
-                    break
-                time.sleep(retry_delay)
+            def check_for_no_results():
+                try:
+                    no_results = self.driver.find_elements(By.CSS_SELECTOR, 
+                        '.jobs-search-no-results-banner, .jobs-search-two-pane__no-results-banner, .jobs-search-results__zero-results')
+                    return any(elem.is_displayed() for elem in no_results if elem.text.strip())
+                except:
+                    return False
 
-            # Primary selectors for job listings
-            primary_selectors = [
+            # Wait for initial page load
+            if not wait_for_page_load():
+                utils.printred("Page failed to load completely")
+                raise Exception("Page load timeout")
+
+            # Check for "No results" message
+            if check_for_no_results():
+                utils.printyellow("No jobs found on this page")
+                return
+
+            # List of possible job container selectors
+            container_selectors = [
                 '.jobs-search-results-list',
-                '.scaffold-layout__list-container',
+                '.jobs-search__job-card-list',
                 '.jobs-search-results__list',
-                'div[data-view-name="job-search-results"]',
-                '.jobs-search-results-container'
+                'div[data-job-id]',
+                '.job-card-container--clickable'
             ]
 
-            # Backup selectors that might indicate job listings
-            backup_selectors = [
-                '.job-card-container',
-                '.jobs-search-results__list-item',
-                '.job-card-list',
-                'div[data-job-id]'
-            ]
-
-            # Progressive element detection
-            element = None
+            job_container = None
             for attempt in range(max_retries):
                 utils.printyellow(f"Attempt {attempt + 1} to find job listings...")
                 
-                # Try primary selectors first
-                element = wait_for_any_element(primary_selectors, page_load_timeout)
-                if element:
+                # Try each selector
+                for selector in container_selectors:
+                    try:
+                        job_container = WebDriverWait(self.driver, base_timeout).until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                        )
+                        if job_container and job_container.is_displayed():
+                            utils.printyellow(f"Found jobs container with selector: {selector}")
+                            break
+                    except:
+                        continue
+                
+                if job_container:
                     break
                     
-                # If primary selectors fail, try backup selectors
-                element = wait_for_any_element(backup_selectors, page_load_timeout)
-                if element:
-                    break
-                    
-                # If both fail, refresh page and wait
                 if attempt < max_retries - 1:
-                    utils.printyellow("Refreshing page and retrying...")
+                    utils.printyellow("Refreshing page and waiting...")
                     self.driver.refresh()
-                    time.sleep(retry_delay * (attempt + 1))
+                    wait_for_page_load()
+                    time.sleep(retry_delay)
 
             if not element:
                 utils.printred("Could not find job listings after multiple attempts")
