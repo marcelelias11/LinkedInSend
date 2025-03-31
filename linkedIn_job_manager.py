@@ -354,7 +354,10 @@ class LinkedInJobManager:
                 '.job-card-list__title',
                 '.job-card-container__link',
                 'a[data-control-name="job_card_title"]',
-                '.jobs-search-results__list-item-title'
+                '.jobs-search-results__list-item-title',
+                '.job-card-container__title',
+                '.job-card-list__entity-lockup',
+                '.jobs-unified-top-card__job-title'
             ]
             
             # Try each title selector
@@ -385,7 +388,10 @@ class LinkedInJobManager:
                 '.job-search-card__company-name',
                 '.jobs-unified-top-card__company-name',
                 'a[data-test-app-aware-link]',
-                '.ember-view.job-card-container__link.job-card-list__entity-lockup.typing-read-only'
+                '.ember-view.job-card-container__link.job-card-list__entity-lockup.typing-read-only',
+                '.job-card-container__company-name-link',
+                '.job-card-container__company-info',
+                '.jobs-unified-top-card__company-name-link'
             ]
             
             # Try each company selector
