@@ -186,7 +186,7 @@ class LinkedInJobManager:
                     wait_for_page_load()
                     time.sleep(retry_delay)
 
-            if not element:
+            if not job_container:
                 utils.printred("Could not find job listings after multiple attempts")
                 self.driver.save_screenshot("debug_screenshot.png")
                 raise Exception("Failed to find job listings container")
