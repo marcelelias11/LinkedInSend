@@ -381,7 +381,12 @@ class LinkedInJobManager:
                 '.job-card-container__primary-description',
                 '.job-card-container__company-name',
                 'a[data-control-name="company_link"]',
-                '.job-card-container__company-link'
+                '.job-card-container__company-link',
+                '.job-card-list__company-name',
+                '.job-search-card__company-name',
+                '.jobs-unified-top-card__company-name',
+                'a[data-test-app-aware-link]',
+                '.ember-view.job-card-container__link.job-card-list__entity-lockup.typing-read-only'
             ]
             
             # Try each company selector
