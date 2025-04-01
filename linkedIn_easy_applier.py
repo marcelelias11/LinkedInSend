@@ -208,7 +208,22 @@ class LinkedInEasyApplier:
             if self._is_upload_field(element):
                 self._handle_upload_fields(element)
             else:
-                additional_questions = element.find_elements(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
+                # Try multiple selectors for finding questions
+                question_selectors = [
+                    '.jobs-easy-apply-form-element',
+                    '.fb-dash-form-element',
+                    'div[data-test-single-line-text-form-component]',
+                    '.artdeco-text-input',
+                    '.ember-view'
+                ]
+                
+                additional_questions = []
+                for selector in question_selectors:
+                    questions = element.find_elements(By.CSS_SELECTOR, selector)
+                    if questions:
+                        additional_questions.extend(questions)
+                        break
+                        
                 if additional_questions:
                     for question in additional_questions:
                         try:
@@ -377,9 +392,46 @@ class LinkedInEasyApplier:
     def _handle_textbox_question(self, element: WebElement) -> None:
         max_retries = 3
         try:
-            question_text = element.find_element(By.TAG_NAME, 'label').text.strip()
-            text_field = self._find_text_field(element)
+            # Try different label selectors
+            label_selectors = [
+                'label.artdeco-text-input--label',
+                'label[for]',
+                'label',
+                '.artdeco-text-input--label'
+            ]
             
+            question_text = None
+            for selector in label_selectors:
+                try:
+                    label_elem = element.find_element(By.CSS_SELECTOR, selector)
+                    question_text = label_elem.text.strip()
+                    if question_text:
+                        break
+                except:
+                    continue
+                    
+            if not question_text:
+                utils.printred("Could not find question text. Skipping...")
+                return
+
+            # Try different input field selectors
+            input_selectors = [
+                'input.artdeco-text-input--input',
+                'input[type="text"]',
+                'input[type="number"]',
+                'textarea',
+                '.artdeco-text-input--input'
+            ]
+            
+            text_field = None
+            for selector in input_selectors:
+                try:
+                    text_field = element.find_element(By.CSS_SELECTOR, selector)
+                    if text_field.is_displayed():
+                        break
+                except:
+                    continue
+
             if not text_field:
                 utils.printred("Textbox element not found. Skipping...")
                 return
