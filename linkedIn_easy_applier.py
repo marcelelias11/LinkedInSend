@@ -208,9 +208,51 @@ class LinkedInEasyApplier:
             if self._is_upload_field(element):
                 self._handle_upload_fields(element)
             else:
-                self._fill_additional_questions()
+                additional_questions = element.find_elements(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
+                if additional_questions:
+                    for question in additional_questions:
+                        try:
+                            question_label = question.find_element(By.TAG_NAME, 'label').text.strip()
+                            if question_label:
+                                # Handle different types of inputs
+                                if self._has_text_input(question):
+                                    self._handle_textbox_question(question)
+                                elif self._has_radio_buttons(question):
+                                    self._handle_radio_question(question)
+                                elif self._has_dropdown(question):
+                                    self._handle_dropdown_question(question)
+                                elif self._has_date_picker(question):
+                                    self._handle_date_question(question)
+                        except Exception as e:
+                            utils.printred(f"Error processing question: {str(e)}")
+                            continue
         except Exception as e:
+            utils.printred(f"Error in form element processing: {str(e)}")
             pass
+
+    def _has_text_input(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.CSS_SELECTOR, 'input[type="text"], textarea, input[type="number"]'))
+        except:
+            return False
+
+    def _has_radio_buttons(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.CSS_SELECTOR, '.fb-text-selectable__option'))
+        except:
+            return False
+
+    def _has_dropdown(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.TAG_NAME, 'select'))
+        except:
+            return False
+
+    def _has_date_picker(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.CSS_SELECTOR, '.artdeco-datepicker__input'))
+        except:
+            return False
 
     def _is_upload_field(self, element: WebElement) -> bool:
         try:
@@ -335,17 +377,18 @@ class LinkedInEasyApplier:
     def _handle_textbox_question(self, element: WebElement) -> None:
         max_retries = 3
         try:
-            question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
-            question_text = question.find_element(By.TAG_NAME, 'label').text.lower()
-            text_field = self._find_text_field(question)
+            question_text = element.find_element(By.TAG_NAME, 'label').text.strip()
+            text_field = self._find_text_field(element)
             
             if not text_field:
-                print("Textbox element not found. Skipping...")
+                utils.printred("Textbox element not found. Skipping...")
                 return
                 
             if text_field.get_attribute('value').strip():
-                print("Textbox already filled. Skipping...")
+                utils.printyellow("Textbox already filled. Skipping...")
                 return
+
+            utils.printyellow(f"Attempting to answer question: {question_text}")
 
             is_numeric = self._is_numeric_field(text_field)
             field_type = 'numeric' if is_numeric else 'text'
