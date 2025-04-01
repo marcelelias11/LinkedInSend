@@ -160,13 +160,13 @@ class LinkedInEasyApplier:
         button_text = next_button.text.lower()
         if 'submit application' in button_text:
             self._unfollow_company()
-            time.sleep(random.uniform(.5, 1.))
+            time.sleep(random.uniform(0.3, 0.7))  # Reduced from 0.5-1.0
             next_button.click()
-            time.sleep(random.uniform(0.8, 1.2))
+            time.sleep(random.uniform(0.5, 0.9))  # Reduced from 0.8-1.2
             return True
-        time.sleep(random.uniform(0.3, 0.7))
+        time.sleep(random.uniform(0.2, 0.5))  # Reduced from 0.3-0.7
         next_button.click()
-        time.sleep(random.uniform(0.8, 1.2))
+        time.sleep(random.uniform(0.5, 0.9))  # Reduced from 0.8-1.2
 
         # time.sleep(random.uniform(3.0, 5.0))
         self._check_for_errors()

@@ -89,8 +89,8 @@ class LinkedInJobManager:
                     job_page_number += 1
                     utils.printyellow(f"Going to job page {job_page_number}")
                     self.next_job_page(position, location_url, job_page_number)
-                    time.sleep(random.uniform(0.2, 1))
-                    
+                    time.sleep(random.uniform(0.15, 0.8))  # Slightly reduced delay
+
                     # Check if there are any jobs on the page
                     try:
                         no_results = self.driver.find_elements(By.CSS_SELECTOR, 
