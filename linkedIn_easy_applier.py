@@ -389,9 +389,24 @@ class LinkedInEasyApplier:
                 return
 
             utils.printyellow(f"Attempting to answer question: {question_text}")
+            
+            # Extract any hints or requirements from the question container
+            try:
+                hint_elements = element.find_elements(By.CSS_SELECTOR, '.fb-form-element-hint, .hint-text, .form-hint')
+                hints = ' '.join([hint.text for hint in hint_elements if hint.text.strip()])
+                if hints:
+                    question_text = f"{question_text} (Hint: {hints})"
+            except:
+                pass
 
+            # Determine field type and constraints
             is_numeric = self._is_numeric_field(text_field)
             field_type = 'numeric' if is_numeric else 'text'
+            
+            # Check for character limits
+            max_length = text_field.get_attribute('maxlength')
+            if max_length:
+                question_text = f"{question_text} (Max length: {max_length} characters)"
             
             for attempt in range(max_retries):
                 try:
@@ -400,14 +415,30 @@ class LinkedInEasyApplier:
                     
                     if not answer:
                         # If no previous answer, get new one from GPT
-                        answer = (self.gpt_answerer.answer_question_numeric(question_text) 
-                                if is_numeric 
-                                else self.gpt_answerer.answer_question_textual_wide_range(question_text))
+                        if is_numeric:
+                            answer = self.gpt_answerer.answer_question_numeric(question_text)
+                        else:
+                            # Pass context about the job to get more relevant answers
+                            job_context = self.gpt_answerer.job.formatted_job_information()
+                            answer = self.gpt_answerer.answer_question_textual_wide_range(
+                                f"Job Context:\n{job_context}\n\nQuestion: {question_text}"
+                            )
+                    
+                    # Validate answer length if maxlength exists
+                    max_length = text_field.get_attribute('maxlength')
+                    if max_length and len(str(answer)) > int(max_length):
+                        answer = str(answer)[:int(max_length)]
                     
                     # Clear and enter text
                     text_field.clear()
                     text_field.send_keys(answer)
                     time.sleep(0.5)
+                    
+                    # Check if the answer was accepted (no error messages)
+                    error_elements = element.find_elements(By.CSS_SELECTOR, '.artdeco-inline-feedback--error, .error-message, .validation-error')
+                    if not any(error.is_displayed() for error in error_elements):
+                        utils.printyellow(f"Successfully answered: {question_text}")
+                        return
                     
                     # Check for validation errors
                     error_elements = element.find_elements(By.CSS_SELECTOR, '.artdeco-inline-feedback--error')
