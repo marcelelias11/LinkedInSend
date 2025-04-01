@@ -99,9 +99,8 @@ class LinkedInJobManager:
                         # time.sleep(time_left)
                         minimum_page_time = time.time() + minimum_time
                     if page_sleep % 5 == 0:
-                        # sleep_time = random.randint(5, 34)
-                        # utils.printyellow(f"Sleeping for {sleep_time / 60} minutes.")
-                        # time.sleep(sleep_time)
+                        sleep_time = random.randint(2, 5)
+                        time.sleep(sleep_time)
                         page_sleep += 1
             except Exception:
                 traceback.format_exc()
@@ -112,9 +111,8 @@ class LinkedInJobManager:
                 # time.sleep(time_left)
                 minimum_page_time = time.time() + minimum_time
             if page_sleep % 5 == 0:
-                # sleep_time = random.randint(50, 90)
-                # utils.printyellow(f"Sleeping for {sleep_time / 60} minutes.")
-                # time.sleep(sleep_time)
+                sleep_time = random.randint(2, 5)
+                time.sleep(sleep_time)
                 page_sleep += 1
 
     def apply_jobs(self):
@@ -365,7 +363,7 @@ class LinkedInJobManager:
                 '.job-card-container .job-card-list__title',
                 '.job-card-container__link span'
             ]
-            
+
             # Wait for job cards to load
             WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, '.job-card-container'))

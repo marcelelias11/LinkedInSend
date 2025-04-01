@@ -162,11 +162,11 @@ class LinkedInEasyApplier:
             self._unfollow_company()
             time.sleep(random.uniform(.5, 1.))
             next_button.click()
-            time.sleep(random.uniform(1.5, 2.5))
+            time.sleep(random.uniform(0.8, 1.2))
             return True
-        time.sleep(random.uniform(.5, 1.5))
+        time.sleep(random.uniform(0.3, 0.7))
         next_button.click()
-        time.sleep(random.uniform(1.5, 2.))
+        time.sleep(random.uniform(0.8, 1.2))
 
         # time.sleep(random.uniform(3.0, 5.0))
         self._check_for_errors()
