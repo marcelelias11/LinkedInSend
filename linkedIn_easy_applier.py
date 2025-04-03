@@ -365,29 +365,56 @@ class LinkedInEasyApplier:
 
     def _handle_radio_question(self, element: WebElement) -> None:
         try:
-            question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
-            radios = question.find_elements(By.CSS_SELECTOR, '.fb-text-selectable__option')
+            # Try multiple selectors for finding radio groups
+            radio_selectors = [
+                '.jobs-easy-apply-form-element',
+                '.fb-dash-form-element',
+                '.ember-view'
+            ]
+            
+            question = None
+            for selector in radio_selectors:
+                try:
+                    question = element.find_element(By.CSS_SELECTOR, selector)
+                    if question:
+                        break
+                except:
+                    continue
+                    
+            if not question:
+                return
+
+            radios = question.find_elements(By.CSS_SELECTOR, '.fb-text-selectable__option, input[type="radio"]')
             if not radios:
                 return
 
-            # Check if any radio button is already selected
-            for radio in radios:
-                if radio.get_attribute('aria-checked') == 'true':
-                    print("Answer already selected. Skipping...")
-                    return  # Early exit if an answer is already selected
+            # Check if already answered
+            if any(radio.get_attribute('aria-checked') == 'true' for radio in radios):
+                return
 
-            question_text = element.text.lower()
-            options = [radio.text.lower() for radio in radios]
+            question_text = question.text.lower()
+            if not question_text:
+                try:
+                    label = question.find_element(By.TAG_NAME, 'label')
+                    question_text = label.text.lower()
+                except:
+                    pass
 
-            answer = self._get_answer_from_set('radio', question_text, options)
-            if not answer:
-                answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+            options = [radio.text.lower() for radio in radios if radio.text.strip()]
+            if not options:
+                options = [radio.get_attribute('value').lower() for radio in radios if radio.get_attribute('value')]
 
-            self._select_radio(radios, answer)
-        except NoSuchElementException:
-            print("Radio button element not found.")
+            if question_text and options:
+                answer = self._get_answer_from_set('radio', question_text, options)
+                if not answer:
+                    answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+                    
+                if answer:
+                    self._select_radio(radios, answer)
+                    time.sleep(random.uniform(0.3, 0.7))
+                    
         except Exception as e:
-            print(f"An error occurred: {e}")
+            utils.printred(f"Error handling radio question: {str(e)}")
 
     def _handle_textbox_question(self, element: WebElement) -> None:
         max_retries = 3
@@ -543,34 +570,63 @@ class LinkedInEasyApplier:
 
     def _handle_dropdown_question(self, element: WebElement) -> None:
         try:
-            question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
-            question_text = question.find_element(By.TAG_NAME, 'label').text.lower()
-            dropdown = question.find_element(By.TAG_NAME, 'select')
-            select = Select(dropdown)
-            # sleep 1 sceond
-            time.sleep(.4)
+            dropdown_selectors = [
+                '.jobs-easy-apply-form-element select',
+                '.fb-dash-form-element select',
+                'select.artdeco-dropdown__input',
+                'select'
+            ]
+            
+            dropdown = None
+            for selector in dropdown_selectors:
+                try:
+                    dropdown = element.find_element(By.CSS_SELECTOR, selector)
+                    if dropdown and dropdown.is_displayed():
+                        break
+                except:
+                    continue
 
             if not dropdown:
-                print("Dropdown element not found(early). Skipping...")
                 return
 
-            # Check if an option is already selected
+            select = Select(dropdown)
+            time.sleep(random.uniform(0.3, 0.7))
+
+            # Check if already selected
             selected_option = select.first_selected_option.text.strip()
-            if selected_option and selected_option != 'Select an option':
-                print(f"Dropdown already selected ({selected_option}). Skipping...")
-                return  # Early exit if a dropdown option is already selected
+            if selected_option and selected_option != 'Select an option' and selected_option != '--':
+                return
 
-            options = [option.text for option in select.options]
-            answer = self._get_answer_from_set('dropdown', question_text, options)
+            # Get question text
+            question_text = ''
+            try:
+                label = element.find_element(By.TAG_NAME, 'label')
+                question_text = label.text.lower()
+            except:
+                try:
+                    # Try getting text from parent
+                    question_text = element.text.lower()
+                except:
+                    pass
 
-            if not answer:
-                answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+            if not question_text:
+                return
 
-            self._select_dropdown(dropdown, answer)
-        except NoSuchElementException:
-            print("Dropdown element not found.")
+            # Get options excluding placeholder
+            options = [option.text for option in select.options 
+                      if option.text.strip() and option.text not in ['Select an option', '--']]
+
+            if options:
+                answer = self._get_answer_from_set('dropdown', question_text, options)
+                if not answer:
+                    answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+
+                if answer:
+                    self._select_dropdown(dropdown, answer)
+                    time.sleep(random.uniform(0.3, 0.7))
+
         except Exception as e:
-            print(f"An error occurred: {e}")
+            utils.printred(f"Error handling dropdown: {str(e)}")
 
     def _get_answer_from_set(self, question_type: str, question_text: str, options: Optional[List[str]] = None) -> Optional[str]:
         for entry in self.set_old_answers:
