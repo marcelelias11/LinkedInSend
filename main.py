@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 import click
+from multiprocessing import Process
 
 from utils import chromeBrowserOptions
 from gpt import GPTAnswerer
@@ -217,4 +218,8 @@ def main(resume: Path = None):
 
 if __name__ == "__main__":
     from api import app
-    app.run(host='0.0.0.0', port=5000)
+    #app.run(host='0.0.0.0', port=5000)
+    server = Process(target=app.run,args=('0.0.0.0', 5000))
+    server.start()
+    principal = Process(target=main)
+    principal.start()

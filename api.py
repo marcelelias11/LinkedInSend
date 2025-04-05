@@ -3,10 +3,12 @@ from flask import Flask, request, jsonify
 import yaml
 from pathlib import Path
 import os
+from main import main
+from multiprocessing import Process
 
 app = Flask(__name__)
 
-DATA_FOLDER = Path("data_folder_example")
+DATA_FOLDER = Path("data_folder")
 DATA_FOLDER.mkdir(exist_ok=True)
 
 @app.route('/api/config', methods=['POST'])
