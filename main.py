@@ -216,25 +216,25 @@ def main(resume: Path = None):
         print(f"An unexpected error occurred: {str(e)}")
         print("Refer to the general troubleshooting guide: https://github.com/feder-cr/LinkedIn_AIHawk_automatic_job_application/blob/main/readme.md#configuration")
 
-if __name__ == "__main__":
+def run_main():
+    main()
+
+def run_flask():
     from api import app
+    app.run(host='0.0.0.0', port=5000)
+
+if __name__ == "__main__":
     import signal
     import sys
-
-    def run_flask():
-        app.run(host='0.0.0.0', port=5000)
+    
+    processes = []
 
     def signal_handler(signum, frame):
         print("\nShutting down gracefully...")
-        try:
-            if 'server' in globals() and server:
-                server.terminate()
-                server.join()
-            if 'principal' in globals() and principal:
-                principal.terminate()
-                principal.join()
-        except Exception as e:
-            print(f"Error during shutdown: {e}")
+        for p in processes:
+            if p and p.is_alive():
+                p.terminate()
+                p.join()
         sys.exit(0)
 
     signal.signal(signal.SIGINT, signal_handler)
@@ -242,7 +242,9 @@ if __name__ == "__main__":
 
     try:
         server = Process(target=run_flask)
-        principal = Process(target=main)
+        principal = Process(target=run_main)
+        
+        processes.extend([server, principal])
         
         server.start()
         principal.start()
