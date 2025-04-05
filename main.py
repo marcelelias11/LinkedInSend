@@ -221,27 +221,32 @@ if __name__ == "__main__":
     import signal
     import sys
 
+    def run_flask():
+        app.run(host='0.0.0.0', port=5000)
+
     def signal_handler(signum, frame):
         print("\nShutting down gracefully...")
-        if 'server' in globals():
-            server.terminate()
-            server.join()
-        if 'principal' in globals():
-            principal.terminate()
-            principal.join()
+        try:
+            if 'server' in globals() and server:
+                server.terminate()
+                server.join()
+            if 'principal' in globals() and principal:
+                principal.terminate()
+                principal.join()
+        except Exception as e:
+            print(f"Error during shutdown: {e}")
         sys.exit(0)
 
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
 
     try:
-        server = Process(target=app.run, kwargs={'host': '0.0.0.0', 'port': 5000})
-        server.start()
-        
+        server = Process(target=run_flask)
         principal = Process(target=main)
+        
+        server.start()
         principal.start()
 
-        # Wait for processes to complete
         server.join()
         principal.join()
     except Exception as e:
