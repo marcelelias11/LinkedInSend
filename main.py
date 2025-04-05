@@ -218,8 +218,32 @@ def main(resume: Path = None):
 
 if __name__ == "__main__":
     from api import app
-    #app.run(host='0.0.0.0', port=5000)
-    server = Process(target=app.run,args=('0.0.0.0', 5000))
-    server.start()
-    principal = Process(target=main)
-    principal.start()
+    import signal
+    import sys
+
+    def signal_handler(signum, frame):
+        print("\nShutting down gracefully...")
+        if 'server' in globals():
+            server.terminate()
+            server.join()
+        if 'principal' in globals():
+            principal.terminate()
+            principal.join()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    try:
+        server = Process(target=app.run, kwargs={'host': '0.0.0.0', 'port': 5000})
+        server.start()
+        
+        principal = Process(target=main)
+        principal.start()
+
+        # Wait for processes to complete
+        server.join()
+        principal.join()
+    except Exception as e:
+        print(f"Error in main process: {e}")
+        signal_handler(None, None)
