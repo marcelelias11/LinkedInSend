@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 import click
-from multiprocessing import Process
 
 from utils import chromeBrowserOptions
 from gpt import GPTAnswerer
@@ -213,13 +212,6 @@ def create_and_run_bot(resume: Path = None):
     except Exception as e:
         print(f"An unexpected error occurred: {str(e)}")
         print("Refer to the general troubleshooting guide: https://github.com/feder-cr/LinkedIn_AIHawk_automatic_job_application/blob/main/readme.md#configuration")
-
-def run_main():
-    main()
-
-def run_flask():
-    from api import app
-    app.run(host='0.0.0.0', port=5000)
 
 if __name__ == "__main__":
     from api import app
