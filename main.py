@@ -224,33 +224,5 @@ def run_flask():
     app.run(host='0.0.0.0', port=5000)
 
 if __name__ == "__main__":
-    import signal
-    import sys
-    
-    processes = []
-
-    def signal_handler(signum, frame):
-        print("\nShutting down gracefully...")
-        for p in processes:
-            if p and p.is_alive():
-                p.terminate()
-                p.join()
-        sys.exit(0)
-
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
-
-    try:
-        server = Process(target=run_flask)
-        principal = Process(target=run_main)
-        
-        processes.extend([server, principal])
-        
-        server.start()
-        principal.start()
-
-        server.join()
-        principal.join()
-    except Exception as e:
-        print(f"Error in main process: {e}")
-        signal_handler(None, None)
+    from api import app
+    app.run(host='0.0.0.0', port=5000)
