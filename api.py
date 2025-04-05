@@ -46,23 +46,18 @@ def update_resume():
 @app.route('/start', methods=['GET'])
 def start_application():
     try:
-        # Send initial response
-        response = make_response(jsonify({"status": "starting", "message": "Starting application..."}))
-        response.headers['Content-Type'] = 'application/json'
-        yield response
-        
-        # Run the bot
-        create_and_run_bot()
-        
-        # Send completion response
-        response = make_response(jsonify({"status": "completed", "message": "Application completed successfully"}))
-        response.headers['Content-Type'] = 'application/json'
-        yield response
-        
+        with app.app_context():
+            # Run the bot
+            create_and_run_bot()
+            return jsonify({
+                "status": "completed",
+                "message": "Application completed successfully"
+            }), 200
     except Exception as e:
-        error_response = make_response(jsonify({"status": "error", "error": str(e)}))
-        error_response.headers['Content-Type'] = 'application/json'
-        yield error_response
+        return jsonify({
+            "status": "error",
+            "error": str(e)
+        }), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
