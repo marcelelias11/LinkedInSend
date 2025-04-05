@@ -2,8 +2,7 @@
 from flask import Flask, request, jsonify
 import yaml
 from pathlib import Path
-import os
-from multiprocessing import Process
+from main import create_and_run_bot
 
 app = Flask(__name__)
 
@@ -43,9 +42,7 @@ def update_resume():
 @app.route('/start', methods=['GET'])
 def start_application():
     try:
-        def run_app():
-            main()
-        run_app()
+        create_and_run_bot()
         return jsonify({"message": "Application started successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500

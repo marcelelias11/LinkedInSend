@@ -1,3 +1,4 @@
+
 import re
 from pathlib import Path
 import yaml
@@ -33,7 +34,6 @@ class ConfigValidator:
         except FileNotFoundError:
             raise ConfigError(f"Config file not found: {config_yaml_path}")
         
-
         # Validate 'remote'
         if 'remote' not in parameters or not isinstance(parameters['remote'], bool):
             raise ConfigError(f"'remote' in config file {config_yaml_path} must be a boolean value.")
@@ -119,13 +119,6 @@ class ConfigValidator:
 
 class FileManager:
     @staticmethod
-    def find_file(name_containing: str, with_extension: str, at_path: Path) -> Path:
-        for file in at_path.iterdir():
-            if name_containing.lower() in file.name.lower() and file.suffix.lower() == with_extension.lower():
-                return file
-        return None
-
-    @staticmethod
     def validate_data_folder(app_data_folder: Path) -> tuple:
         if not app_data_folder.exists() or not app_data_folder.is_dir():
             raise FileNotFoundError(f"Data folder not found: {app_data_folder}")
@@ -169,25 +162,6 @@ def init_browser():
     except Exception as e:
         raise RuntimeError(f"Failed to initialize browser: {str(e)}")
 
-def create_and_run_bot(email: str, password: str, parameters: dict, openai_api_key: str):
-    try:
-        browser = init_browser()
-        login_component = LinkedInAuthenticator(browser)
-        apply_component = LinkedInJobManager(browser)
-        gpt_answerer_component = GPTAnswerer(openai_api_key)
-        with open(parameters['uploads']['plainTextResume'], "r") as file:
-            plain_text_resume_file = file.read()
-        resume_object = Resume(plain_text_resume_file)
-        bot = LinkedInBotFacade(login_component, apply_component)
-        bot.set_secrets(email, password)
-        bot.set_resume(resume_object)
-        bot.set_gpt_answerer(gpt_answerer_component)
-        bot.set_parameters(parameters)
-        bot.start_login()
-        bot.start_apply()
-    except Exception as e:
-        raise RuntimeError(f"Error running the bot: {str(e)}")
-
 def create_and_run_bot(resume: Path = None):
     try:
         data_folder = Path("data_folder")
@@ -197,7 +171,23 @@ def create_and_run_bot(resume: Path = None):
         parameters['uploads'] = FileManager.file_paths_to_dict(resume, plain_text_resume_file)
         parameters['outputFileDirectory'] = output_folder
 
-        create_and_run_bot(email, password, parameters, openai_api_key)
+        browser = init_browser()
+        login_component = LinkedInAuthenticator(browser)
+        apply_component = LinkedInJobManager(browser)
+        gpt_answerer_component = GPTAnswerer(openai_api_key)
+        
+        with open(parameters['uploads']['plainTextResume'], "r") as file:
+            plain_text_resume_file = file.read()
+        
+        resume_object = Resume(plain_text_resume_file)
+        bot = LinkedInBotFacade(login_component, apply_component)
+        bot.set_secrets(email, password)
+        bot.set_resume(resume_object)
+        bot.set_gpt_answerer(gpt_answerer_component)
+        bot.set_parameters(parameters)
+        bot.start_login()
+        bot.start_apply()
+        
     except ConfigError as ce:
         print(f"Configuration error: {str(ce)}")
         print("Refer to the configuration guide for troubleshooting: https://github.com/feder-cr/LinkedIn_AIHawk_automatic_job_application/blob/main/readme.md#configuration")
