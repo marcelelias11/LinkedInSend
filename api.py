@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 import yaml
 from pathlib import Path
 import os
-from main import main
 from multiprocessing import Process
 
 app = Flask(__name__)
