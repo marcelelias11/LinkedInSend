@@ -1,5 +1,5 @@
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 import yaml
 from pathlib import Path
 from main import create_and_run_bot
@@ -46,10 +46,23 @@ def update_resume():
 @app.route('/start', methods=['GET'])
 def start_application():
     try:
+        # Send initial response
+        response = make_response(jsonify({"status": "starting", "message": "Starting application..."}))
+        response.headers['Content-Type'] = 'application/json'
+        yield response
+        
+        # Run the bot
         create_and_run_bot()
-        return jsonify({"message": "Application started successfully"}), 200
+        
+        # Send completion response
+        response = make_response(jsonify({"status": "completed", "message": "Application completed successfully"}))
+        response.headers['Content-Type'] = 'application/json'
+        yield response
+        
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        error_response = make_response(jsonify({"status": "error", "error": str(e)}))
+        error_response.headers['Content-Type'] = 'application/json'
+        yield error_response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
