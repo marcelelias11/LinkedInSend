@@ -9,6 +9,10 @@ app = Flask(__name__)
 DATA_FOLDER = Path("data_folder")
 DATA_FOLDER.mkdir(exist_ok=True)
 
+@app.route('/')
+def status():
+    return jsonify({"status": "running"}), 200
+
 @app.route('/api/config', methods=['POST'])
 def update_config():
     try:
