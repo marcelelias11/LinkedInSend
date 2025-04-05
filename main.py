@@ -189,9 +189,7 @@ def create_and_run_bot(email: str, password: str, parameters: dict, openai_api_k
     except Exception as e:
         raise RuntimeError(f"Error running the bot: {str(e)}")
 
-@click.command()
-@click.option('--resume', type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=Path), help="Path to the resume PDF file")
-def main(resume: Path = None):
+def create_and_run_bot(resume: Path = None):
     try:
         data_folder = Path("data_folder")
         secrets_file, config_file, plain_text_resume_file, output_folder = FileManager.validate_data_folder(data_folder)

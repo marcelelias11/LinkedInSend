@@ -44,7 +44,8 @@ def update_resume():
 @app.route('/start', methods=['GET'])
 def start_application():
     try:
-        process = Process(target=main)
+        from main import create_and_run_bot
+        process = Process(target=create_and_run_bot, args=(None,))
         process.start()
         return jsonify({"message": "Application started successfully"}), 200
     except Exception as e:
