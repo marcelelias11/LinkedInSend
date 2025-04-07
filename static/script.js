@@ -40,10 +40,10 @@ function submitAll() {
             openai_api_key: document.getElementById('openaiKey').value
         };
 
-        // Prepare resume data
-        const resumeData = {
+        // Resume data temporarily disabled
+        /*const resumeData = {
             content: document.getElementById('resumeText').value
-        };
+        };*/
 
         // Submit data to API endpoints
         Promise.all([
@@ -56,12 +56,12 @@ function submitAll() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(secretsData)
-            }),
-            fetch('/api/resume', {
+            })
+            /*fetch('/api/resume', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(resumeData)
-            })
+            })*/
         ])
         .then(() => fetch('/start'))
         .then(response => {
