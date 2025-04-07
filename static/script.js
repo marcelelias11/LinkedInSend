@@ -65,7 +65,7 @@ function submitAll() {
         };
 
         document.getElementById('linkedinLoginBtn').addEventListener('click', function() {
-            window.location.href = '/auth/linkedin';
+            window.location.href = '/linkedin/login';
         });
 
         // Resume data temporarily disabled

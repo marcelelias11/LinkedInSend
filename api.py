@@ -6,6 +6,7 @@ from pathlib import Path
 from main import create_and_run_bot
 
 app = Flask(__name__, static_url_path='')
+app.secret_key = os.urandom(24)  # Required for session management
 
 @app.route('/')
 def serve_frontend():
