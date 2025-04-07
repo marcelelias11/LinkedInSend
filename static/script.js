@@ -61,10 +61,12 @@ function submitAll() {
 
         // Prepare secrets data
         const secretsData = {
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
             openai_api_key: document.getElementById('openaiKey').value
         };
+
+        document.getElementById('linkedinLoginBtn').addEventListener('click', function() {
+            window.location.href = '/auth/linkedin';
+        });
 
         // Resume data temporarily disabled
         /*const resumeData = {
