@@ -60,7 +60,7 @@ function submitAll() {
     try {
         // Prepare config data
         const configData = {
-            remote: true,
+            remote: document.getElementById('remote').checked,
             experienceLevel: getExperienceLevels(),
             jobTypes: getJobTypes(),
             date: getDatePosted(),
