@@ -1,18 +1,39 @@
 
-function getCheckedValues(name) {
-    const checkboxes = document.getElementsByName(name);
-    const checkedValues = {};
-    checkboxes.forEach(checkbox => {
-        checkedValues[checkbox.value] = checkbox.checked;
-    });
-    return checkedValues;
+function getExperienceLevels() {
+    return {
+        "internship": document.querySelector('input[name="expLevel"][value="internship"]').checked,
+        "entry": document.querySelector('input[name="expLevel"][value="entry"]').checked,
+        "associate": document.querySelector('input[name="expLevel"][value="associate"]').checked,
+        "mid-senior level": document.querySelector('input[name="expLevel"][value="mid-senior"]').checked,
+        "director": document.querySelector('input[name="expLevel"][value="director"]').checked,
+        "executive": document.querySelector('input[name="expLevel"][value="executive"]').checked
+    };
+}
+
+function getJobTypes() {
+    return {
+        "full-time": document.querySelector('input[name="jobType"][value="full-time"]').checked,
+        "contract": document.querySelector('input[name="jobType"][value="contract"]').checked,
+        "part-time": document.querySelector('input[name="jobType"][value="part-time"]').checked,
+        "temporary": document.querySelector('input[name="jobType"][value="temporary"]').checked,
+        "internship": document.querySelector('input[name="jobType"][value="internship"]').checked,
+        "other": document.querySelector('input[name="jobType"][value="other"]').checked,
+        "volunteer": document.querySelector('input[name="jobType"][value="volunteer"]').checked
+    };
+}
+
+function getDatePosted() {
+    return {
+        "all time": document.querySelector('input[name="datePosted"][value="all time"]').checked,
+        "month": document.querySelector('input[name="datePosted"][value="month"]').checked,
+        "week": document.querySelector('input[name="datePosted"][value="week"]').checked,
+        "24 hours": document.querySelector('input[name="datePosted"][value="24 hours"]').checked
+    };
 }
 
 function textareaToArray(id) {
-    return document.getElementById(id).value
-        .split('\n')
-        .map(item => item.trim())
-        .filter(item => item.length > 0);
+    const value = document.getElementById(id).value.trim();
+    return value ? value.split('\n').map(item => item.trim()).filter(item => item.length > 0) : [];
 }
 
 function submitAll() {
@@ -23,14 +44,14 @@ function submitAll() {
         // Prepare config data
         const configData = {
             remote: true,
-            jobTypes: getCheckedValues('jobType'),
-            experienceLevel: getCheckedValues('expLevel'),
-            date: getCheckedValues('datePosted'),
+            experienceLevel: getExperienceLevels(),
+            jobTypes: getJobTypes(),
+            date: getDatePosted(),
             positions: textareaToArray('positions'),
             locations: textareaToArray('locations'),
             distance: parseInt(document.getElementById('distance').value),
             companyBlacklist: textareaToArray('blacklistCompanies'),
-            titleBlacklist: textareaToArray('blacklistTitles')
+            titleBlacklist: null
         };
 
         // Prepare secrets data
