@@ -1,10 +1,14 @@
 
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, send_from_directory
 import yaml
 from pathlib import Path
 from main import create_and_run_bot
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
+
+@app.route('/')
+def serve_frontend():
+    return send_from_directory('static', 'index.html')
 
 DATA_FOLDER = Path("data_folder")
 DATA_FOLDER.mkdir(exist_ok=True)
