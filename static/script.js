@@ -1,4 +1,16 @@
 
+// Add LinkedIn login button event listener
+document.addEventListener('DOMContentLoaded', function() {
+    const loginBtn = document.getElementById('linkedinLoginBtn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function() {
+            window.location.href = '/linkedin/login';
+        });
+    }
+});
+
+
+
 function getExperienceLevels() {
     const getCheckboxValue = (value) => {
         const element = document.querySelector(`input[name="expLevel"][value="${value}"]`);
@@ -63,10 +75,6 @@ function submitAll() {
         const secretsData = {
             openai_api_key: document.getElementById('openaiKey').value
         };
-
-        document.getElementById('linkedinLoginBtn').addEventListener('click', function() {
-            window.location.href = '/linkedin/login';
-        });
 
         // Resume data temporarily disabled
         /*const resumeData = {
