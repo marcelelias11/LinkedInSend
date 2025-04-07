@@ -1,12 +1,17 @@
 
 function getExperienceLevels() {
+    const getCheckboxValue = (value) => {
+        const element = document.querySelector(`input[name="expLevel"][value="${value}"]`);
+        return element ? element.checked : false;
+    };
+    
     return {
-        "internship": document.querySelector('input[name="expLevel"][value="internship"]').checked,
-        "entry": document.querySelector('input[name="expLevel"][value="entry"]').checked,
-        "associate": document.querySelector('input[name="expLevel"][value="associate"]').checked,
-        "mid-senior level": document.querySelector('input[name="expLevel"][value="mid-senior"]').checked,
-        "director": document.querySelector('input[name="expLevel"][value="director"]').checked,
-        "executive": document.querySelector('input[name="expLevel"][value="executive"]').checked
+        "internship": getCheckboxValue("internship"),
+        "entry": getCheckboxValue("entry"),
+        "associate": getCheckboxValue("associate"),
+        "mid-senior level": getCheckboxValue("mid-senior level"),
+        "director": getCheckboxValue("director"),
+        "executive": getCheckboxValue("executive")
     };
 }
 
