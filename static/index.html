@@ -12,21 +12,97 @@
         <h1>LinkedIn Bot Controller</h1>
         
         <div class="form-section">
-            <h2>Config Settings</h2>
-            <textarea id="configData" placeholder="Enter config data (JSON format)"></textarea>
+            <h2>LinkedIn Login</h2>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="openaiKey">OpenAI API Key:</label>
+                <input type="password" id="openaiKey" required>
+            </div>
         </div>
 
         <div class="form-section">
-            <h2>Secrets</h2>
-            <textarea id="secretsData" placeholder="Enter secrets data (JSON format)"></textarea>
+            <h2>Job Search Settings</h2>
+            <div class="form-group">
+                <label>Job Types:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="jobType" value="full-time"> Full Time</label>
+                    <label><input type="checkbox" name="jobType" value="contract"> Contract</label>
+                    <label><input type="checkbox" name="jobType" value="part-time"> Part Time</label>
+                    <label><input type="checkbox" name="jobType" value="temporary"> Temporary</label>
+                    <label><input type="checkbox" name="jobType" value="internship"> Internship</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Experience Level:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="expLevel" value="internship"> Internship</label>
+                    <label><input type="checkbox" name="expLevel" value="entry"> Entry Level</label>
+                    <label><input type="checkbox" name="expLevel" value="associate"> Associate</label>
+                    <label><input type="checkbox" name="expLevel" value="mid-senior"> Mid-Senior Level</label>
+                    <label><input type="checkbox" name="expLevel" value="director"> Director</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Date Posted:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="datePosted" value="24 hours"> Last 24 hours</label>
+                    <label><input type="checkbox" name="datePosted" value="week"> Past Week</label>
+                    <label><input type="checkbox" name="datePosted" value="month"> Past Month</label>
+                    <label><input type="checkbox" name="datePosted" value="all time"> All Time</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="positions">Job Titles (one per line):</label>
+                <textarea id="positions" placeholder="e.g.&#10;Software Engineer&#10;Full Stack Developer"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="locations">Locations (one per line):</label>
+                <textarea id="locations" placeholder="e.g.&#10;New York&#10;Remote"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="distance">Search Distance:</label>
+                <select id="distance">
+                    <option value="0">Exact location</option>
+                    <option value="5">5 miles</option>
+                    <option value="10">10 miles</option>
+                    <option value="25">25 miles</option>
+                    <option value="50">50 miles</option>
+                    <option value="100">100 miles</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="blacklistCompanies">Blacklisted Companies (one per line):</label>
+                <textarea id="blacklistCompanies" placeholder="Companies to exclude..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="blacklistTitles">Blacklisted Titles (one per line):</label>
+                <textarea id="blacklistTitles" placeholder="Job titles to exclude..."></textarea>
+            </div>
         </div>
 
         <div class="form-section">
             <h2>Resume</h2>
-            <textarea id="resumeData" placeholder="Enter resume data (JSON format)"></textarea>
+            <div class="form-group">
+                <label for="resumeText">Plain Text Resume:</label>
+                <textarea id="resumeText" placeholder="Paste your resume text here..."></textarea>
+            </div>
         </div>
 
-        <button id="submitBtn" onclick="submitAll()">Submit All & Start Bot</button>
+        <button id="submitBtn" onclick="submitAll()">Start Bot</button>
         
         <div id="status" class="status"></div>
     </div>
