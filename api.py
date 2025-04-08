@@ -97,12 +97,29 @@ def linkedin_login():
 
 @app.route('/linkedin/callback')
 def linkedin_callback():
-    linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, state=session['oauth_state'])
-    token = linkedin.fetch_token(LINKEDIN_TOKEN_URL, client_secret=LINKEDIN_CLIENT_SECRET, authorization_response=request.url)
-    linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, token=token)
-    profile_data = linkedin.get(LINKEDIN_PROFILE_API_URL).json()
-    #Process the profile data (e.g., save to database)
-    return jsonify({"message": "LinkedIn login successful", "profile": profile_data}), 200
+    try:
+        linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, state=session['oauth_state'])
+        token = linkedin.fetch_token(LINKEDIN_TOKEN_URL, client_secret=LINKEDIN_CLIENT_SECRET, authorization_response=request.url)
+        linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, token=token)
+        profile_data = linkedin.get(LINKEDIN_PROFILE_API_URL).json()
+        
+        # Store credentials in session for bot use
+        session['linkedin_token'] = token
+        session['linkedin_profile'] = profile_data
+        
+        return """
+            <script>
+                window.opener.postMessage({ type: 'LINKEDIN_AUTH_SUCCESS', profile: %s }, '*');
+                window.close();
+            </script>
+        """ % json.dumps(profile_data)
+    except Exception as e:
+        return """
+            <script>
+                window.opener.postMessage({ type: 'LINKEDIN_AUTH_ERROR', error: 'Authentication failed' }, '*');
+                window.close();
+            </script>
+        """
 
 
 if __name__ == '__main__':

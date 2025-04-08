@@ -1,11 +1,26 @@
 // Add LinkedIn login button event listener
 document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('linkedinLoginBtn');
+    const statusDiv = document.getElementById('status');
+    
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
             window.open('/linkedin/login', 'LinkedIn Login', 'width=600,height=700');
         });
     }
+
+    // Listen for messages from the popup
+    window.addEventListener('message', function(event) {
+        if (event.data.type === 'LINKEDIN_AUTH_SUCCESS') {
+            statusDiv.textContent = 'LinkedIn authentication successful!';
+            statusDiv.className = 'status success';
+            // Store the profile data
+            localStorage.setItem('linkedinProfile', JSON.stringify(event.data.profile));
+        } else if (event.data.type === 'LINKEDIN_AUTH_ERROR') {
+            statusDiv.textContent = 'LinkedIn authentication failed';
+            statusDiv.className = 'status error';
+        }
+    });
 });
 
 
