@@ -1,5 +1,7 @@
 *.csv
 __pycache__/**
+*.enc
+.config.key
 .idea/**
 open_ai_calls.log
 test*
