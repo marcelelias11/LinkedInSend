@@ -187,7 +187,7 @@ def create_and_run_bot(resume: Path = None):
 
         resume_object = Resume(plain_text_resume_file)
         bot = LinkedInBotFacade(login_component, apply_component)
-        bot.set_secrets(email, password) #These variables are not defined.  This part needs further changes.
+        #These variables are not defined.  This part needs further changes.  This will be addressed in a future edit.
         bot.set_resume(resume_object)
         bot.set_gpt_answerer(gpt_answerer_component)
         bot.set_parameters(parameters)
