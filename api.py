@@ -68,7 +68,7 @@ def start_application():
 # LinkedIn OAuth Configuration
 LINKEDIN_CLIENT_ID = os.environ.get('LINKEDIN_CLIENT_ID')
 LINKEDIN_CLIENT_SECRET = os.environ.get('LINKEDIN_CLIENT_SECRET')
-LINKEDIN_REDIRECT_URI = f"https://{os.environ.get('REPL_SLUG')}.{os.environ.get('REPL_OWNER')}.repl.co/linkedin/callback"
+LINKEDIN_REDIRECT_URI = "http://localhost:5000/linkedin/callback" if not os.environ.get('REPL_SLUG') else f"https://{os.environ.get('REPL_SLUG')}.{os.environ.get('REPL_OWNER')}.repl.co/linkedin/callback"
 LINKEDIN_AUTHORIZATION_BASE_URL = "https://www.linkedin.com/oauth/v2/authorization"
 LINKEDIN_TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken"
 LINKEDIN_PROFILE_API_URL = "https://api.linkedin.com/v2/me"
