@@ -1,10 +1,9 @@
-
 // Add LinkedIn login button event listener
 document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('linkedinLoginBtn');
     if (loginBtn) {
         loginBtn.addEventListener('click', function() {
-            window.location.href = '/linkedin/login';
+            window.open('/linkedin/login', 'LinkedIn Login', 'width=600,height=700');
         });
     }
 });
@@ -16,7 +15,7 @@ function getExperienceLevels() {
         const element = document.querySelector(`input[name="expLevel"][value="${value}"]`);
         return element ? element.checked : false;
     };
-    
+
     return {
         "internship": getCheckboxValue("internship"),
         "entry": getCheckboxValue("entry"),
@@ -56,7 +55,7 @@ function textareaToArray(id) {
 function submitAll() {
     const statusDiv = document.getElementById('status');
     statusDiv.className = 'status';
-    
+
     try {
         // Prepare config data
         const configData = {

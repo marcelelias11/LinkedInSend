@@ -75,10 +75,25 @@ LINKEDIN_PROFILE_API_URL = "https://api.linkedin.com/v2/me"
 
 @app.route('/linkedin/login')
 def linkedin_login():
-    linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, redirect_uri=LINKEDIN_REDIRECT_URI, scope=['r_liteprofile', 'r_emailaddress']) # Adjust scopes as needed
-    authorization_url, state = linkedin.authorization_url(LINKEDIN_AUTHORIZATION_BASE_URL)
-    session['oauth_state'] = state
-    return redirect(authorization_url)
+    max_retries = 3
+    retry_delay = 5
+    
+    for attempt in range(max_retries):
+        try:
+            linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, redirect_uri=LINKEDIN_REDIRECT_URI, scope=['r_liteprofile', 'r_emailaddress'])
+            authorization_url, state = linkedin.authorization_url(LINKEDIN_AUTHORIZATION_BASE_URL)
+            session['oauth_state'] = state
+            return """
+                <script>
+                    window.open('{}', 'LinkedIn Login', 'width=600,height=700');
+                    window.close();
+                </script>
+            """.format(authorization_url)
+        except Exception as e:
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+                continue
+            return "LinkedIn is temporarily unavailable. Please try again in a few minutes.", 503
 
 @app.route('/linkedin/callback')
 def linkedin_callback():
