@@ -83,7 +83,12 @@ def linkedin_login():
             linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, redirect_uri=LINKEDIN_REDIRECT_URI, scope=['r_liteprofile', 'r_emailaddress'])
             authorization_url, state = linkedin.authorization_url(LINKEDIN_AUTHORIZATION_BASE_URL)
             session['oauth_state'] = state
-            return redirect(authorization_url)
+            return """
+                <script>
+                    window.open('{}', 'LinkedIn Login', 'width=600,height=700');
+                    window.close();
+                </script>
+            """.format(authorization_url)
         except Exception as e:
             if attempt < max_retries - 1:
                 time.sleep(retry_delay)
