@@ -11,17 +11,25 @@ class LinkedInAuthenticator:
         self.email = ""
         self.password = ""
 
-    def set_secrets(self, email, password):
-        self.email = email
-        self.password = password
+    def set_oauth_token(self, token):
+        self.oauth_token = token
 
     def start(self):
-        """Start the Chrome browser and attempt to log in to LinkedIn."""
-        print("Starting Chrome browser to log in to LinkedIn.")
+        """Use OAuth token to authenticate with LinkedIn."""
+        print("Authenticating with LinkedIn using OAuth token...")
         self.driver.get('https://www.linkedin.com')
+        
+        # Add OAuth token to browser storage
+        self.driver.execute_script(
+            f"window.localStorage.setItem('linkedin_oauth_token', '{json.dumps(self.oauth_token)}')"
+        )
+        
+        # Refresh page to apply token
+        self.driver.refresh()
         self.wait_for_page_load()
+        
         if not self.is_logged_in():
-            self.handle_login()
+            raise Exception("OAuth authentication failed")
 
     def handle_login(self):
         """Handle the LinkedIn login process."""

@@ -167,8 +167,12 @@ def create_and_run_bot(resume: Path = None):
         data_folder = Path("data_folder")
         secrets_file, config_file, plain_text_resume_file, output_folder = FileManager.validate_data_folder(data_folder)
         parameters = ConfigValidator.validate_config(config_file)
-        email, password, openai_api_key = ConfigValidator.validate_secrets(secrets_file)
         parameters['uploads'] = FileManager.file_paths_to_dict(resume, plain_text_resume_file)
+        
+        # Get LinkedIn token from session
+        linkedin_token = session.get('linkedin_oauth_token')
+        if not linkedin_token:
+            raise ValueError("LinkedIn authentication required")
         parameters['outputFileDirectory'] = output_folder
 
         browser = init_browser()
