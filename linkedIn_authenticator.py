@@ -32,7 +32,7 @@ class LinkedInAuthenticator:
             self.submit_login_form()
         except NoSuchElementException:
             print("Could not log in to LinkedIn. Please check your credentials.")
-        time.sleep(3) #TODO fix better
+        time.sleep(random.uniform(5, 8))  # Add randomized delay
         self.handle_security_check()
 
     def enter_credentials(self):

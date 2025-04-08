@@ -652,7 +652,7 @@ class LinkedInEasyApplier:
     def _enter_text(self, element: WebElement, text: str) -> None:
         element.clear()
         element.send_keys(text)
-        time.sleep(0.5)  # Allow the dropdown to appear, if any
+        time.sleep(random.uniform(1, 2))  # Allow the dropdown to appear, if any
 
         # Check for any dropdowns or autocomplete suggestions
         try:
