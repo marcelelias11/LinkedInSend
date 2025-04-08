@@ -18,11 +18,10 @@ class LinkedInBotFacade:
         self.resume = resume
         self.state["resume_set"] = True
 
-    def set_secrets(self, email, password):  # Aggiunto openai_api_key
-        if not email or not password :
-            raise ValueError("Email and password cannot be empty.")
-        self.email = email
-        self.password = password
+    def set_oauth_token(self, token):
+        if not token:
+            raise ValueError("OAuth token cannot be empty")
+        self.login_component.set_oauth_token(token)
         self.state["credentials_set"] = True
 
     def set_gpt_answerer(self, gpt_answerer_component):

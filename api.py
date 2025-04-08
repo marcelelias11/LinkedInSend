@@ -103,16 +103,20 @@ def linkedin_callback():
         linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, token=token)
         profile_data = linkedin.get(LINKEDIN_PROFILE_API_URL).json()
         
-        # Store credentials in session for bot use
-        session['linkedin_token'] = token
-        session['linkedin_profile'] = profile_data
+        # Store encrypted token in session
+        session['linkedin_oauth_token'] = token
+        session['linkedin_email'] = profile_data.get('emailAddress', '')
+        session.permanent = True  # Make session persistent but with expiry
         
         return """
             <script>
-                window.opener.postMessage({ type: 'LINKEDIN_AUTH_SUCCESS', profile: %s }, '*');
+                window.opener.postMessage({ 
+                    type: 'LINKEDIN_AUTH_SUCCESS',
+                    email: %s
+                }, '*');
                 window.close();
             </script>
-        """ % json.dumps(profile_data)
+        """ % json.dumps(profile_data.get('emailAddress', ''))
     except Exception as e:
         return """
             <script>
