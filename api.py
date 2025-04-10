@@ -1,29 +1,27 @@
-from flask import Flask, request, jsonify, send_from_directory, redirect, session
-from requests_oauthlib import OAuth2Session
+from flask import Flask, request, jsonify, send_from_directory, redirect, session, url_for
+from config_manager import ConfigManager
 import yaml
-import time
-import json
-import os
 from pathlib import Path
 from main import create_and_run_bot
+import os
+import json
+import requests
+from jose import jwt
+from urllib.parse import urlencode
 
 app = Flask(__name__, static_url_path='')
-app.secret_key = os.urandom(24)  # Required for session management
+app.secret_key = os.urandom(24)
 
+config = ConfigManager()
+credentials = config.load_secrets()
+
+LINKEDIN_CLIENT_ID = credentials.get('linkedin_client_id', '')
+LINKEDIN_CLIENT_SECRET = credentials.get('linkedin_client_secret', '')
+LINKEDIN_REDIRECT_URI = f"https://{os.environ.get('REPL_SLUG')}.{os.environ.get('REPL_OWNER')}.repl.co/linkedin/callback" if os.environ.get('REPL_SLUG') else "http://localhost:5000/linkedin/callback"
 
 @app.route('/')
 def serve_frontend():
     return send_from_directory('static', 'index.html')
-
-
-DATA_FOLDER = Path("data_folder")
-DATA_FOLDER.mkdir(exist_ok=True)
-
-
-@app.route('/')
-def status():
-    return jsonify({"status": "running"}), 200
-
 
 @app.route('/api/config', methods=['POST'])
 def update_config():
@@ -57,7 +55,6 @@ def update_resume():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/start', methods=['GET'])
 def start_application():
     try:
@@ -71,92 +68,60 @@ def start_application():
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)}), 500
 
-
-# LinkedIn OAuth Configuration
-from config_manager import ConfigManager
-
-config = ConfigManager()
-credentials = config.load_credentials()
-
-if not credentials:
-    credentials = {
-        'LINKEDIN_CLIENT_ID': 'dummy',
-        'LINKEDIN_CLIENT_SECRET': 'dummy',
-        'OPENAI_API_KEY': 'dummy'
-    }
-    config.save_credentials(credentials)
-
-LINKEDIN_CLIENT_ID = credentials['LINKEDIN_CLIENT_ID']
-LINKEDIN_CLIENT_SECRET = credentials['LINKEDIN_CLIENT_SECRET']
-LINKEDIN_REDIRECT_URI = "http://localhost:5000/linkedin/callback" if not os.environ.get(
-    'REPL_SLUG'
-) else f"https://{os.environ.get('REPL_SLUG')}.{os.environ.get('REPL_OWNER')}.repl.co/linkedin/callback"
-LINKEDIN_AUTHORIZATION_BASE_URL = "https://www.linkedin.com/oauth/v2/authorization"
-LINKEDIN_TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken"
-LINKEDIN_PROFILE_API_URL = "https://api.linkedin.com/v2/me"
-
+DATA_FOLDER = Path("data_folder")
+DATA_FOLDER.mkdir(exist_ok=True)
 
 @app.route('/linkedin/login')
 def linkedin_login():
-    max_retries = 3
-    retry_delay = 5
-
-    for attempt in range(max_retries):
-        try:
-            linkedin = OAuth2Session(LINKEDIN_CLIENT_ID,
-                                     redirect_uri=LINKEDIN_REDIRECT_URI,
-                                     scope=['r_liteprofile', 'r_emailaddress'])
-            authorization_url, state = linkedin.authorization_url(
-                LINKEDIN_AUTHORIZATION_BASE_URL)
-            session['oauth_state'] = state
-            return """
-                <script>
-                    window.open('{}', 'LinkedIn Login', 'width=600,height=700');
-                    window.close();
-                </script>
-            """.format(authorization_url)
-        except Exception as e:
-            if attempt < max_retries - 1:
-                time.sleep(retry_delay)
-                continue
-            return "LinkedIn is temporarily unavailable. Please try again in a few minutes.", 503
-
+    params = {
+        'response_type': 'code',
+        'client_id': LINKEDIN_CLIENT_ID,
+        'redirect_uri': LINKEDIN_REDIRECT_URI,
+        'scope': 'openid profile email',
+        'state': os.urandom(16).hex()
+    }
+    session['oauth_state'] = params['state']
+    auth_url = f"https://www.linkedin.com/oauth/v2/authorization?{urlencode(params)}"
+    return redirect(auth_url)
 
 @app.route('/linkedin/callback')
 def linkedin_callback():
-    try:
-        linkedin = OAuth2Session(LINKEDIN_CLIENT_ID,
-                                 state=session['oauth_state'])
-        token = linkedin.fetch_token(LINKEDIN_TOKEN_URL,
-                                     client_secret=LINKEDIN_CLIENT_SECRET,
-                                     authorization_response=request.url)
-        linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, token=token)
-        profile_data = linkedin.get(LINKEDIN_PROFILE_API_URL).json()
+    if request.args.get('state') != session.get('oauth_state'):
+        return 'State verification failed', 400
 
-        # Store encrypted token in session
-        session['linkedin_oauth_token'] = token
-        session['linkedin_email'] = profile_data.get('emailAddress', '')
-        session.permanent = True  # Make session persistent but with expiry
+    code = request.args.get('code')
+    token_response = requests.post('https://www.linkedin.com/oauth/v2/accessToken', data={
+        'grant_type': 'authorization_code',
+        'code': code,
+        'client_id': LINKEDIN_CLIENT_ID,
+        'client_secret': LINKEDIN_CLIENT_SECRET,
+        'redirect_uri': LINKEDIN_REDIRECT_URI
+    })
 
-        return """
-            <script>
-                window.opener.postMessage({ 
-                    type: 'LINKEDIN_AUTH_SUCCESS',
-                    token: %s,
-                    email: %s
-                }, '*');
-                window.close();
-            </script>
-        """ % (json.dumps(token), json.dumps(profile_data.get('emailAddress', '')))
-    except Exception as e:
-        return """
-            <script>
-                window.opener.postMessage({ type: 'LINKEDIN_AUTH_ERROR', error: 'Authentication failed' }, '*');
-                window.close();
-            </script>
-        """
+    if token_response.status_code != 200:
+        return 'Token exchange failed', 400
 
+    tokens = token_response.json()
+
+    # Get user info
+    user_response = requests.get('https://api.linkedin.com/v2/userinfo', 
+        headers={'Authorization': f"Bearer {tokens['access_token']}"})
+
+    if user_response.status_code != 200:
+        return 'Failed to get user info', 400
+
+    user_info = user_response.json()
+
+    return f"""
+        <script>
+            window.opener.postMessage({{ 
+                type: 'LINKEDIN_AUTH_SUCCESS',
+                token: {json.dumps(tokens)},
+                user: {json.dumps(user_info)}
+            }}, '*');
+            window.close();
+        </script>
+    """
 
 if __name__ == '__main__':
-    app.secret_key = "YOUR_SECRET_KEY"  # Set a secret key for sessions
     app.run(host='0.0.0.0', port=5000)
