@@ -74,7 +74,7 @@ def start_application():
 from config_manager import ConfigManager
 
 config = ConfigManager()
-credentials = config.load_credentials()
+credentials = config.load_secrets()
 
 if not credentials:
     credentials = {
