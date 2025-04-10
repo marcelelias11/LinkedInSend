@@ -34,7 +34,7 @@ def update_config():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/api/secrets', methods=['POST'])
+'''@app.route('/api/secrets', methods=['POST'])
 def update_secrets():
     try:
         data = request.get_json()
@@ -42,10 +42,10 @@ def update_secrets():
             yaml.dump(data, f)
         return jsonify({"message": "Secrets updated successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500'''
 
 
-@app.route('/api/resume', methods=['POST'])
+'''@app.route('/api/resume', methods=['POST'])
 def update_resume():
     try:
         data = request.get_json()
@@ -53,7 +53,7 @@ def update_resume():
             yaml.dump(data, f)
         return jsonify({"message": "Resume updated successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500'''
 
 @app.route('/start', methods=['GET'])
 def start_application():
