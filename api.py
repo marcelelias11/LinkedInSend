@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory, redirect, sessio
 from requests_oauthlib import OAuth2Session
 import yaml
 import os
+import time
+import json
 from pathlib import Path
 from main import create_and_run_bot
 
@@ -34,7 +36,7 @@ def update_config():
         return jsonify({"error": str(e)}), 500
 
 
-@app.route('/api/secrets', methods=['POST'])
+'''@app.route('/api/secrets', methods=['POST'])
 def update_secrets():
     try:
         data = request.get_json()
@@ -42,7 +44,7 @@ def update_secrets():
             yaml.dump(data, f)
         return jsonify({"message": "Secrets updated successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500'''
 
 
 @app.route('/api/resume', methods=['POST'])
