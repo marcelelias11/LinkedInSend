@@ -111,6 +111,14 @@ function submitAll() {
   const statusDiv = document.getElementById("status");
   statusDiv.className = "status";
 
+  // Check if already authenticated
+  const linkedinTokens = localStorage.getItem("linkedin_tokens");
+  if (!linkedinTokens) {
+    // If not authenticated, trigger LinkedIn login
+    window.open("/linkedin/login", "LinkedIn Login", "width=600,height=700");
+    return;
+  }
+
   try {
     // Prepare config data
     const configData = {
