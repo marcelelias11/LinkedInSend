@@ -2,8 +2,6 @@ from flask import Flask, request, jsonify, send_from_directory, redirect, sessio
 from requests_oauthlib import OAuth2Session
 import yaml
 import os
-import time
-import json
 from pathlib import Path
 from main import create_and_run_bot
 
@@ -36,7 +34,7 @@ def update_config():
         return jsonify({"error": str(e)}), 500
 
 
-'''@app.route('/api/secrets', methods=['POST'])
+@app.route('/api/secrets', methods=['POST'])
 def update_secrets():
     try:
         data = request.get_json()
@@ -44,7 +42,7 @@ def update_secrets():
             yaml.dump(data, f)
         return jsonify({"message": "Secrets updated successfully"}), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500'''
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/api/resume', methods=['POST'])
@@ -76,7 +74,7 @@ def start_application():
 from config_manager import ConfigManager
 
 config = ConfigManager()
-credentials = config.load_secrets()
+credentials = config.load_credentials()
 
 if not credentials:
     credentials = {
@@ -97,46 +95,63 @@ LINKEDIN_PROFILE_API_URL = "https://api.linkedin.com/v2/me"
 
 
 @app.route('/linkedin/login')
-@app.route('/api/linkedin/auth_url')
-def get_auth_url():
-    config = ConfigManager().load_secrets()
-    if not config:
-        return jsonify({"error": "Could not load configuration"}), 500
-    
-    oauth = OAuth2Session(
-        config['linkedin_client_id'],
-        redirect_uri=LINKEDIN_REDIRECT_URI,
-        scope=['r_liteprofile', 'r_emailaddress']
-    )
-    authorization_url, state = oauth.authorization_url(LINKEDIN_AUTHORIZATION_BASE_URL)
-    session['oauth_state'] = state
-    return jsonify({"auth_url": authorization_url})
+def linkedin_login():
+    max_retries = 3
+    retry_delay = 5
+
+    for attempt in range(max_retries):
+        try:
+            linkedin = OAuth2Session(LINKEDIN_CLIENT_ID,
+                                     redirect_uri=LINKEDIN_REDIRECT_URI,
+                                     scope=['r_liteprofile', 'r_emailaddress'])
+            authorization_url, state = linkedin.authorization_url(
+                LINKEDIN_AUTHORIZATION_BASE_URL)
+            session['oauth_state'] = state
+            return """
+                <script>
+                    window.open('{}', 'LinkedIn Login', 'width=600,height=700');
+                    window.close();
+                </script>
+            """.format(authorization_url)
+        except Exception as e:
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+                continue
+            return "LinkedIn is temporarily unavailable. Please try again in a few minutes.", 503
 
 
 @app.route('/linkedin/callback')
-@app.route('/api/linkedin/callback', methods=['POST'])
 def linkedin_callback():
-    config = ConfigManager().load_secrets()
-    if not config:
-        return jsonify({"error": "Could not load configuration"}), 500
-
     try:
-        code = request.json.get('code')
-        oauth = OAuth2Session(
-            config['linkedin_client_id'],
-            redirect_uri=LINKEDIN_REDIRECT_URI
-        )
-        token = oauth.fetch_token(
-            LINKEDIN_TOKEN_URL,
-            code=code,
-            client_secret=config['linkedin_client_secret']
-        )
-        return jsonify({
-            "access_token": token['access_token'],
-            "expires_in": token['expires_in']
-        })
+        linkedin = OAuth2Session(LINKEDIN_CLIENT_ID,
+                                 state=session['oauth_state'])
+        token = linkedin.fetch_token(LINKEDIN_TOKEN_URL,
+                                     client_secret=LINKEDIN_CLIENT_SECRET,
+                                     authorization_response=request.url)
+        linkedin = OAuth2Session(LINKEDIN_CLIENT_ID, token=token)
+        profile_data = linkedin.get(LINKEDIN_PROFILE_API_URL).json()
+
+        # Store encrypted token in session
+        session['linkedin_oauth_token'] = token
+        session['linkedin_email'] = profile_data.get('emailAddress', '')
+        session.permanent = True  # Make session persistent but with expiry
+
+        return """
+            <script>
+                window.opener.postMessage({ 
+                    type: 'LINKEDIN_AUTH_SUCCESS',
+                    email: %s
+                }, '*');
+                window.close();
+            </script>
+        """ % json.dumps(profile_data.get('emailAddress', ''))
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return """
+            <script>
+                window.opener.postMessage({ type: 'LINKEDIN_AUTH_ERROR', error: 'Authentication failed' }, '*');
+                window.close();
+            </script>
+        """
 
 
 if __name__ == '__main__':

@@ -3,45 +3,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginBtn = document.getElementById("linkedinLoginBtn");
   const statusDiv = document.getElementById("status");
 
-  function handleOAuthResponse(response) {
-    if (response.access_token) {
-      localStorage.setItem('linkedin_token', response.access_token);
+  if (loginBtn) {
+    loginBtn.addEventListener("click", function () {
+      window.open("/linkedin/login", "LinkedIn Login", "width=600,height=700");
+    });
+  }
+
+  // Listen for messages from the popup
+  window.addEventListener("message", function (event) {
+    if (event.data.type === "LINKEDIN_AUTH_SUCCESS") {
       statusDiv.textContent = "LinkedIn authentication successful!";
       statusDiv.className = "status success";
-    }
-  }
-
-  if (loginBtn) {
-    loginBtn.addEventListener("click", async function () {
-      try {
-        const response = await fetch('/api/linkedin/auth_url');
-        const data = await response.json();
-        window.location.href = data.auth_url;
-      } catch (error) {
-        statusDiv.textContent = "Failed to initiate LinkedIn login";
-        statusDiv.className = "status error";
-      }
-    });
-  }
-
-  // Handle OAuth callback
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get('code');
-  if (code) {
-    fetch('/api/linkedin/callback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ code })
-    })
-    .then(response => response.json())
-    .then(handleOAuthResponse)
-    .catch(error => {
-      statusDiv.textContent = "Authentication failed";
+      // Store the profile data
+      localStorage.setItem(
+        "linkedinProfile",
+        JSON.stringify(event.data.profile)
+      );
+    } else if (event.data.type === "LINKEDIN_AUTH_ERROR") {
+      statusDiv.textContent = "LinkedIn authentication failed";
       statusDiv.className = "status error";
-    });
-  }
+    }
+  });
 });
 
 function getExperienceLevels() {
