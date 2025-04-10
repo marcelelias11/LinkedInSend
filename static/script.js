@@ -9,6 +9,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Handle OAuth callback messages
+  window.addEventListener("message", function (event) {
+    if (event.data.type === "LINKEDIN_AUTH_SUCCESS") {
+      statusDiv.textContent = "LinkedIn authentication successful!";
+      statusDiv.className = "status success";
+      // Store the token for later use
+      localStorage.setItem("linkedin_token", event.data.token);
+      window.location.reload();
+    } else if (event.data.type === "LINKEDIN_AUTH_ERROR") {
+      statusDiv.textContent = "LinkedIn authentication failed";
+      statusDiv.className = "status error";
+    }
+  });
+
   // Listen for messages from the popup
   window.addEventListener("message", function (event) {
     if (event.data.type === "LINKEDIN_AUTH_SUCCESS") {

@@ -140,11 +140,12 @@ def linkedin_callback():
             <script>
                 window.opener.postMessage({ 
                     type: 'LINKEDIN_AUTH_SUCCESS',
+                    token: %s,
                     email: %s
                 }, '*');
                 window.close();
             </script>
-        """ % json.dumps(profile_data.get('emailAddress', ''))
+        """ % (json.dumps(token), json.dumps(profile_data.get('emailAddress', '')))
     except Exception as e:
         return """
             <script>
