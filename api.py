@@ -8,6 +8,7 @@ import json
 import requests
 from jose import jwt
 from urllib.parse import urlencode
+import secrets
 
 app = Flask(__name__, static_url_path='')
 app.secret_key = os.urandom(24)
@@ -18,6 +19,7 @@ credentials = config.load_credentials()
 LINKEDIN_CLIENT_ID = credentials.get('linkedin_client_id', '')
 LINKEDIN_CLIENT_SECRET = credentials.get('linkedin_client_secret', '')
 LINKEDIN_REDIRECT_URI = f"https://{os.environ.get('REPL_SLUG')}.{os.environ.get('REPL_OWNER')}.repl.co/linkedin/callback" if os.environ.get('REPL_SLUG') else "http://localhost:5000/linkedin/callback"
+LINKEDIN_SCOPES = ['openid', 'profile', 'email', 'w_member_social']
 
 @app.route('/')
 def serve_frontend():
@@ -73,55 +75,67 @@ DATA_FOLDER.mkdir(exist_ok=True)
 
 @app.route('/linkedin/login')
 def linkedin_login():
+    state = secrets.token_hex(16)
     params = {
         'response_type': 'code',
         'client_id': LINKEDIN_CLIENT_ID,
         'redirect_uri': LINKEDIN_REDIRECT_URI,
-        'scope': 'openid profile email',
-        'state': os.urandom(16).hex()
+        'scope': ' '.join(LINKEDIN_SCOPES),
+        'state': state
     }
-    session['oauth_state'] = params['state']
+    session['oauth_state'] = state
     auth_url = f"https://www.linkedin.com/oauth/v2/authorization?{urlencode(params)}"
     return redirect(auth_url)
 
 @app.route('/linkedin/callback')
 def linkedin_callback():
+    error = request.args.get('error')
+    if error:
+        error_description = request.args.get('error_description', '')
+        return f'Authorization failed: {error} - {error_description}', 400
+
     if request.args.get('state') != session.get('oauth_state'):
-        return 'State verification failed', 400
+        return 'State verification failed - possible CSRF attack', 401
 
     code = request.args.get('code')
-    token_response = requests.post('https://www.linkedin.com/oauth/v2/accessToken', data={
-        'grant_type': 'authorization_code',
-        'code': code,
-        'client_id': LINKEDIN_CLIENT_ID,
-        'client_secret': LINKEDIN_CLIENT_SECRET,
-        'redirect_uri': LINKEDIN_REDIRECT_URI
-    })
+    if not code:
+        return 'Authorization code not received', 400
 
-    if token_response.status_code != 200:
-        return 'Token exchange failed', 400
+    try:
+        token_response = requests.post('https://www.linkedin.com/oauth/v2/accessToken', data={
+            'grant_type': 'authorization_code',
+            'code': code,
+            'client_id': LINKEDIN_CLIENT_ID,
+            'client_secret': LINKEDIN_CLIENT_SECRET,
+            'redirect_uri': LINKEDIN_REDIRECT_URI
+        })
+        token_response.raise_for_status()
+        tokens = token_response.json()
 
-    tokens = token_response.json()
+        # Store tokens securely in session
+        session['access_token'] = tokens['access_token']
+        session['expires_in'] = tokens.get('expires_in', 0)
+        if 'refresh_token' in tokens:
+            session['refresh_token'] = tokens['refresh_token']
 
-    # Get user info
-    user_response = requests.get('https://api.linkedin.com/v2/userinfo', 
-        headers={'Authorization': f"Bearer {tokens['access_token']}"})
+        # Get user info
+        user_response = requests.get('https://api.linkedin.com/v2/userinfo', 
+            headers={'Authorization': f"Bearer {tokens['access_token']}"})
+        user_response.raise_for_status()
+        user_info = user_response.json()
 
-    if user_response.status_code != 200:
-        return 'Failed to get user info', 400
-
-    user_info = user_response.json()
-
-    return f"""
-        <script>
-            window.opener.postMessage({{ 
-                type: 'LINKEDIN_AUTH_SUCCESS',
-                token: {json.dumps(tokens)},
-                user: {json.dumps(user_info)}
-            }}, '*');
-            window.close();
-        </script>
-    """
+        return f"""
+            <script>
+                window.opener.postMessage({{ 
+                    type: 'LINKEDIN_AUTH_SUCCESS',
+                    token: {json.dumps(tokens)},
+                    user: {json.dumps(user_info)}
+                }}, '*');
+                window.close();
+            </script>
+        """
+    except requests.exceptions.RequestException as e:
+        return f'Failed to exchange code for token: {str(e)}', 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
