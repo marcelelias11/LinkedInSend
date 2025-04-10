@@ -10,7 +10,7 @@ app = Flask(__name__, static_url_path='')
 app.secret_key = os.urandom(24)
 
 config = ConfigManager()
-credentials = config.load_secrets()
+credentials = config.load_credentials()
 
 LINKEDIN_CLIENT_ID = credentials.get('linkedin_client_id', '')
 LINKEDIN_CLIENT_SECRET = credentials.get('linkedin_client_secret', '')
