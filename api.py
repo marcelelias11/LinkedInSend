@@ -80,7 +80,7 @@ def linkedin_login():
         'response_type': 'code',
         'client_id': LINKEDIN_CLIENT_ID,
         'redirect_uri': LINKEDIN_REDIRECT_URI,
-        'scope': ' '.join(LINKEDIN_SCOPES),
+        'scope': 'r_liteprofile r_emailaddress w_member_social',
         'state': state
     }
     session['oauth_state'] = state
