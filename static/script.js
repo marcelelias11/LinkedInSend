@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Handle OAuth callback messages
   window.addEventListener("message", function (event) {
     if (event.data.type === "LINKEDIN_AUTH_SUCCESS") {
-      statusDiv.textContent = "LinkedIn authentication successful!";
+      statusDiv.textContent = `Authenticated as ${event.data.user.name}`;
       statusDiv.className = "status success";
-      // Store the token for later use
-      localStorage.setItem("linkedin_token", event.data.token);
+      localStorage.setItem("linkedin_tokens", JSON.stringify(event.data.token));
+      localStorage.setItem("linkedin_user", JSON.stringify(event.data.user));
       window.location.reload();
     } else if (event.data.type === "LINKEDIN_AUTH_ERROR") {
       statusDiv.textContent = "LinkedIn authentication failed";
