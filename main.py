@@ -101,8 +101,8 @@ class ConfigValidator:
             raise ConfigError(f"Error reading secrets file {secrets_yaml_path}: {exc}")
         except FileNotFoundError:
             raise ConfigError(f"Secrets file not found: {secrets_yaml_path}")
-
-        mandatory_secrets = ['email', 'password', 'openai_api_key']
+        
+        mandatory_secrets = ['email', 'password', 'openai_api_key', 'linkedin_client_id', 'linkedin_client_secret']
 
         for secret in mandatory_secrets:
             if secret not in secrets:
@@ -114,8 +114,19 @@ class ConfigValidator:
             raise ConfigError(f"Password cannot be empty in secrets file {secrets_yaml_path}.")
         if not secrets['openai_api_key']:
             raise ConfigError(f"OpenAI API key cannot be empty in secrets file {secrets_yaml_path}.")
+        if not secrets['linkedin_client_id']:
+            raise ConfigError(f"LinkedIn Client ID cannot be empty in secrets file {secrets_yaml_path}.")
+        if not secrets['linkedin_client_secret']:
+            raise ConfigError(f"LinkedIn Client Secret cannot be empty in secrets file {secrets_yaml_path}.")
 
-        return secrets['email'], str(secrets['password']), secrets['openai_api_key']
+        return (
+            secrets['email'],
+            str(secrets['password']),
+            secrets['openai_api_key'],
+            secrets['linkedin_client_id'],
+            secrets['linkedin_client_secret']
+        )
+        
 
 class FileManager:
     @staticmethod
@@ -165,29 +176,23 @@ def init_browser():
 def create_and_run_bot(resume: Path = None):
     try:
         data_folder = Path("data_folder")
-        _, config_file, plain_text_resume_file, output_folder = FileManager.validate_data_folder(data_folder)
+        secrets_file, config_file, plain_text_resume_file, output_folder = FileManager.validate_data_folder(data_folder)
         parameters = ConfigValidator.validate_config(config_file)
-        openai_api_key = os.environ.get('OPENAI_API_KEY')
-        if openai_api_key is None:
-            raise ConfigError("OPENAI_API_KEY environment variable not set")
-
-        # Get LinkedIn token from session
-        linkedin_token = session.get('linkedin_oauth_token')
-        if not linkedin_token:
-            raise ValueError("LinkedIn authentication required")
+        email, password, openai_api_key, linkedin_client_id, linkedin_client_secret = ConfigValidator.validate_secrets(secrets_file)
+        parameters['uploads'] = FileManager.file_paths_to_dict(resume, plain_text_resume_file)
         parameters['outputFileDirectory'] = output_folder
 
         browser = init_browser()
         login_component = LinkedInAuthenticator(browser)
         apply_component = LinkedInJobManager(browser)
         gpt_answerer_component = GPTAnswerer(openai_api_key)
-
+        
         with open(parameters['uploads']['plainTextResume'], "r") as file:
             plain_text_resume_file = file.read()
-
+        
         resume_object = Resume(plain_text_resume_file)
         bot = LinkedInBotFacade(login_component, apply_component)
-        #These variables are not defined.  This part needs further changes.  This will be addressed in a future edit.
+        bot.set_secrets(email, password)
         bot.set_resume(resume_object)
         bot.set_gpt_answerer(gpt_answerer_component)
         bot.set_parameters(parameters)
