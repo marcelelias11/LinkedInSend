@@ -55,14 +55,14 @@ class LinkedInEasyApplier:
 
 
     def _find_easy_apply_button(self) -> WebElement:
-        buttons = WebDriverWait(self.driver, 5).until(
+        buttons = WebDriverWait(self.driver, 3).until(
             EC.presence_of_all_elements_located(
                 (By.XPATH, '//button[contains(@class, "jobs-apply-button") and contains(., "Easy Apply")]')
             )
         )
         for index, button in enumerate(buttons):
             try:
-                return WebDriverWait(self.driver, 5).until(
+                return WebDriverWait(self.driver, 3).until(
                     EC.element_to_be_clickable(
                         (By.XPATH, f'(//button[contains(@class, "jobs-apply-button") and contains(., "Easy Apply")])[{index + 1}]')
                     )
@@ -73,18 +73,76 @@ class LinkedInEasyApplier:
 
     def _get_job_description(self) -> str:
         try:
-            see_more_button = self.driver.find_element(By.XPATH, '//button[@aria-label="Click to see more description"]')
-            see_more_button.click()
-            time.sleep(.2)
-            description = self.driver.find_element(By.CSS_SELECTOR, '.jobs-description-content__text').text
-            # self._scroll_page()
-            return description
-        except NoSuchElementException:
+            # Wait for either of these elements to be present
+            description_selectors = [
+                '.jobs-description__content',
+                '.jobs-unified-top-card__job-details',
+                '.jobs-search-results-list',
+                '.jobs-description',
+                '[data-member-id]',
+                '.job-details-jobs-unified-top-card__primary-description-container'
+            ]
+            
+            # Wait for any of the selectors to be present
+            for selector in description_selectors:
+                try:
+                    WebDriverWait(self.driver, 3).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                    )
+                    break
+                except:
+                    continue
+            
+            time.sleep(1)  # Allow dynamic content to load
+
+            # Try to find and click "see more" button if it exists
+            see_more_selectors = [
+                '//*[contains(@aria-label, "Click to see more")]',
+                '//button[contains(@class, "show-more-less-html__button")]',
+                '//button[contains(text(), "more")]',
+                '//button[contains(text(), "See more")]'
+            ]
+            
+            for selector in see_more_selectors:
+                try:
+                    buttons = self.driver.find_elements(By.XPATH, selector)
+                    if buttons:
+                        buttons[0].click()
+                        time.sleep(0.5)
+                        break
+                except:
+                    continue
+
+            # Updated list of description selectors
+            content_selectors = [
+                '.jobs-description__content span',
+                '.jobs-box__html-content',
+                '.jobs-unified-top-card__job-details',
+                '.jobs-description',
+                '.jobs-description-content__text',
+                '.job-details-jobs-unified-top-card__primary-description-container',
+                '.jobs-unified-top-card__job-details p',
+                '.jobs-description__content div'
+            ]
+
+            full_description = []
+            for selector in content_selectors:
+                try:
+                    elements = self.driver.find_elements(By.CSS_SELECTOR, selector)
+                    for element in elements:
+                        text = element.text.strip()
+                        if text:
+                            full_description.append(text)
+                except:
+                    continue
+
+            if full_description:
+                return '\n'.join(full_description)
+
+            raise Exception("Could not find job description with any selector")
+        except Exception as e:
             tb_str = traceback.format_exc()
-            raise Exception("Job description 'See more' button not found: \nTraceback:\n{tb_str}")
-        except Exception :
-            tb_str = traceback.format_exc()
-            raise Exception(f"Error getting Job description: \nTraceback:\n{tb_str}")
+            raise Exception(f"Error getting Job description: {str(e)}\nTraceback:\n{tb_str}")
 
     def _scroll_page(self) -> None:
         scrollable_element = self.driver.find_element(By.TAG_NAME, 'html')
@@ -102,13 +160,13 @@ class LinkedInEasyApplier:
         button_text = next_button.text.lower()
         if 'submit application' in button_text:
             self._unfollow_company()
-            time.sleep(random.uniform(.5, 1.))
+            time.sleep(random.uniform(0.3, 0.7))  # Reduced from 0.5-1.0
             next_button.click()
-            time.sleep(random.uniform(1.5, 2.5))
+            time.sleep(random.uniform(0.5, 0.9))  # Reduced from 0.8-1.2
             return True
-        time.sleep(random.uniform(.5, 1.5))
+        time.sleep(random.uniform(0.2, 0.5))  # Reduced from 0.3-0.7
         next_button.click()
-        time.sleep(random.uniform(1.5, 2.))
+        time.sleep(random.uniform(0.5, 0.9))  # Reduced from 0.8-1.2
 
         # time.sleep(random.uniform(3.0, 5.0))
         self._check_for_errors()
@@ -150,9 +208,66 @@ class LinkedInEasyApplier:
             if self._is_upload_field(element):
                 self._handle_upload_fields(element)
             else:
-                self._fill_additional_questions()
+                # Try multiple selectors for finding questions
+                question_selectors = [
+                    '.jobs-easy-apply-form-element',
+                    '.fb-dash-form-element',
+                    'div[data-test-single-line-text-form-component]',
+                    '.artdeco-text-input',
+                    '.ember-view'
+                ]
+                
+                additional_questions = []
+                for selector in question_selectors:
+                    questions = element.find_elements(By.CSS_SELECTOR, selector)
+                    if questions:
+                        additional_questions.extend(questions)
+                        break
+                        
+                if additional_questions:
+                    for question in additional_questions:
+                        try:
+                            question_label = question.find_element(By.TAG_NAME, 'label').text.strip()
+                            if question_label:
+                                # Handle different types of inputs
+                                if self._has_text_input(question):
+                                    self._handle_textbox_question(question)
+                                elif self._has_radio_buttons(question):
+                                    self._handle_radio_question(question)
+                                elif self._has_dropdown(question):
+                                    self._handle_dropdown_question(question)
+                                elif self._has_date_picker(question):
+                                    self._handle_date_question(question)
+                        except Exception as e:
+                            utils.printred(f"Error processing question: {str(e)}")
+                            continue
         except Exception as e:
+            utils.printred(f"Error in form element processing: {str(e)}")
             pass
+
+    def _has_text_input(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.CSS_SELECTOR, 'input[type="text"], textarea, input[type="number"]'))
+        except:
+            return False
+
+    def _has_radio_buttons(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.CSS_SELECTOR, '.fb-text-selectable__option'))
+        except:
+            return False
+
+    def _has_dropdown(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.TAG_NAME, 'select'))
+        except:
+            return False
+
+    def _has_date_picker(self, element: WebElement) -> bool:
+        try:
+            return bool(element.find_elements(By.CSS_SELECTOR, '.artdeco-datepicker__input'))
+        except:
+            return False
 
     def _is_upload_field(self, element: WebElement) -> bool:
         try:
@@ -192,10 +307,10 @@ class LinkedInEasyApplier:
 
                 # file_name_pdf = f"resume_{uuid.uuid4().hex}.pdf"
                 # file_path_pdf = os.path.join(folder_path, file_name_pdf)
-                
+
                 # with open(file_path_pdf, "wb") as f:
                 #     f.write(base64.b64decode(utils.HTML_to_PDF(file_name_HTML)))
-                    
+
                 # element.send_keys(os.path.abspath(file_path_pdf))
                 # time.sleep(2)  # Give some time for the upload process
                 # os.remove(file_name_HTML)
@@ -250,55 +365,187 @@ class LinkedInEasyApplier:
 
     def _handle_radio_question(self, element: WebElement) -> None:
         try:
-            question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
-            radios = question.find_elements(By.CSS_SELECTOR, '.fb-text-selectable__option')
+            # Try multiple selectors for finding radio groups
+            radio_selectors = [
+                '.jobs-easy-apply-form-element',
+                '.fb-dash-form-element',
+                '.ember-view'
+            ]
+            
+            question = None
+            for selector in radio_selectors:
+                try:
+                    question = element.find_element(By.CSS_SELECTOR, selector)
+                    if question:
+                        break
+                except:
+                    continue
+                    
+            if not question:
+                return
+
+            radios = question.find_elements(By.CSS_SELECTOR, '.fb-text-selectable__option, input[type="radio"]')
             if not radios:
                 return
 
-            # Check if any radio button is already selected
-            for radio in radios:
-                if radio.get_attribute('aria-checked') == 'true':
-                    print("Answer already selected. Skipping...")
-                    return  # Early exit if an answer is already selected
+            # Check if already answered
+            if any(radio.get_attribute('aria-checked') == 'true' for radio in radios):
+                return
 
-            question_text = element.text.lower()
-            options = [radio.text.lower() for radio in radios]
+            question_text = question.text.lower()
+            if not question_text:
+                try:
+                    label = question.find_element(By.TAG_NAME, 'label')
+                    question_text = label.text.lower()
+                except:
+                    pass
 
-            answer = self._get_answer_from_set('radio', question_text, options)
-            if not answer:
-                answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+            options = [radio.text.lower() for radio in radios if radio.text.strip()]
+            if not options:
+                options = [radio.get_attribute('value').lower() for radio in radios if radio.get_attribute('value')]
 
-            self._select_radio(radios, answer)
-        except NoSuchElementException:
-            print("Radio button element not found.")
+            if question_text and options:
+                answer = self._get_answer_from_set('radio', question_text, options)
+                if not answer:
+                    answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+                    
+                if answer:
+                    self._select_radio(radios, answer)
+                    time.sleep(random.uniform(0.3, 0.7))
+                    
         except Exception as e:
-            print(f"An error occurred: {e}")
+            utils.printred(f"Error handling radio question: {str(e)}")
 
     def _handle_textbox_question(self, element: WebElement) -> None:
+        max_retries = 3
         try:
-            question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
-            question_text = question.find_element(By.TAG_NAME, 'label').text.lower()
-            text_field = self._find_text_field(question)
-            if not text_field:
-                print("Textbox element not found(early). Skipping...")
+            # Try different label selectors
+            label_selectors = [
+                'label.artdeco-text-input--label',
+                'label[for]',
+                'label',
+                '.artdeco-text-input--label'
+            ]
+            
+            question_text = None
+            for selector in label_selectors:
+                try:
+                    label_elem = element.find_element(By.CSS_SELECTOR, selector)
+                    question_text = label_elem.text.strip()
+                    if question_text:
+                        break
+                except:
+                    continue
+                    
+            if not question_text:
+                utils.printred("Could not find question text. Skipping...")
                 return
-            # Check if the text field is already filled
+
+            # Try different input field selectors
+            input_selectors = [
+                'input.artdeco-text-input--input',
+                'input[type="text"]',
+                'input[type="number"]',
+                'textarea',
+                '.artdeco-text-input--input'
+            ]
+            
+            text_field = None
+            for selector in input_selectors:
+                try:
+                    text_field = element.find_element(By.CSS_SELECTOR, selector)
+                    if text_field.is_displayed():
+                        break
+                except:
+                    continue
+
+            if not text_field:
+                utils.printred("Textbox element not found. Skipping...")
+                return
+                
             if text_field.get_attribute('value').strip():
-                print("Textbox already filled. Skipping...")
-                return  # Early exit if the textbox is already filled
+                utils.printyellow("Textbox already filled. Skipping...")
+                return
 
+            utils.printyellow(f"Attempting to answer question: {question_text}")
+            
+            # Extract any hints or requirements from the question container
+            try:
+                hint_elements = element.find_elements(By.CSS_SELECTOR, '.fb-form-element-hint, .hint-text, .form-hint')
+                hints = ' '.join([hint.text for hint in hint_elements if hint.text.strip()])
+                if hints:
+                    question_text = f"{question_text} (Hint: {hints})"
+            except:
+                pass
+
+            # Determine field type and constraints
             is_numeric = self._is_numeric_field(text_field)
-            answer = self._get_answer_from_set('numeric' if is_numeric else 'text', question_text)
-
-            if not answer:
-                answer = self.gpt_answerer.answer_question_numeric(question_text) if is_numeric else self.gpt_answerer.answer_question_textual_wide_range(question_text)
-
-            self._enter_text(text_field, answer)
-            self._handle_form_errors(element, question_text, answer, text_field)
+            field_type = 'numeric' if is_numeric else 'text'
+            
+            # Check for character limits
+            max_length = text_field.get_attribute('maxlength')
+            if max_length:
+                question_text = f"{question_text} (Max length: {max_length} characters)"
+            
+            for attempt in range(max_retries):
+                try:
+                    # First try to get answer from previous responses
+                    answer = self._get_answer_from_set(field_type, question_text)
+                    
+                    if not answer:
+                        # If no previous answer, get new one from GPT
+                        if is_numeric:
+                            answer = self.gpt_answerer.answer_question_numeric(question_text)
+                        else:
+                            # Pass context about the job to get more relevant answers
+                            job_context = self.gpt_answerer.job.formatted_job_information()
+                            answer = self.gpt_answerer.answer_question_textual_wide_range(
+                                f"Job Context:\n{job_context}\n\nQuestion: {question_text}"
+                            )
+                    
+                    # Validate answer length if maxlength exists
+                    max_length = text_field.get_attribute('maxlength')
+                    if max_length and len(str(answer)) > int(max_length):
+                        answer = str(answer)[:int(max_length)]
+                    
+                    # Clear and enter text
+                    text_field.clear()
+                    text_field.send_keys(answer)
+                    time.sleep(0.5)
+                    
+                    # Check if the answer was accepted (no error messages)
+                    error_elements = element.find_elements(By.CSS_SELECTOR, '.artdeco-inline-feedback--error, .error-message, .validation-error')
+                    if not any(error.is_displayed() for error in error_elements):
+                        utils.printyellow(f"Successfully answered: {question_text}")
+                        return
+                    
+                    # Check for validation errors
+                    error_elements = element.find_elements(By.CSS_SELECTOR, '.artdeco-inline-feedback--error')
+                    if not error_elements:
+                        print(f"Successfully filled {question_text} with {answer}")
+                        return
+                    
+                    error_text = error_elements[0].text.lower()
+                    if 'valid' in error_text:
+                        print(f"Invalid answer format for {question_text}, retrying...")
+                        if attempt < max_retries - 1:
+                            # Get a new answer for next attempt, explicitly telling GPT about the error
+                            answer = self.gpt_answerer.try_fix_answer(question_text, answer, error_text)
+                            continue
+                    
+                    raise Exception(f"Failed to provide valid answer for {question_text}: {error_text}")
+                    
+                except Exception as e:
+                    if attempt == max_retries - 1:
+                        raise Exception(f"Max retries reached for {question_text}: {str(e)}")
+                    print(f"Attempt {attempt + 1} failed: {str(e)}")
+                    time.sleep(1)
+                    
         except NoSuchElementException:
             print("Textbox element not found.")
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred while handling textbox question: {str(e)}")
+            raise
 
 
     def _handle_date_question(self, element: WebElement) -> None:
@@ -307,7 +554,7 @@ class LinkedInEasyApplier:
             if not date_picker:
                 print("Date picker element not found(early).")
                 return
-            
+
             # Check if the date picker is already filled
             if date_picker.get_attribute('value').strip():
                 print("Date already selected. Skipping...")
@@ -323,34 +570,63 @@ class LinkedInEasyApplier:
 
     def _handle_dropdown_question(self, element: WebElement) -> None:
         try:
-            question = element.find_element(By.CSS_SELECTOR, '.jobs-easy-apply-form-element')
-            question_text = question.find_element(By.TAG_NAME, 'label').text.lower()
-            dropdown = question.find_element(By.TAG_NAME, 'select')
-            select = Select(dropdown)
-            # sleep 1 sceond
-            time.sleep(.4)
+            dropdown_selectors = [
+                '.jobs-easy-apply-form-element select',
+                '.fb-dash-form-element select',
+                'select.artdeco-dropdown__input',
+                'select'
+            ]
+            
+            dropdown = None
+            for selector in dropdown_selectors:
+                try:
+                    dropdown = element.find_element(By.CSS_SELECTOR, selector)
+                    if dropdown and dropdown.is_displayed():
+                        break
+                except:
+                    continue
 
             if not dropdown:
-                print("Dropdown element not found(early). Skipping...")
                 return
 
-            # Check if an option is already selected
+            select = Select(dropdown)
+            time.sleep(random.uniform(0.3, 0.7))
+
+            # Check if already selected
             selected_option = select.first_selected_option.text.strip()
-            if selected_option and selected_option != 'Select an option':
-                print(f"Dropdown already selected ({selected_option}). Skipping...")
-                return  # Early exit if a dropdown option is already selected
+            if selected_option and selected_option != 'Select an option' and selected_option != '--':
+                return
 
-            options = [option.text for option in select.options]
-            answer = self._get_answer_from_set('dropdown', question_text, options)
+            # Get question text
+            question_text = ''
+            try:
+                label = element.find_element(By.TAG_NAME, 'label')
+                question_text = label.text.lower()
+            except:
+                try:
+                    # Try getting text from parent
+                    question_text = element.text.lower()
+                except:
+                    pass
 
-            if not answer:
-                answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+            if not question_text:
+                return
 
-            self._select_dropdown(dropdown, answer)
-        except NoSuchElementException:
-            print("Dropdown element not found.")
+            # Get options excluding placeholder
+            options = [option.text for option in select.options 
+                      if option.text.strip() and option.text not in ['Select an option', '--']]
+
+            if options:
+                answer = self._get_answer_from_set('dropdown', question_text, options)
+                if not answer:
+                    answer = self.gpt_answerer.answer_question_from_options(question_text, options)
+
+                if answer:
+                    self._select_dropdown(dropdown, answer)
+                    time.sleep(random.uniform(0.3, 0.7))
+
         except Exception as e:
-            print(f"An error occurred: {e}")
+            utils.printred(f"Error handling dropdown: {str(e)}")
 
     def _get_answer_from_set(self, question_type: str, question_text: str, options: Optional[List[str]] = None) -> Optional[str]:
         for entry in self.set_old_answers:
