@@ -1,7 +1,7 @@
-
 import re
 from pathlib import Path
 import yaml
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -23,7 +23,7 @@ class ConfigValidator:
     def validate_email(email: str) -> bool:
         email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         return re.match(email_regex, email) is not None
-    
+
     @staticmethod
     def validate_config(config_yaml_path: Path) -> dict:
         try:
@@ -33,7 +33,7 @@ class ConfigValidator:
             raise ConfigError(f"Error reading config file {config_yaml_path}: {exc}")
         except FileNotFoundError:
             raise ConfigError(f"Config file not found: {config_yaml_path}")
-        
+
         # Validate 'remote'
         if 'remote' not in parameters or not isinstance(parameters['remote'], bool):
             raise ConfigError(f"'remote' in config file {config_yaml_path} must be a boolean value.")
@@ -67,7 +67,7 @@ class ConfigValidator:
         positions = parameters.get('positions', [])
         if not isinstance(positions, list) or not all(isinstance(pos, str) for pos in positions):
             raise ConfigError(f"'positions' must be a list of strings in config file {config_yaml_path}.")
-        
+
         # Validate 'locations'
         locations = parameters.get('locations', [])
         if not isinstance(locations, list) or not all(isinstance(loc, str) for loc in locations):
@@ -101,13 +101,13 @@ class ConfigValidator:
             raise ConfigError(f"Error reading secrets file {secrets_yaml_path}: {exc}")
         except FileNotFoundError:
             raise ConfigError(f"Secrets file not found: {secrets_yaml_path}")
-
+        
         mandatory_secrets = ['email', 'password', 'openai_api_key']
 
         for secret in mandatory_secrets:
             if secret not in secrets:
                 raise ConfigError(f"Missing secret in file {secrets_yaml_path}: {secret}")
-           
+
         if not ConfigValidator.validate_email(secrets['email']):
             raise ConfigError(f"Invalid email format in secrets file {secrets_yaml_path}.")
         if not secrets['password']:
@@ -115,7 +115,12 @@ class ConfigValidator:
         if not secrets['openai_api_key']:
             raise ConfigError(f"OpenAI API key cannot be empty in secrets file {secrets_yaml_path}.")
 
-        return secrets['email'], str(secrets['password']), secrets['openai_api_key']
+        return (
+            secrets['email'],
+            str(secrets['password']),
+            secrets['openai_api_key'],
+        )
+        
 
 class FileManager:
     @staticmethod
@@ -126,16 +131,16 @@ class FileManager:
         secrets_file = app_data_folder / 'secrets.yaml'
         config_file = app_data_folder / 'config.yaml'
         plain_text_resume_file = app_data_folder / 'plain_text_resume.yaml'
-        
+
         missing_files = []
         if not config_file.exists():
             missing_files.append('config.yaml')
         if not plain_text_resume_file.exists():
             missing_files.append('plain_text_resume.yaml')
-        
+
         if missing_files:
             raise FileNotFoundError(f"Missing files in the data folder: {', '.join(missing_files)}")
-        
+
         output_folder = app_data_folder / 'output'
         output_folder.mkdir(exist_ok=True)
         return secrets_file, config_file, plain_text_resume_file, output_folder
@@ -144,14 +149,14 @@ class FileManager:
     def file_paths_to_dict(resume_file: Path | None, plain_text_resume_file: Path) -> dict:
         if not plain_text_resume_file.exists():
             raise FileNotFoundError(f"Plain text resume file not found: {plain_text_resume_file}")
-        
+
         result = {'plainTextResume': plain_text_resume_file}
-        
+
         if resume_file is not None:
             if not resume_file.exists():
                 raise FileNotFoundError(f"Resume file not found: {resume_file}")
             result['resume'] = resume_file
-        
+
         return result
 
 def init_browser():
@@ -187,7 +192,7 @@ def create_and_run_bot(resume: Path = None):
         bot.set_parameters(parameters)
         bot.start_login()
         bot.start_apply()
-        
+
     except ConfigError as ce:
         print(f"Configuration error: {str(ce)}")
         print("Refer to the configuration guide for troubleshooting: https://github.com/feder-cr/LinkedIn_AIHawk_automatic_job_application/blob/main/readme.md#configuration")
@@ -204,4 +209,5 @@ def create_and_run_bot(resume: Path = None):
         print("Refer to the general troubleshooting guide: https://github.com/feder-cr/LinkedIn_AIHawk_automatic_job_application/blob/main/readme.md#configuration")
 
 if __name__ == "__main__":
-    create_and_run_bot()
+    from api import app
+    app.run(host='0.0.0.0', port=5000, debug=True)

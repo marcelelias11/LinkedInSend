@@ -1,17 +1,21 @@
 // Main content script that orchestrates form detection and filling
-(function() {
+(function () {
   // Listen for messages from popup
-  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    console.log('Received message:', message);
+  chrome.runtime.onMessage.addListener(function (
+    message,
+    sender,
+    sendResponse
+  ) {
+    console.log("Received message:", message);
 
     switch (message.action) {
-      case 'fillForm':
+      case "fillForm":
         fillDetectedForm();
         break;
-      case 'fillAndSubmit':
+      case "fillAndSubmit":
         fillAndSubmitForm();
         break;
-      case 'detectForms':
+      case "detectForms":
         detectForms();
         break;
     }
@@ -20,10 +24,10 @@
   });
 
   // Auto-detect forms when page loads
-  chrome.storage.sync.get('appSettings', function(data) {
+  chrome.storage.sync.get("appSettings", function (data) {
     if (!data.appSettings || data.appSettings.autoDetect !== false) {
       // Wait for page to be fully loaded
-      if (document.readyState === 'complete') {
+      if (document.readyState === "complete") {
         setTimeout(detectForms, 1500); // Initial detection
 
         // Retry detection periodically for dynamic pages that load content later
@@ -33,7 +37,10 @@
             clearInterval(intervalId);
 
             // Show notification if enabled
-            if (!data.appSettings || data.appSettings.showNotification !== false) {
+            if (
+              !data.appSettings ||
+              data.appSettings.showNotification !== false
+            ) {
               showFormDetectedNotification();
             }
           }
@@ -42,7 +49,7 @@
         // Stop checking after 30 seconds
         setTimeout(() => clearInterval(intervalId), 30000);
       } else {
-        window.addEventListener('load', function() {
+        window.addEventListener("load", function () {
           setTimeout(detectForms, 1500);
         });
       }
@@ -54,7 +61,7 @@
     const formInfo = FormDetector.detectJobApplicationForm();
 
     if (formInfo.isJobForm) {
-      chrome.storage.sync.get('appSettings', function(data) {
+      chrome.storage.sync.get("appSettings", function (data) {
         if (!data.appSettings || data.appSettings.showNotification !== false) {
           showFormDetectedNotification();
         }
@@ -65,26 +72,28 @@
   // Show notification when a form is detected
   function showFormDetectedNotification() {
     // Create notification container if it doesn't exist
-    let notificationContainer = document.getElementById('auto-applicator-notification');
+    let notificationContainer = document.getElementById(
+      "auto-applicator-notification"
+    );
     if (!notificationContainer) {
-      notificationContainer = document.createElement('div');
-      notificationContainer.id = 'auto-applicator-notification';
+      notificationContainer = document.createElement("div");
+      notificationContainer.id = "auto-applicator-notification";
 
       // Style the notification
       Object.assign(notificationContainer.style, {
-        position: 'fixed',
-        top: '20px',
-        right: '20px',
-        zIndex: '9999',
-        backgroundColor: 'rgba(52, 152, 219, 0.9)',
-        color: 'white',
-        padding: '15px',
-        borderRadius: '5px',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-        maxWidth: '300px',
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '14px',
-        transition: 'opacity 0.3s ease'
+        position: "fixed",
+        top: "20px",
+        right: "20px",
+        zIndex: "9999",
+        backgroundColor: "rgba(52, 152, 219, 0.9)",
+        color: "white",
+        padding: "15px",
+        borderRadius: "5px",
+        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+        maxWidth: "300px",
+        fontFamily: "Arial, sans-serif",
+        fontSize: "14px",
+        transition: "opacity 0.3s ease",
       });
 
       document.body.appendChild(notificationContainer);
@@ -108,25 +117,31 @@
     `;
 
     // Add event listeners to buttons
-    document.getElementById('auto-fill-btn').addEventListener('click', function() {
-      fillDetectedForm();
-      hideNotification();
-    });
+    document
+      .getElementById("auto-fill-btn")
+      .addEventListener("click", function () {
+        fillDetectedForm();
+        hideNotification();
+      });
 
-    document.getElementById('fill-submit-btn').addEventListener('click', function() {
-      fillAndSubmitForm();
-      hideNotification();
-    });
+    document
+      .getElementById("fill-submit-btn")
+      .addEventListener("click", function () {
+        fillAndSubmitForm();
+        hideNotification();
+      });
 
-    document.getElementById('ignore-btn').addEventListener('click', function() {
-      hideNotification();
-    });
+    document
+      .getElementById("ignore-btn")
+      .addEventListener("click", function () {
+        hideNotification();
+      });
 
     // Auto-hide after 10 seconds
     setTimeout(hideNotification, 10000);
 
     function hideNotification() {
-      notificationContainer.style.opacity = '0';
+      notificationContainer.style.opacity = "0";
       setTimeout(() => {
         if (notificationContainer.parentNode) {
           notificationContainer.parentNode.removeChild(notificationContainer);
@@ -137,15 +152,15 @@
 
   // Fill the detected form with user profile data
   function fillDetectedForm() {
-    chrome.storage.sync.get('profileData', function(data) {
+    chrome.storage.sync.get("profileData", function (data) {
       if (!data.profileData) {
-        console.error('No profile data found');
+        console.error("No profile data found");
         return;
       }
 
       const formInfo = FormDetector.detectJobApplicationForm();
       if (!formInfo.isJobForm) {
-        alert('No job application form detected on this page');
+        alert("No job application form detected on this page");
         return;
       }
 
@@ -156,33 +171,39 @@
         url: window.location.href,
         jobTitle: getJobTitle(),
         company: getCompanyName(),
-        status: 'filled',
-        date: new Date().toISOString()
+        status: "filled",
+        date: new Date().toISOString(),
       });
     });
   }
 
   // Fill and submit the form
   function fillAndSubmitForm() {
-    fetch('http://0.0.0.0:5000/start')
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'completed') {
-          console.log('Application process started successfully');
+    fetch("http://localhost:5000/start")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "completed") {
+          console.log("Application process started successfully");
         } else {
           throw new Error(data.message);
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch((error) => console.error("Error:", error));
   }
 
   // Extract job title from page
   function getJobTitle() {
     // Common selectors for job titles
     const selectors = [
-      'h1.job-title', 'h1.jobtitle', 'h1.posting-title', 'h1.position-title',
-      '.job-title', '.jobtitle', '.posting-title', 
-      'h1:contains("Job Title")', 'h2:contains("Position")'
+      "h1.job-title",
+      "h1.jobtitle",
+      "h1.posting-title",
+      "h1.position-title",
+      ".job-title",
+      ".jobtitle",
+      ".posting-title",
+      'h1:contains("Job Title")',
+      'h2:contains("Position")',
     ];
 
     for (const selector of selectors) {
@@ -193,10 +214,14 @@
     }
 
     // Fallback: look for h1 elements with certain keywords
-    const h1Elements = document.querySelectorAll('h1');
+    const h1Elements = document.querySelectorAll("h1");
     for (const h1 of h1Elements) {
       const text = h1.textContent.toLowerCase();
-      if (text.includes('job') || text.includes('position') || text.includes('career')) {
+      if (
+        text.includes("job") ||
+        text.includes("position") ||
+        text.includes("career")
+      ) {
         return h1.textContent.trim();
       }
     }
@@ -207,15 +232,19 @@
       return titleParts[0].trim();
     }
 
-    return 'Unknown Job';
+    return "Unknown Job";
   }
 
   // Extract company name from page
   function getCompanyName() {
     // Common selectors for company names
     const selectors = [
-      '.company-name', '.company', '.employer-name', '.organization-name',
-      'span[itemprop="hiringOrganization"]', '[data-testid="company-name"]'
+      ".company-name",
+      ".company",
+      ".employer-name",
+      ".organization-name",
+      'span[itemprop="hiringOrganization"]',
+      '[data-testid="company-name"]',
     ];
 
     for (const selector of selectors) {
@@ -227,28 +256,35 @@
 
     // Check meta data
     const metaCompany = document.querySelector('meta[property="og:site_name"]');
-    if (metaCompany && metaCompany.getAttribute('content')) {
-      return metaCompany.getAttribute('content');
+    if (metaCompany && metaCompany.getAttribute("content")) {
+      return metaCompany.getAttribute("content");
     }
 
     // Extract from URL (fallback)
     try {
       const hostname = new URL(window.location.href).hostname;
-      const domainParts = hostname.split('.');
-      if (domainParts.length > 1 && !['com', 'org', 'net', 'io', 'co'].includes(domainParts[domainParts.length - 2])) {
-        return domainParts[domainParts.length - 2].charAt(0).toUpperCase() + 
-               domainParts[domainParts.length - 2].slice(1);
+      const domainParts = hostname.split(".");
+      if (
+        domainParts.length > 1 &&
+        !["com", "org", "net", "io", "co"].includes(
+          domainParts[domainParts.length - 2]
+        )
+      ) {
+        return (
+          domainParts[domainParts.length - 2].charAt(0).toUpperCase() +
+          domainParts[domainParts.length - 2].slice(1)
+        );
       }
     } catch (e) {
-      console.error('Error parsing URL:', e);
+      console.error("Error parsing URL:", e);
     }
 
-    return 'Unknown Company';
+    return "Unknown Company";
   }
 
   // Add entry to application history
   function addHistoryEntry(entry) {
-    chrome.storage.sync.get('applicationHistory', function(data) {
+    chrome.storage.sync.get("applicationHistory", function (data) {
       let history = data.applicationHistory || [];
 
       // Limit history size to avoid storage quota issues (keep last 100 entries)
