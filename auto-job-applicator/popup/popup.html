@@ -21,29 +21,12 @@
     <main>
       <!-- Profile Tab Content -->
       <section id="profileSection" class="tab-content active">
-        <h2>Configuration Settings</h2>
-        <div id="configDisplay">
-          <div class="config-section">
-            <h3>Job Preferences</h3>
-            <div id="jobPreferences"></div>
+        <h2>Your Profile Information</h2>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Your full name">
           </div>
-          <div class="config-section">
-            <h3>Experience Level</h3>
-            <div id="experienceLevel"></div>
-          </div>
-          <div class="config-section">
-            <h3>Job Types</h3>
-            <div id="jobTypes"></div>
-          </div>
-          <div class="config-section">
-            <h3>Locations</h3>
-            <div id="locations"></div>
-          </div>
-          <div class="config-section">
-            <h3>Blacklists</h3>
-            <div id="blacklists"></div>
-          </div>
-        </div>
           
           <div class="form-group">
             <label for="email">Email</label>
@@ -133,26 +116,15 @@
       <!-- History Tab Content -->
       <section id="historySection" class="tab-content">
         <h2>Application History</h2>
-        <div class="stats-summary">
-          <div class="stat-box">
-            <h3>Successful</h3>
-            <span id="successCount">0</span>
-          </div>
-          <div class="stat-box">
-            <h3>Failed</h3>
-            <span id="failedCount">0</span>
-          </div>
-          <div class="stat-box">
-            <h3>Skipped</h3>
-            <span id="skippedCount">0</span>
-          </div>
-        </div>
-        <div class="history-tabs">
-          <button class="history-tab active" data-type="successful">Successful</button>
-          <button class="history-tab" data-type="failed">Failed</button>
-          <button class="history-tab" data-type="skipped">Skipped</button>
+        <div class="search-box">
+          <input type="text" id="historySearch" placeholder="Search applications...">
         </div>
         <div id="applicationHistory" class="history-list">
+          <!-- Application history will be loaded here -->
+          <div class="empty-state">
+            <i class="fas fa-history fa-3x"></i>
+            <p>No application history yet. Your submitted applications will appear here.</p>
+          </div>
         </div>
       </section>
 

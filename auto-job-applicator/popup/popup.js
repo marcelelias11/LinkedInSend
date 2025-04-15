@@ -33,106 +33,60 @@ function setupTabs() {
   });
 }
 
-// Load config data
-async function loadProfileData() {
-  try {
-    const response = await fetch(
-      "https://" + window.location.hostname + "/api/config"
-    );
-    const config = await response.json();
+// Load saved profile data from storage
+function loadProfileData() {
+  chrome.storage.sync.get("profileData", function (data) {
+    if (data.profileData) {
+      const profile = data.profileData;
 
-    // Display job preferences
-    const jobPrefs = document.getElementById("jobPreferences");
-    jobPrefs.innerHTML = `
-      <p><strong>Remote:</strong> ${config.remote ? "Yes" : "No"}</p>
-      <p><strong>Distance:</strong> ${config.distance}km</p>
-      <p><strong>Positions:</strong> ${config.positions.join(", ")}</p>
-    `;
+      // Fill basic info
+      document.getElementById("fullName").value = profile.fullName || "";
+      document.getElementById("email").value = profile.email || "";
+      document.getElementById("phone").value = profile.phone || "";
+      document.getElementById("location").value = profile.location || "";
+      document.getElementById("linkedin").value = profile.linkedin || "";
+      document.getElementById("website").value = profile.website || "";
+      document.getElementById("summary").value = profile.summary || "";
+      document.getElementById("skills").value = profile.skills || "";
 
-    // Display experience levels
-    const expLevel = document.getElementById("experienceLevel");
-    expLevel.innerHTML = Object.entries(config.experienceLevel)
-      .filter(([_, value]) => value)
-      .map(([key, _]) => `<span class="tag">${key}</span>`)
-      .join("");
+      // Fill work experience
+      if (profile.workExperience && profile.workExperience.length > 0) {
+        const workContainer = document.getElementById("workExperience");
+        // Clear default entry
+        workContainer.innerHTML = "";
 
-    // Display job types
-    const jobTypes = document.getElementById("jobTypes");
-    jobTypes.innerHTML = Object.entries(config.jobTypes)
-      .filter(([_, value]) => value)
-      .map(([key, _]) => `<span class="tag">${key}</span>`)
-      .join("");
+        profile.workExperience.forEach((work) => {
+          const workEntry = createWorkExperienceEntry();
+          workEntry.querySelector('[name="workTitle[]"]').value =
+            work.title || "";
+          workEntry.querySelector('[name="workCompany[]"]').value =
+            work.company || "";
+          workEntry.querySelector('[name="workDuration[]"]').value =
+            work.duration || "";
+          workEntry.querySelector('[name="workDescription[]"]').value =
+            work.description || "";
+          workContainer.appendChild(workEntry);
+        });
+      }
 
-    // Display locations
-    const locations = document.getElementById("locations");
-    locations.innerHTML = config.locations
-      .map((loc) => `<span class="tag">${loc}</span>`)
-      .join("");
+      // Fill education
+      if (profile.education && profile.education.length > 0) {
+        const eduContainer = document.getElementById("education");
+        // Clear default entry
+        eduContainer.innerHTML = "";
 
-    // Display blacklists
-    const blacklists = document.getElementById("blacklists");
-    blacklists.innerHTML = `
-      <p><strong>Company Blacklist:</strong> ${
-        config.companyBlacklist?.join(", ") || "None"
-      }</p>
-      <p><strong>Title Blacklist:</strong> ${
-        config.titleBlacklist || "None"
-      }</p>
-    `;
-  } catch (error) {
-    console.error("Error loading config:", error);
-  }
-
-  try {
-    const profile = await loadProfile();
-    // Fill basic info
-    document.getElementById("fullName").value = profile.fullName || "";
-    document.getElementById("email").value = profile.email || "";
-    document.getElementById("phone").value = profile.phone || "";
-    document.getElementById("location").value = profile.location || "";
-    document.getElementById("linkedin").value = profile.linkedin || "";
-    document.getElementById("website").value = profile.website || "";
-    document.getElementById("summary").value = profile.summary || "";
-    document.getElementById("skills").value = profile.skills || "";
-
-    // Fill work experience
-    if (profile.workExperience && profile.workExperience.length > 0) {
-      const workContainer = document.getElementById("workExperience");
-      // Clear default entry
-      workContainer.innerHTML = "";
-
-      profile.workExperience.forEach((work) => {
-        const workEntry = createWorkExperienceEntry();
-        workEntry.querySelector('[name="workTitle[]"]').value =
-          work.title || "";
-        workEntry.querySelector('[name="workCompany[]"]').value =
-          work.company || "";
-        workEntry.querySelector('[name="workDuration[]"]').value =
-          work.duration || "";
-        workEntry.querySelector('[name="workDescription[]"]').value =
-          work.description || "";
-        workContainer.appendChild(workEntry);
-      });
+        profile.education.forEach((edu) => {
+          const eduEntry = createEducationEntry();
+          eduEntry.querySelector('[name="eduDegree[]"]').value =
+            edu.degree || "";
+          eduEntry.querySelector('[name="eduInstitution[]"]').value =
+            edu.institution || "";
+          eduEntry.querySelector('[name="eduYear[]"]').value = edu.year || "";
+          eduContainer.appendChild(eduEntry);
+        });
+      }
     }
-
-    // Fill education
-    if (profile.education && profile.education.length > 0) {
-      const eduContainer = document.getElementById("education");
-      // Clear default entry
-      eduContainer.innerHTML = "";
-
-      profile.education.forEach((edu) => {
-        const eduEntry = createEducationEntry();
-        eduEntry.querySelector('[name="eduDegree[]"]').value = edu.degree || "";
-        eduEntry.querySelector('[name="eduInstitution[]"]').value =
-          edu.institution || "";
-        eduEntry.querySelector('[name="eduYear[]"]').value = edu.year || "";
-        eduContainer.appendChild(eduEntry);
-      });
-    }
-  } catch (error) {
-    console.error("Error loading profile:", error);
-  }
+  });
 }
 
 // Load application settings
@@ -153,94 +107,49 @@ function loadSettings() {
   });
 }
 
-// Load application history from API
-async function loadApplicationHistory() {
-  try {
-    const response = await fetch(
-      "https://" + window.location.hostname + "/api/stats"
-    );
-    const stats = await response.json();
+// Load application history
+function loadApplicationHistory() {
+  chrome.storage.sync.get("applicationHistory", function (data) {
+    const historyContainer = document.getElementById("applicationHistory");
 
-    // Update count displays
-    document.getElementById("successCount").textContent =
-      stats.data.successful_count;
-    document.getElementById("failedCount").textContent =
-      stats.data.failed_count;
-    document.getElementById("skippedCount").textContent =
-      stats.data.skipped_count;
+    if (data.applicationHistory && data.applicationHistory.length > 0) {
+      historyContainer.innerHTML = "";
 
-    // Display current active tab's applications
-    const activeTab = document.querySelector(".history-tab.active").dataset
-      .type;
-    displayApplications(stats.data.applications[activeTab]);
-  } catch (error) {
-    console.error("Error loading stats:", error);
-  }
-}
+      // Sort by date (newest first)
+      const sortedHistory = data.applicationHistory.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
 
-function displayApplications(applications) {
-  const historyContainer = document.getElementById("applicationHistory");
+      sortedHistory.forEach((app) => {
+        const historyItem = document.createElement("div");
+        historyItem.className = "history-item";
 
-  if (!applications || applications.length === 0) {
-    historyContainer.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-history fa-3x"></i>
-        <p>No applications in this category.</p>
-      </div>
-    `;
-    return;
-  }
+        const statusClass =
+          app.status === "success" ? "status-success" : "status-error";
 
-  historyContainer.innerHTML = applications
-    .map(
-      (app) => `
-    <div class="history-item">
-      <div class="history-item-title">${app["Job Title"]}</div>
-      <div class="history-item-company">${app.Company}</div>
-      <div class="history-item-date">${app.Timestamp}</div>
-      <a href="${app.Link}" target="_blank" class="history-item-link">View Job</a>
-    </div>
-  `
-    )
-    .join("");
-
-  if (data.applicationHistory && data.applicationHistory.length > 0) {
-    historyContainer.innerHTML = "";
-
-    // Sort by date (newest first)
-    const sortedHistory = data.applicationHistory.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    });
-
-    sortedHistory.forEach((app) => {
-      const historyItem = document.createElement("div");
-      historyItem.className = "history-item";
-
-      const statusClass =
-        app.status === "success" ? "status-success" : "status-error";
-
-      historyItem.innerHTML = `
+        historyItem.innerHTML = `
           <div class="history-item-title">${app.jobTitle || "Unknown Job"}</div>
           <div class="history-item-company">${
             app.company || "Unknown Company"
           }</div>
           <div class="history-item-date">${formatDate(app.date)}</div>
           <div class="history-item-status ${statusClass}">${
-        app.status === "success" ? "Submitted" : "Failed"
-      }</div>
+          app.status === "success" ? "Submitted" : "Failed"
+        }</div>
         `;
 
-      historyContainer.appendChild(historyItem);
-    });
-  } else {
-    // Show empty state
-    historyContainer.innerHTML = `
+        historyContainer.appendChild(historyItem);
+      });
+    } else {
+      // Show empty state
+      historyContainer.innerHTML = `
         <div class="empty-state">
           <i class="fas fa-history fa-3x"></i>
           <p>No application history yet. Your submitted applications will appear here.</p>
         </div>
       `;
-  }
+    }
+  });
 }
 
 // Format date for display
@@ -436,15 +345,12 @@ function setupButtonListeners() {
     .getElementById("autoSubmitBtn")
     .addEventListener("click", async function () {
       try {
-        const response = await fetch(
-          "https://" + window.location.hostname + "/start",
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-            },
-          }
-        );
+        const response = await fetch("http://localhost:5000/start", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        });
 
         const data = await response.json();
         if (data.status === "completed") {
