@@ -118,7 +118,9 @@ async function loadProfileData() {
         });
       }
     }
-  });
+  } catch (error) {
+    console.error('Error loading profile:', error);
+  }
 }
 
 // Load application settings
