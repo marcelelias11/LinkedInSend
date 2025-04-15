@@ -310,18 +310,25 @@ function setupButtonListeners() {
   });
   
   // Auto submit button
-  document.getElementById('autoSubmitBtn').addEventListener('click', function() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, {action: "fillAndSubmit"}, function(response) {
-          if (chrome.runtime.lastError) {
-            console.error(chrome.runtime.lastError);
-            return;
-          }
-          console.log("Response:", response);
-        });
+  document.getElementById('autoSubmitBtn').addEventListener('click', async function() {
+    try {
+      const response = await fetch('http://0.0.0.0:5000/start', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      if (data.status === 'completed') {
+        showNotification('Application submitted successfully!');
+      } else {
+        showNotification('Failed to submit application', true);
       }
-    });
+    } catch (error) {
+      console.error('Error:', error);
+      showNotification('Failed to connect to the application server', true);
+    }
   });
   
   // Export data button

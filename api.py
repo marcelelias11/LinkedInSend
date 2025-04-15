@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory, redirect, session
+from flask_cors import CORS
 from requests_oauthlib import OAuth2Session
 import yaml
 import os
@@ -6,6 +7,7 @@ from pathlib import Path
 from main import create_and_run_bot
 
 app = Flask(__name__, static_url_path='')
+CORS(app)
 app.secret_key = os.urandom(24)  # Required for session management
 
 
