@@ -36,6 +36,36 @@ def update_config():
         return jsonify({"error": str(e)}), 500
 
 
+
+@app.route('/api/stats', methods=['GET'])
+def get_stats():
+    try:
+        stats = {
+            'successful': [],
+            'failed': [],
+            'skipped': []
+        }
+        
+        for status in ['success', 'failed', 'skipped']:
+            file_path = DATA_FOLDER / f'{status}.csv'
+            if os.path.exists(file_path):
+                with open(file_path, 'r', newline='', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    stats[status] = list(reader)
+        
+        return jsonify({
+            'status': 'success',
+            'data': {
+                'successful_count': len(stats['successful']),
+                'failed_count': len(stats['failed']),
+                'skipped_count': len(stats['skipped']),
+                'applications': stats
+            }
+        }), 200
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)}), 500
+
+
 @app.route('/api/secrets', methods=['POST'])
 def update_secrets():
     try:

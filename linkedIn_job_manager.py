@@ -306,9 +306,9 @@ class LinkedInJobManager:
                             utils.printyellow(f"Skipping {job.title} - not an Easy Apply job")
                             self.write_to_file(job.company, job.location, job.title, job.link, "skipped")
                     except Exception as e:
-                        utils.printred(f"Failed to apply for {job.title} at {job.company}: {str(e)}")
-                        utils.printred(traceback.format_exc())
-                        self.write_to_file(job.company, job.location, job.title, job.link, "failed")
+                        error_msg = f"{str(e)}\n{traceback.format_exc()}"
+                        utils.printred(f"Failed to apply for {job.title} at {job.company}: {error_msg}")
+                        self.write_to_file(job.company, job.location, job.title, job.link, "failed", error_msg)
 
         except Exception as e:
             utils.printred(f"Error in apply_jobs: {str(e)}")
@@ -316,9 +316,22 @@ class LinkedInJobManager:
             raise e
 
 
-    def write_to_file(self, company, job_title, link, job_location, file_name):
-        to_write = [company, job_title, link, job_location]
+    def write_to_file(self, company, job_title, link, job_location, file_name, error_details=None):
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        to_write = [timestamp, company, job_title, link, job_location]
+        if error_details:
+            to_write.append(error_details)
+        
         file_path = self.output_file_directory / f"{file_name}.csv"
+        # Create header if file doesn't exist
+        if not os.path.exists(file_path):
+            with open(file_path, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                header = ['Timestamp', 'Company', 'Job Title', 'Link', 'Location']
+                if file_name == 'failed':
+                    header.append('Error Details')
+                writer.writerow(header)
+        
         with open(file_path, 'a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(to_write)
