@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Job Applicator</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Auto Job Applicator</h1>
+      <div class="tabs">
+        <button id="profileTab" class="tab-btn active">Profile</button>
+        <button id="historyTab" class="tab-btn">History</button>
+        <button id="settingsTab" class="tab-btn">Settings</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Profile Tab Content -->
+      <section id="profileSection" class="tab-content active">
+        <h2>Your Profile Information</h2>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Your full name">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your email address">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="City, State">
+          </div>
+
+          <div class="form-group">
+            <label for="linkedin">LinkedIn URL</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+          </div>
+
+          <div class="form-group">
+            <label for="website">Personal Website/Portfolio</label>
+            <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+          </div>
+
+          <div class="form-group">
+            <label for="summary">Professional Summary</label>
+            <textarea id="summary" name="summary" rows="3" placeholder="Brief summary of your professional background"></textarea>
+          </div>
+
+          <h3>Work Experience</h3>
+          <div id="workExperience">
+            <!-- Work experience entries will be added here -->
+            <div class="work-entry">
+              <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" name="workTitle[]" placeholder="Software Engineer">
+              </div>
+              <div class="form-group">
+                <label>Company</label>
+                <input type="text" name="workCompany[]" placeholder="Company Name">
+              </div>
+              <div class="form-group">
+                <label>Duration</label>
+                <input type="text" name="workDuration[]" placeholder="Jan 2020 - Present">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="workDescription[]" rows="2" placeholder="Brief description of responsibilities and achievements"></textarea>
+              </div>
+              <button type="button" class="remove-btn" title="Remove this entry"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          <button type="button" id="addWorkBtn" class="add-btn"><i class="fas fa-plus"></i> Add Work Experience</button>
+
+          <h3>Education</h3>
+          <div id="education">
+            <!-- Education entries will be added here -->
+            <div class="education-entry">
+              <div class="form-group">
+                <label>Degree</label>
+                <input type="text" name="eduDegree[]" placeholder="Bachelor of Science in Computer Science">
+              </div>
+              <div class="form-group">
+                <label>Institution</label>
+                <input type="text" name="eduInstitution[]" placeholder="University Name">
+              </div>
+              <div class="form-group">
+                <label>Graduation Year</label>
+                <input type="text" name="eduYear[]" placeholder="2019">
+              </div>
+              <button type="button" class="remove-btn" title="Remove this entry"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          <button type="button" id="addEduBtn" class="add-btn"><i class="fas fa-plus"></i> Add Education</button>
+
+          <h3>Skills</h3>
+          <div class="form-group">
+            <textarea id="skills" name="skills" rows="3" placeholder="JavaScript, Python, React, Project Management (comma separated)"></textarea>
+          </div>
+
+          <button type="submit" id="saveProfileBtn" class="primary-btn">Save Profile</button>
+        </form>
+      </section>
+
+      <!-- History Tab Content -->
+      <section id="historySection" class="tab-content">
+        <h2>Application History</h2>
+        <div class="search-box">
+          <input type="text" id="historySearch" placeholder="Search applications...">
+        </div>
+        <div id="applicationHistory" class="history-list">
+          <!-- Application history will be loaded here -->
+          <div class="empty-state">
+            <i class="fas fa-history fa-3x"></i>
+            <p>No application history yet. Your submitted applications will appear here.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Tab Content -->
+      <section id="settingsSection" class="tab-content">
+        <h2>Application Settings</h2>
+        <form id="settingsForm">
+          <div class="form-group">
+            <label class="switch-label">
+              <span>Auto-detect job application forms</span>
+              <div class="switch">
+                <input type="checkbox" id="autoDetect" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+          
+          <div class="form-group">
+            <label class="switch-label">
+              <span>Show notification before auto-filling</span>
+              <div class="switch">
+                <input type="checkbox" id="showNotification" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+          
+          <div class="form-group">
+            <label class="switch-label">
+              <span>One-click submission (when available)</span>
+              <div class="switch">
+                <input type="checkbox" id="oneClickSubmit" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+          
+          <div class="form-group">
+            <label for="defaultResume">Default Resume</label>
+            <textarea id="defaultResume" name="defaultResume" rows="3" placeholder="Paste text content of your resume here or enter a link to your resume file"></textarea>
+          </div>
+          
+          <h3>Data Management</h3>
+          <div class="btn-group">
+            <button type="button" id="exportDataBtn" class="secondary-btn">Export Data</button>
+            <button type="button" id="importDataBtn" class="secondary-btn">Import Data</button>
+            <button type="button" id="clearDataBtn" class="danger-btn">Clear All Data</button>
+          </div>
+          
+          <button type="submit" id="saveSettingsBtn" class="primary-btn">Save Settings</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div class="actions">
+        <button id="fillCurrentBtn" class="action-btn" title="Fill current form">
+          <i class="fas fa-fill-drip"></i> Fill Form
+        </button>
+        <button id="autoSubmitBtn" class="action-btn easy-apply-btn" title="One-click job application">
+          <i class="fas fa-paper-plane"></i> EASY APPLY
+        </button>
+      </div>
+      <p class="version">Auto Job Applicator v1.0</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
