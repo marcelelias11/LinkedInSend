@@ -1,0 +1,30 @@
+companyBlacklist:
+- Noir
+- Crossover
+date:
+  24 hours: true
+  all time: false
+  month: false
+  week: true
+distance: 100
+experienceLevel:
+  associate: true
+  director: false
+  entry: true
+  executive: false
+  internship: true
+  mid-senior level: false
+jobTypes:
+  contract: true
+  full-time: true
+  internship: true
+  other: true
+  part-time: true
+  temporary: false
+  volunteer: false
+locations:
+- Germany
+positions:
+- Software Engineer
+remote: true
+titleBlacklist: null
