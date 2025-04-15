@@ -78,6 +78,7 @@ async function loadProfileData() {
   }
 
   try {
+    const profile = await loadProfile();
     // Fill basic info
     document.getElementById("fullName").value = profile.fullName || "";
     document.getElementById("email").value = profile.email || "";
