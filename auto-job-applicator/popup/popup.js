@@ -312,7 +312,7 @@ function setupButtonListeners() {
   // Auto submit button
   document.getElementById('autoSubmitBtn').addEventListener('click', async function() {
     try {
-      const response = await fetch('http://0.0.0.0:5000/start', {
+      const response = await fetch('https://' + window.location.hostname + '/start', {
         method: 'GET',
         headers: {
           'Accept': 'application/json'
