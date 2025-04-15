@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Tab Navigation
 function setupTabs() {
+<<<<<<< HEAD
   const tabs = document.querySelectorAll(".tab-btn");
   const tabContents = document.querySelectorAll(".tab-content");
 
@@ -24,6 +25,16 @@ function setupTabs() {
       // Remove active class from all tabs and contents
       tabs.forEach((t) => t.classList.remove("active"));
       tabContents.forEach((c) => c.classList.remove("active"));
+=======
+  const tabs = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active class from all tabs and contents
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
       // Add active class to clicked tab and corresponding content
       tab.classList.add("active");
@@ -83,6 +94,7 @@ async function loadProfileData() {
     console.error("Error loading config:", error);
   }
 
+<<<<<<< HEAD
   // Fill basic info
   document.getElementById("fullName").value = profile.fullName || "";
   document.getElementById("email").value = profile.email || "";
@@ -126,6 +138,51 @@ async function loadProfileData() {
       eduEntry.querySelector('[name="eduYear[]"]').value = edu.year || "";
       eduContainer.appendChild(eduEntry);
     });
+=======
+  try {
+    // Fill basic info
+    document.getElementById("fullName").value = profile.fullName || "";
+    document.getElementById("email").value = profile.email || "";
+    document.getElementById("phone").value = profile.phone || "";
+    document.getElementById("location").value = profile.location || "";
+    document.getElementById("linkedin").value = profile.linkedin || "";
+    document.getElementById("website").value = profile.website || "";
+    document.getElementById("summary").value = profile.summary || "";
+    document.getElementById("skills").value = profile.skills || "";
+
+    // Fill work experience
+    if (profile.workExperience && profile.workExperience.length > 0) {
+      const workContainer = document.getElementById('workExperience');
+      // Clear default entry
+      workContainer.innerHTML = '';
+
+      profile.workExperience.forEach(work => {
+        const workEntry = createWorkExperienceEntry();
+        workEntry.querySelector('[name="workTitle[]"]').value = work.title || '';
+        workEntry.querySelector('[name="workCompany[]"]').value = work.company || '';
+        workEntry.querySelector('[name="workDuration[]"]').value = work.duration || '';
+        workEntry.querySelector('[name="workDescription[]"]').value = work.description || '';
+        workContainer.appendChild(workEntry);
+      });
+    }
+
+    // Fill education
+    if (profile.education && profile.education.length > 0) {
+      const eduContainer = document.getElementById('education');
+      // Clear default entry
+      eduContainer.innerHTML = '';
+
+      profile.education.forEach(edu => {
+        const eduEntry = createEducationEntry();
+        eduEntry.querySelector('[name="eduDegree[]"]').value = edu.degree || '';
+        eduEntry.querySelector('[name="eduInstitution[]"]').value = edu.institution || '';
+        eduEntry.querySelector('[name="eduYear[]"]').value = edu.year || '';
+        eduContainer.appendChild(eduEntry);
+      });
+    }
+  } catch (error) {
+    console.error('Error loading profile:', error);
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
   }
 }
 
@@ -135,6 +192,7 @@ function loadSettings() {
     if (data.appSettings) {
       const settings = data.appSettings;
 
+<<<<<<< HEAD
       document.getElementById("autoDetect").checked =
         settings.autoDetect !== false;
       document.getElementById("showNotification").checked =
@@ -143,6 +201,12 @@ function loadSettings() {
         settings.oneClickSubmit !== false;
       document.getElementById("defaultResume").value =
         settings.defaultResume || "";
+=======
+      document.getElementById('autoDetect').checked = settings.autoDetect !== false;
+      document.getElementById('showNotification').checked = settings.showNotification !== false;
+      document.getElementById('oneClickSubmit').checked = settings.oneClickSubmit !== false;
+      document.getElementById('defaultResume').value = settings.defaultResume || '';
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
     }
   });
 }
@@ -156,12 +220,18 @@ async function loadApplicationHistory() {
     const stats = await response.json();
 
     // Update count displays
+<<<<<<< HEAD
     document.getElementById("successCount").textContent =
       stats.data.successful_count;
     document.getElementById("failedCount").textContent =
       stats.data.failed_count;
     document.getElementById("skippedCount").textContent =
       stats.data.skipped_count;
+=======
+    document.getElementById('successCount').textContent = stats.data.successful_count;
+    document.getElementById('failedCount').textContent = stats.data.failed_count;
+    document.getElementById('skippedCount').textContent = stats.data.skipped_count;
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
     // Display current active tab's applications
     const activeTab = document.querySelector(".history-tab.active").dataset
@@ -173,7 +243,11 @@ async function loadApplicationHistory() {
 }
 
 function displayApplications(applications) {
+<<<<<<< HEAD
   const historyContainer = document.getElementById("applicationHistory");
+=======
+  const historyContainer = document.getElementById('applicationHistory');
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
   if (!applications || applications.length === 0) {
     historyContainer.innerHTML = `
@@ -185,9 +259,13 @@ function displayApplications(applications) {
     return;
   }
 
+<<<<<<< HEAD
   historyContainer.innerHTML = applications
     .map(
       (app) => `
+=======
+  historyContainer.innerHTML = applications.map(app => `
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
     <div class="history-item">
       <div class="history-item-title">${app["Job Title"]}</div>
       <div class="history-item-company">${app.Company}</div>
@@ -199,6 +277,7 @@ function displayApplications(applications) {
     .join("");
 }
 
+<<<<<<< HEAD
 if (data.applicationHistory && data.applicationHistory.length > 0) {
   historyContainer.innerHTML = "";
 
@@ -219,17 +298,44 @@ if (data.applicationHistory && data.applicationHistory.length > 0) {
           <div class="history-item-company">${
             app.company || "Unknown Company"
           }</div>
+=======
+    if (data.applicationHistory && data.applicationHistory.length > 0) {
+      historyContainer.innerHTML = '';
+
+      // Sort by date (newest first)
+      const sortedHistory = data.applicationHistory.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      sortedHistory.forEach(app => {
+        const historyItem = document.createElement('div');
+        historyItem.className = 'history-item';
+
+        const statusClass = app.status === 'success' ? 'status-success' : 'status-error';
+
+        historyItem.innerHTML = `
+          <div class="history-item-title">${app.jobTitle || 'Unknown Job'}</div>
+          <div class="history-item-company">${app.company || 'Unknown Company'}</div>
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
           <div class="history-item-date">${formatDate(app.date)}</div>
           <div class="history-item-status ${statusClass}">${
       app.status === "success" ? "Submitted" : "Failed"
     }</div>
         `;
 
+<<<<<<< HEAD
     historyContainer.appendChild(historyItem);
   });
 } else {
   // Show empty state
   historyContainer.innerHTML = `
+=======
+        historyContainer.appendChild(historyItem);
+      });
+    } else {
+      // Show empty state
+      historyContainer.innerHTML = `
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
         <div class="empty-state">
           <i class="fas fa-history fa-3x"></i>
           <p>No application history yet. Your submitted applications will appear here.</p>
@@ -250,6 +356,7 @@ function formatDate(dateStr) {
 // Setup form listeners
 function setupFormListeners() {
   // Profile form submission
+<<<<<<< HEAD
   document
     .getElementById("profileForm")
     .addEventListener("submit", function (e) {
@@ -264,6 +371,18 @@ function setupFormListeners() {
       e.preventDefault();
       saveSettings();
     });
+=======
+  document.getElementById('profileForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    saveProfileData();
+  });
+
+  // Settings form submission
+  document.getElementById('settingsForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    saveSettings();
+  });
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
   // Add work experience button
   document.getElementById("addWorkBtn").addEventListener("click", function () {
@@ -289,6 +408,7 @@ function setupFormListeners() {
   });
 
   // History search
+<<<<<<< HEAD
   document
     .getElementById("historySearch")
     .addEventListener("input", function (e) {
@@ -309,6 +429,21 @@ function setupFormListeners() {
           item.style.display = "none";
         }
       });
+=======
+  document.getElementById('historySearch').addEventListener('input', function(e) {
+    const searchText = e.target.value.toLowerCase();
+    const historyItems = document.querySelectorAll('.history-item');
+
+    historyItems.forEach(item => {
+      const title = item.querySelector('.history-item-title').textContent.toLowerCase();
+      const company = item.querySelector('.history-item-company').textContent.toLowerCase();
+
+      if (title.includes(searchText) || company.includes(searchText)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
     });
 }
 
@@ -411,19 +546,30 @@ function saveSettings() {
     defaultResume: document.getElementById("defaultResume").value,
   };
 
+<<<<<<< HEAD
   chrome.storage.sync.set({ appSettings: settings }, function () {
     showNotification("Settings saved successfully!");
+=======
+  chrome.storage.sync.set({ appSettings: settings }, function() {
+    showNotification('Settings saved successfully!');
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
   });
 }
 
 // Setup button listeners
 function setupButtonListeners() {
   // Fill current form button
+<<<<<<< HEAD
   document
     .getElementById("fillCurrentBtn")
     .addEventListener("click", function () {
       executeContentScript("fillForm");
     });
+=======
+  document.getElementById('fillCurrentBtn').addEventListener('click', function() {
+    executeContentScript('fillForm');
+  });
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
   // Auto submit button
   document
@@ -446,6 +592,7 @@ function setupButtonListeners() {
         } else {
           showNotification("Failed to submit application", true);
         }
+<<<<<<< HEAD
       } catch (error) {
         console.error("Error:", error);
         showNotification("Failed to connect to the application server", true);
@@ -465,6 +612,31 @@ function setupButtonListeners() {
     .addEventListener("click", function () {
       importData();
     });
+=======
+      });
+
+      const data = await response.json();
+      if (data.status === 'completed') {
+        showNotification('Application submitted successfully!');
+      } else {
+        showNotification('Failed to submit application', true);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      showNotification('Failed to connect to the application server', true);
+    }
+  });
+
+  // Export data button
+  document.getElementById('exportDataBtn').addEventListener('click', function() {
+    exportData();
+  });
+
+  // Import data button
+  document.getElementById('importDataBtn').addEventListener('click', function() {
+    importData();
+  });
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
   // Clear data button
   document
@@ -499,10 +671,17 @@ function showNotification(message, isError = false) {
 
   // Set notification content and style
   notification.textContent = message;
+<<<<<<< HEAD
   notification.className = "notification " + (isError ? "error" : "success");
 
   // Show notification
   notification.style.display = "block";
+=======
+  notification.className = 'notification ' + (isError ? 'error' : 'success');
+
+  // Show notification
+  notification.style.display = 'block';
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 
   // Hide after 3 seconds
   setTimeout(() => {
@@ -512,6 +691,7 @@ function showNotification(message, isError = false) {
 
 // Export user data
 function exportData() {
+<<<<<<< HEAD
   chrome.storage.sync.get(
     ["profileData", "appSettings", "applicationHistory"],
     function (data) {
@@ -529,15 +709,39 @@ function exportData() {
       }, 100);
     }
   );
+=======
+  chrome.storage.sync.get(['profileData', 'appSettings', 'applicationHistory'], function(data) {
+    const exportData = JSON.stringify(data, null, 2);
+    const blob = new Blob([exportData], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'auto-job-applicator-data.json';
+    a.click();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 100);
+  });
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
 }
 
 // Import user data
 function importData() {
+<<<<<<< HEAD
   const input = document.createElement("input");
   input.type = "file";
   input.accept = ".json";
 
   input.onchange = (e) => {
+=======
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+
+  input.onchange = e => {
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
     const file = e.target.files[0];
     if (!file) return;
 
@@ -562,7 +766,11 @@ function importData() {
           loadSettings();
           loadApplicationHistory();
 
+<<<<<<< HEAD
           showNotification("Data imported successfully!");
+=======
+          showNotification('Data imported successfully!');
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
         });
       } catch (error) {
         showNotification("Error importing data: " + error.message, true);
@@ -579,6 +787,7 @@ function importData() {
 function clearAllData() {
   chrome.storage.sync.clear(function () {
     // Reset UI to default state
+<<<<<<< HEAD
     document.getElementById("profileForm").reset();
     document.getElementById("settingsForm").reset();
 
@@ -590,11 +799,28 @@ function clearAllData() {
     workContainer.appendChild(createWorkExperienceEntry());
 
     eduContainer.innerHTML = "";
+=======
+    document.getElementById('profileForm').reset();
+    document.getElementById('settingsForm').reset();
+
+    // Clear work experience and education entries except for the first one
+    const workContainer = document.getElementById('workExperience');
+    const eduContainer = document.getElementById('education');
+
+    workContainer.innerHTML = '';
+    workContainer.appendChild(createWorkExperienceEntry());
+
+    eduContainer.innerHTML = '';
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
     eduContainer.appendChild(createEducationEntry());
 
     // Reset history
     loadApplicationHistory();
 
+<<<<<<< HEAD
     showNotification("All data has been cleared");
+=======
+    showNotification('All data has been cleared');
+>>>>>>> 0e41d81b1bd2a7cc62c5f309115e909f125a8b1e
   });
 }
