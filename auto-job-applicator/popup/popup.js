@@ -33,10 +33,19 @@ function setupTabs() {
   });
 }
 
-// Load config data
+// Load profile from storage
+async function loadProfile() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get('profileData', function(data) {
+      resolve(data.profileData || {});
+    });
+  });
+}
+
+// Load profile data 
 async function loadProfileData() {
   try {
-    const response = await fetch('https://' + window.location.hostname + '/api/config');
+    const response = await fetch(window.location.protocol + '//' + window.location.hostname + '/api/config');
     const config = await response.json();
 
     // Display job preferences
@@ -141,7 +150,7 @@ function loadSettings() {
 // Load application history from API
 async function loadApplicationHistory() {
   try {
-    const response = await fetch('https://' + window.location.hostname + '/api/stats');
+    const response = await fetch(window.location.protocol + '//' + window.location.hostname + '/api/stats');
     const stats = await response.json();
 
     // Update count displays
@@ -224,30 +233,51 @@ function formatDate(dateStr) {
 // Setup form listeners
 function setupFormListeners() {
   // Profile form submission
-  document.getElementById('profileForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    saveProfileData();
-  });
+  const profileForm = document.getElementById('profileForm');
+  if (profileForm) {
+    profileForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveProfileData();
+    });
+  } else {
+    console.error("profileForm element not found");
+  }
 
   // Settings form submission
-  document.getElementById('settingsForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    saveSettings();
-  });
+  const settingsForm = document.getElementById('settingsForm');
+  if (settingsForm) {
+    settingsForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveSettings();
+    });
+  } else {
+    console.error("settingsForm element not found");
+  }
+
 
   // Add work experience button
-  document.getElementById('addWorkBtn').addEventListener('click', function() {
-    const workContainer = document.getElementById('workExperience');
-    const workEntry = createWorkExperienceEntry();
-    workContainer.appendChild(workEntry);
-  });
+  const addWorkBtn = document.getElementById('addWorkBtn');
+  if (addWorkBtn) {
+    addWorkBtn.addEventListener('click', function() {
+      const workContainer = document.getElementById('workExperience');
+      const workEntry = createWorkExperienceEntry();
+      workContainer.appendChild(workEntry);
+    });
+  } else {
+    console.error("addWorkBtn element not found");
+  }
 
   // Add education button
-  document.getElementById('addEduBtn').addEventListener('click', function() {
-    const eduContainer = document.getElementById('education');
-    const eduEntry = createEducationEntry();
-    eduContainer.appendChild(eduEntry);
-  });
+  const addEduBtn = document.getElementById('addEduBtn');
+  if (addEduBtn) {
+    addEduBtn.addEventListener('click', function() {
+      const eduContainer = document.getElementById('education');
+      const eduEntry = createEducationEntry();
+      eduContainer.appendChild(eduEntry);
+    });
+  } else {
+    console.error("addEduBtn element not found");
+  }
 
   // Listen for remove buttons (delegated event)
   document.addEventListener('click', function(e) {
@@ -259,21 +289,26 @@ function setupFormListeners() {
   });
 
   // History search
-  document.getElementById('historySearch').addEventListener('input', function(e) {
-    const searchText = e.target.value.toLowerCase();
-    const historyItems = document.querySelectorAll('.history-item');
+  const historySearch = document.getElementById('historySearch');
+  if (historySearch) {
+    historySearch.addEventListener('input', function(e) {
+      const searchText = e.target.value.toLowerCase();
+      const historyItems = document.querySelectorAll('.history-item');
 
-    historyItems.forEach(item => {
-      const title = item.querySelector('.history-item-title').textContent.toLowerCase();
-      const company = item.querySelector('.history-item-company').textContent.toLowerCase();
+      historyItems.forEach(item => {
+        const title = item.querySelector('.history-item-title').textContent.toLowerCase();
+        const company = item.querySelector('.history-item-company').textContent.toLowerCase();
 
-      if (title.includes(searchText) || company.includes(searchText)) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
+        if (title.includes(searchText) || company.includes(searchText)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
     });
-  });
+  } else {
+    console.error("historySearch element not found");
+  }
 }
 
 // Create a new work experience entry
@@ -383,48 +418,73 @@ function saveSettings() {
 // Setup button listeners
 function setupButtonListeners() {
   // Fill current form button
-  document.getElementById('fillCurrentBtn').addEventListener('click', function() {
-    executeContentScript('fillForm');
-  });
+  const fillCurrentBtn = document.getElementById('fillCurrentBtn');
+  if (fillCurrentBtn) {
+    fillCurrentBtn.addEventListener('click', function() {
+      executeContentScript('fillForm');
+    });
+  } else {
+    console.error("fillCurrentBtn element not found");
+  }
 
   // Auto submit button
-  document.getElementById('autoSubmitBtn').addEventListener('click', async function() {
-    try {
-      const response = await fetch('https://' + window.location.hostname + '/start', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+  const autoSubmitBtn = document.getElementById('autoSubmitBtn');
+  if (autoSubmitBtn) {
+    autoSubmitBtn.addEventListener('click', async function() {
+      try {
+        const response = await fetch(window.location.protocol + '//' + window.location.hostname + '/start', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
 
-      const data = await response.json();
-      if (data.status === 'completed') {
-        showNotification('Application submitted successfully!');
-      } else {
-        showNotification('Failed to submit application', true);
+        const data = await response.json();
+        if (data.status === 'completed') {
+          showNotification('Application submitted successfully!');
+        } else {
+          showNotification('Failed to submit application', true);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showNotification('Failed to connect to the application server', true);
       }
-    } catch (error) {
-      console.error('Error:', error);
-      showNotification('Failed to connect to the application server', true);
-    }
-  });
+    });
+  } else {
+    console.error("autoSubmitBtn element not found");
+  }
 
   // Export data button
-  document.getElementById('exportDataBtn').addEventListener('click', function() {
-    exportData();
-  });
+  const exportDataBtn = document.getElementById('exportDataBtn');
+  if (exportDataBtn) {
+    exportDataBtn.addEventListener('click', function() {
+      exportData();
+    });
+  } else {
+    console.error("exportDataBtn element not found");
+  }
 
   // Import data button
-  document.getElementById('importDataBtn').addEventListener('click', function() {
-    importData();
-  });
+  const importDataBtn = document.getElementById('importDataBtn');
+  if (importDataBtn) {
+    importDataBtn.addEventListener('click', function() {
+      importData();
+    });
+  } else {
+    console.error("importDataBtn element not found");
+  }
 
   // Clear data button
-  document.getElementById('clearDataBtn').addEventListener('click', function() {
-    if (confirm('Are you sure you want to clear all your saved data? This cannot be undone.')) {
-      clearAllData();
-    }
-  });
+  const clearDataBtn = document.getElementById('clearDataBtn');
+  if (clearDataBtn) {
+    clearDataBtn.addEventListener('click', function() {
+      if (confirm('Are you sure you want to clear all your saved data? This cannot be undone.')) {
+        clearAllData();
+      }
+    });
+  } else {
+    console.error("clearDataBtn element not found");
+  }
 }
 
 // Execute a content script action on the current tab
