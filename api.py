@@ -111,8 +111,7 @@ def linkedin_login():
             session['oauth_state'] = state
             return """
                 <script>
-                    window.open('{}', 'LinkedIn Login', 'width=600,height=700');
-                    window.close();
+                    window.location.href = '{}';
                 </script>
             """.format(authorization_url)
         except Exception as e:
