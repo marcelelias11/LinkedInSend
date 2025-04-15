@@ -33,11 +33,49 @@ function setupTabs() {
   });
 }
 
-// Load saved profile data from storage
-function loadProfileData() {
-  chrome.storage.sync.get('profileData', function(data) {
-    if (data.profileData) {
-      const profile = data.profileData;
+// Load config data
+async function loadProfileData() {
+  try {
+    const response = await fetch('https://' + window.location.hostname + '/api/config');
+    const config = await response.json();
+    
+    // Display job preferences
+    const jobPrefs = document.getElementById('jobPreferences');
+    jobPrefs.innerHTML = `
+      <p><strong>Remote:</strong> ${config.remote ? 'Yes' : 'No'}</p>
+      <p><strong>Distance:</strong> ${config.distance}km</p>
+      <p><strong>Positions:</strong> ${config.positions.join(', ')}</p>
+    `;
+
+    // Display experience levels
+    const expLevel = document.getElementById('experienceLevel');
+    expLevel.innerHTML = Object.entries(config.experienceLevel)
+      .filter(([_, value]) => value)
+      .map(([key, _]) => `<span class="tag">${key}</span>`)
+      .join('');
+
+    // Display job types
+    const jobTypes = document.getElementById('jobTypes');
+    jobTypes.innerHTML = Object.entries(config.jobTypes)
+      .filter(([_, value]) => value)
+      .map(([key, _]) => `<span class="tag">${key}</span>`)
+      .join('');
+
+    // Display locations
+    const locations = document.getElementById('locations');
+    locations.innerHTML = config.locations
+      .map(loc => `<span class="tag">${loc}</span>`)
+      .join('');
+
+    // Display blacklists
+    const blacklists = document.getElementById('blacklists');
+    blacklists.innerHTML = `
+      <p><strong>Company Blacklist:</strong> ${config.companyBlacklist?.join(', ') || 'None'}</p>
+      <p><strong>Title Blacklist:</strong> ${config.titleBlacklist || 'None'}</p>
+    `;
+  } catch (error) {
+    console.error('Error loading config:', error);
+  }
       
       // Fill basic info
       document.getElementById('fullName').value = profile.fullName || '';
@@ -97,10 +135,47 @@ function loadSettings() {
   });
 }
 
-// Load application history
-function loadApplicationHistory() {
-  chrome.storage.sync.get('applicationHistory', function(data) {
-    const historyContainer = document.getElementById('applicationHistory');
+// Load application history from API
+async function loadApplicationHistory() {
+  try {
+    const response = await fetch('https://' + window.location.hostname + '/api/stats');
+    const stats = await response.json();
+    
+    // Update count displays
+    document.getElementById('successCount').textContent = stats.data.successful_count;
+    document.getElementById('failedCount').textContent = stats.data.failed_count;
+    document.getElementById('skippedCount').textContent = stats.data.skipped_count;
+    
+    // Display current active tab's applications
+    const activeTab = document.querySelector('.history-tab.active').dataset.type;
+    displayApplications(stats.data.applications[activeTab]);
+  } catch (error) {
+    console.error('Error loading stats:', error);
+  }
+}
+
+function displayApplications(applications) {
+  const historyContainer = document.getElementById('applicationHistory');
+  
+  if (!applications || applications.length === 0) {
+    historyContainer.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-history fa-3x"></i>
+        <p>No applications in this category.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  historyContainer.innerHTML = applications.map(app => `
+    <div class="history-item">
+      <div class="history-item-title">${app['Job Title']}</div>
+      <div class="history-item-company">${app.Company}</div>
+      <div class="history-item-date">${app.Timestamp}</div>
+      <a href="${app.Link}" target="_blank" class="history-item-link">View Job</a>
+    </div>
+  `).join('');
+}
     
     if (data.applicationHistory && data.applicationHistory.length > 0) {
       historyContainer.innerHTML = '';

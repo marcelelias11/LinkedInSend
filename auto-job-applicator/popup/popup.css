@@ -282,6 +282,88 @@ input:checked + .slider:before {
 }
 
 /* History Styles */
+.config-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 2px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.stats-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  min-width: 100px;
+}
+
+.stat-box h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.stat-box span {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+}
+
+.history-tabs {
+  display: flex;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.history-tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.history-tab.active {
+  opacity: 1;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.history-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.history-item-link {
+  color: #4CAF50;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.history-item-date {
+  color: #666;
+  font-size: 12px;
+}
+
 .search-box {
   margin-bottom: 10px;
 }
@@ -291,43 +373,7 @@ input:checked + .slider:before {
   overflow-y: auto;
 }
 
-.history-item {
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  padding: 10px;
-}
 
-.history-item-title {
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.history-item-date {
-  color: #7f8c8d;
-  font-size: 12px;
-}
-
-.history-item-status {
-  display: inline-block;
-  font-size: 12px;
-  margin-top: 5px;
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-.status-success {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.status-error {
-  background-color: #e74c3c;
-  color: white;
-}
-
-/* Empty State */
 .empty-state {
   text-align: center;
   color: #95a5a6;
