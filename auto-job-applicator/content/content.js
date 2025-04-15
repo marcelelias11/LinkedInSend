@@ -1,11 +1,9 @@
 // Main content script that orchestrates form detection and filling
-(function () {
+(function() {
+  console.log("Content script loaded");
+
   // Listen for messages from popup
-  chrome.runtime.onMessage.addListener(function (
-    message,
-    sender,
-    sendResponse
-  ) {
+  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     console.log("Received message:", message);
 
     switch (message.action) {
@@ -13,18 +11,27 @@
         fillDetectedForm();
         break;
       case "fillAndSubmit":
-        fillAndSubmitForm();
-        break;
+        fetch('http://0.0.0.0:5000/start')
+          .then(response => response.json())
+          .then(data => {
+            console.log("Application started:", data);
+            sendResponse({status: "success", data});
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            sendResponse({status: "error", error: error.message});
+          });
+        return true; // Keep the message channel open for async response
       case "detectForms":
         detectForms();
         break;
     }
 
-    return true;
+    return true; //necessary for compatibility
   });
 
   // Auto-detect forms when page loads
-  chrome.storage.sync.get("appSettings", function (data) {
+  chrome.storage.sync.get("appSettings", function(data) {
     if (!data.appSettings || data.appSettings.autoDetect !== false) {
       // Wait for page to be fully loaded
       if (document.readyState === "complete") {
@@ -37,10 +44,7 @@
             clearInterval(intervalId);
 
             // Show notification if enabled
-            if (
-              !data.appSettings ||
-              data.appSettings.showNotification !== false
-            ) {
+            if (!data.appSettings || data.appSettings.showNotification !== false) {
               showFormDetectedNotification();
             }
           }
@@ -49,7 +53,7 @@
         // Stop checking after 30 seconds
         setTimeout(() => clearInterval(intervalId), 30000);
       } else {
-        window.addEventListener("load", function () {
+        window.addEventListener("load", function() {
           setTimeout(detectForms, 1500);
         });
       }
@@ -61,7 +65,7 @@
     const formInfo = FormDetector.detectJobApplicationForm();
 
     if (formInfo.isJobForm) {
-      chrome.storage.sync.get("appSettings", function (data) {
+      chrome.storage.sync.get("appSettings", function(data) {
         if (!data.appSettings || data.appSettings.showNotification !== false) {
           showFormDetectedNotification();
         }
@@ -72,9 +76,7 @@
   // Show notification when a form is detected
   function showFormDetectedNotification() {
     // Create notification container if it doesn't exist
-    let notificationContainer = document.getElementById(
-      "auto-applicator-notification"
-    );
+    let notificationContainer = document.getElementById("auto-applicator-notification");
     if (!notificationContainer) {
       notificationContainer = document.createElement("div");
       notificationContainer.id = "auto-applicator-notification";
@@ -119,21 +121,21 @@
     // Add event listeners to buttons
     document
       .getElementById("auto-fill-btn")
-      .addEventListener("click", function () {
+      .addEventListener("click", function() {
         fillDetectedForm();
         hideNotification();
       });
 
     document
       .getElementById("fill-submit-btn")
-      .addEventListener("click", function () {
+      .addEventListener("click", function() {
         fillAndSubmitForm();
         hideNotification();
       });
 
     document
       .getElementById("ignore-btn")
-      .addEventListener("click", function () {
+      .addEventListener("click", function() {
         hideNotification();
       });
 
@@ -152,7 +154,7 @@
 
   // Fill the detected form with user profile data
   function fillDetectedForm() {
-    chrome.storage.sync.get("profileData", function (data) {
+    chrome.storage.sync.get("profileData", function(data) {
       if (!data.profileData) {
         console.error("No profile data found");
         return;
@@ -177,19 +179,18 @@
     });
   }
 
-  // Fill and submit the form
+
+  // Fill and submit the form -  REPLACED with edited code
   function fillAndSubmitForm() {
-    fetch("http://localhost:5000/start")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "completed") {
-          console.log("Application process started successfully");
-        } else {
-          throw new Error(data.message);
-        }
-      })
-      .catch((error) => console.error("Error:", error));
+    chrome.runtime.sendMessage({action: "submitForm", url: window.location.href}, (response) => {
+      if(response.status === "success"){
+        console.log("Form submitted successfully:", response.data);
+      } else {
+        console.error("Error submitting form:", response.error);
+      }
+    });
   }
+
 
   // Extract job title from page
   function getJobTitle() {
@@ -284,7 +285,7 @@
 
   // Add entry to application history
   function addHistoryEntry(entry) {
-    chrome.storage.sync.get("applicationHistory", function (data) {
+    chrome.storage.sync.get("applicationHistory", function(data) {
       let history = data.applicationHistory || [];
 
       // Limit history size to avoid storage quota issues (keep last 100 entries)
@@ -294,7 +295,10 @@
 
       history.push(entry);
 
-      chrome.storage.sync.set({ applicationHistory: history });
+      chrome.storage.sync.set({applicationHistory: history});
     });
   }
+
+  // Notify that content script is ready
+  chrome.runtime.sendMessage({type: "CONTENT_SCRIPT_LOADED"});
 })();

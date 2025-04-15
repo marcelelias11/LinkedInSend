@@ -311,7 +311,17 @@ function setupButtonListeners() {
   
   // Auto submit button
   document.getElementById('autoSubmitBtn').addEventListener('click', function() {
-    executeContentScript('fillAndSubmit');
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, {action: "fillAndSubmit"}, function(response) {
+          if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+            return;
+          }
+          console.log("Response:", response);
+        });
+      }
+    });
   });
   
   // Export data button

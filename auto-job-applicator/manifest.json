@@ -20,25 +20,20 @@
     "storage",
     "activeTab",
     "scripting",
-    "tabs",
-    "contextMenus"
+    "tabs"
   ],
   "host_permissions": [
-    "*://*/*"
+    "*://*/*",
+    "http://0.0.0.0:5000/*"
   ],
   "background": {
     "service_worker": "background/background.js"
   },
   "content_scripts": [
     {
-      "matches": ["*://*/*"],
-      "js": [
-        "js/formDetector.js", 
-        "js/formFiller.js", 
-        "js/storage.js",
-        "js/tracker.js",
-        "content/content.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_end"
     }
   ],
   "web_accessible_resources": [
