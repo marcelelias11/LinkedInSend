@@ -105,7 +105,7 @@ def chromeBrowserOptions():
     options.add_argument("--disable-extensions")
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-dev-shm-usage')
-    
+
     # Try to connect to existing Chrome instance
     try:
         import psutil
@@ -116,14 +116,15 @@ def chromeBrowserOptions():
                 break
         if not chrome_running:
             raise RuntimeError("No Chrome instance found. Please open Chrome before running the application.")
-            
+
         options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
     except ImportError:
         raise RuntimeError("psutil package is required. Please install it first.")
-        
+
     options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_experimental_option('useAutomationExtension', False)
-    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_argument("--disable-blink-features")
+    options.add_experimental_option("useAutomationExtension", False)
+    options.add_experimental_option("excludeSwitches", ['enable-automation'])
 
     # Assicurati che la directory del profilo Chrome esista
     ensure_chrome_profile()
