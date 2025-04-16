@@ -99,18 +99,23 @@ def HTML_to_PDF(FilePath):
         driver.quit()
 
 def chromeBrowserOptions():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--start-maximized")
-    options.add_argument("--ignore-certificate-errors")
-    options.add_argument("--disable-blink-features=AutomationControlled")
+    # Check if Chrome is running
+    import psutil
+    chrome_running = False
+    for proc in psutil.process_iter(['name']):
+        if 'chrome' in proc.info['name'].lower():
+            chrome_running = True
+            break
     
-    # Set up user data directory in local environment
-    user_data_dir = os.path.join(os.getcwd(), "chrome-data")
-    if not os.path.exists(user_data_dir):
-        os.makedirs(user_data_dir)
-    options.add_argument(f"--user-data-dir={user_data_dir}")
+    if not chrome_running:
+        raise RuntimeError("No Chrome instance found. Please open Chrome before running the application.")
 
-    # Assicurati che la directory del profilo Chrome esista
+    options = webdriver.ChromeOptions()
+    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+    
+    # Ensure Chrome profile exists
     ensure_chrome_profile()
 
     if len(chromeProfilePath) > 0:
