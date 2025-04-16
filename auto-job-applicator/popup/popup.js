@@ -277,6 +277,54 @@ function createEducationEntry() {
 
 // Save profile data to storage
 function saveProfileData() {
+  // Collect checkbox values for experience level
+  const experienceLevel = {};
+  document.querySelectorAll('input[name="experienceLevel"]').forEach(checkbox => {
+    experienceLevel[checkbox.value] = checkbox.checked;
+  });
+
+  // Collect checkbox values for job types
+  const jobTypes = {};
+  document.querySelectorAll('input[name="jobTypes"]').forEach(checkbox => {
+    jobTypes[checkbox.value] = checkbox.checked;
+  });
+
+  // Collect checkbox values for date
+  const date = {};
+  document.querySelectorAll('input[name="date"]').forEach(checkbox => {
+    date[checkbox.value] = checkbox.checked;
+  });
+
+  const config = {
+    remote: document.getElementById("remote").checked,
+    experienceLevel,
+    jobTypes,
+    date,
+    positions: document.getElementById("positions").value.split(',').map(s => s.trim()),
+    locations: document.getElementById("locations").value.split(',').map(s => s.trim()),
+    distance: parseInt(document.getElementById("distance").value),
+    companyBlacklist: document.getElementById("companyBlacklist").value.split(',').map(s => s.trim()),
+    titleBlacklist: document.getElementById("titleBlacklist").value ? 
+      document.getElementById("titleBlacklist").value.split(',').map(s => s.trim()) : 
+      null
+  };
+
+  // Send config to API
+  fetch('http://localhost:5000/api/config', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(config)
+  })
+  .then(response => response.json())
+  .then(data => {
+    showNotification("Configuration saved successfully!");
+  })
+  .catch(error => {
+    showNotification("Error saving configuration", true);
+  });
+
   const profileData = {
     fullName: document.getElementById("fullName").value,
     email: document.getElementById("email").value,
