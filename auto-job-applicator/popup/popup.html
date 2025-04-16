@@ -104,9 +104,172 @@
           </div>
           <button type="button" id="addEduBtn" class="add-btn"><i class="fas fa-plus"></i> Add Education</button>
 
-          <h3>Skills</h3>
+          <h3>Job Search Preferences</h3>
           <div class="form-group">
-            <textarea id="skills" name="skills" rows="3" placeholder="JavaScript, Python, React, Project Management (comma separated)"></textarea>
+            <label class="switch-label">
+              <span>Remote</span>
+              <div class="switch">
+                <input type="checkbox" id="remote" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+
+          <h4>Experience Level</h4>
+          <div class="form-group">
+            <label class="switch-label">
+              <span>Internship</span>
+              <div class="switch">
+                <input type="checkbox" id="exp-internship" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Entry</span>
+              <div class="switch">
+                <input type="checkbox" id="exp-entry" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Associate</span>
+              <div class="switch">
+                <input type="checkbox" id="exp-associate" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Mid-Senior Level</span>
+              <div class="switch">
+                <input type="checkbox" id="exp-midsenior">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Director</span>
+              <div class="switch">
+                <input type="checkbox" id="exp-director" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Executive</span>
+              <div class="switch">
+                <input type="checkbox" id="exp-executive">
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+
+          <h4>Job Types</h4>
+          <div class="form-group">
+            <label class="switch-label">
+              <span>Full-time</span>
+              <div class="switch">
+                <input type="checkbox" id="type-fulltime" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Contract</span>
+              <div class="switch">
+                <input type="checkbox" id="type-contract">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Part-time</span>
+              <div class="switch">
+                <input type="checkbox" id="type-parttime">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Temporary</span>
+              <div class="switch">
+                <input type="checkbox" id="type-temporary" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Internship</span>
+              <div class="switch">
+                <input type="checkbox" id="type-internship">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Other</span>
+              <div class="switch">
+                <input type="checkbox" id="type-other">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Volunteer</span>
+              <div class="switch">
+                <input type="checkbox" id="type-volunteer" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+
+          <h4>Date Posted</h4>
+          <div class="form-group">
+            <label class="switch-label">
+              <span>All Time</span>
+              <div class="switch">
+                <input type="checkbox" id="date-alltime">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Month</span>
+              <div class="switch">
+                <input type="checkbox" id="date-month" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>Week</span>
+              <div class="switch">
+                <input type="checkbox" id="date-week">
+                <span class="slider round"></span>
+              </div>
+            </label>
+            <label class="switch-label">
+              <span>24 Hours</span>
+              <div class="switch">
+                <input type="checkbox" id="date-24h" checked>
+                <span class="slider round"></span>
+              </div>
+            </label>
+          </div>
+
+          <h4>Job Search</h4>
+          <div class="form-group">
+            <label>Positions (comma-separated)</label>
+            <input type="text" id="positions" value="Software developer">
+          </div>
+
+          <div class="form-group">
+            <label>Locations (comma-separated)</label>
+            <input type="text" id="locations" value="Brazil">
+          </div>
+
+          <div class="form-group">
+            <label>Distance (km)</label>
+            <input type="number" id="distance" value="100">
+          </div>
+
+          <div class="form-group">
+            <label>Company Blacklist (comma-separated)</label>
+            <input type="text" id="companyBlacklist" value="Noir, Crossover">
+          </div>
+
+          <div class="form-group">
+            <label>Title Blacklist (comma-separated)</label>
+            <input type="text" id="titleBlacklist">
           </div>
 
           <button type="submit" id="saveProfileBtn" class="primary-btn">Save Profile</button>

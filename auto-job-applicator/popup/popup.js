@@ -249,14 +249,37 @@ function createEducationEntry() {
 // Save profile data to storage
 function saveProfileData() {
   const profileData = {
-    fullName: document.getElementById('fullName').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    location: document.getElementById('location').value,
-    linkedin: document.getElementById('linkedin').value,
-    website: document.getElementById('website').value,
-    summary: document.getElementById('summary').value,
-    skills: document.getElementById('skills').value,
+    remote: document.getElementById('remote').checked,
+    experienceLevel: {
+      internship: document.getElementById('exp-internship').checked,
+      entry: document.getElementById('exp-entry').checked,
+      associate: document.getElementById('exp-associate').checked,
+      'mid-senior level': document.getElementById('exp-midsenior').checked,
+      director: document.getElementById('exp-director').checked,
+      executive: document.getElementById('exp-executive').checked
+    },
+    jobTypes: {
+      'full-time': document.getElementById('type-fulltime').checked,
+      contract: document.getElementById('type-contract').checked,
+      'part-time': document.getElementById('type-parttime').checked,
+      temporary: document.getElementById('type-temporary').checked,
+      internship: document.getElementById('type-internship').checked,
+      other: document.getElementById('type-other').checked,
+      volunteer: document.getElementById('type-volunteer').checked
+    },
+    date: {
+      'all time': document.getElementById('date-alltime').checked,
+      month: document.getElementById('date-month').checked,
+      week: document.getElementById('date-week').checked,
+      '24 hours': document.getElementById('date-24h').checked
+    },
+    positions: document.getElementById('positions').value.split(',').map(p => p.trim()),
+    locations: document.getElementById('locations').value.split(',').map(l => l.trim()),
+    distance: parseInt(document.getElementById('distance').value),
+    companyBlacklist: document.getElementById('companyBlacklist').value.split(',').map(c => c.trim()),
+    titleBlacklist: document.getElementById('titleBlacklist').value ? 
+      document.getElementById('titleBlacklist').value.split(',').map(t => t.trim()) : 
+      null,
     workExperience: [],
     education: []
   };
@@ -282,9 +305,23 @@ function saveProfileData() {
     });
   });
   
-  // Save to Chrome storage
+  // Save to Chrome storage and send to API
   chrome.storage.sync.set({ profileData }, function() {
-    showNotification('Profile saved successfully!');
+    // Send to API
+    fetch('http://localhost:5000/api/config', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      showNotification('Profile saved successfully!');
+    })
+    .catch(error => {
+      showNotification('Error saving to server: ' + error.message, true);
+    });
   });
 }
 
