@@ -65,7 +65,7 @@ def HTML_to_PDF(FilePath):
     # Initialize Chrome driver
     service = ChromeService(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
-    
+
     try:
         # Load the HTML file
         driver.get(FilePath)
@@ -86,14 +86,14 @@ def HTML_to_PDF(FilePath):
             "generateTaggedPDF": False,
             "transferMode": "ReturnAsBase64"
         })
-        
+
         if time.time() - start_time > 120:
             raise TimeoutError("PDF generation exceeded the specified timeout limit.")
         return pdf_base64['data']
 
     except WebDriverException as e:
         raise RuntimeError(f"WebDriver exception occurred: {e}")
-    
+
     finally:
         # Ensure the driver is closed
         driver.quit()
@@ -113,7 +113,9 @@ def chromeBrowserOptions():
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option('useAutomationExtension', False)
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    
+    options.add_argument("--new-tab")
+    options.add_experimental_option("detach", True)
+
     # Assicurati che la directory del profilo Chrome esista
     ensure_chrome_profile()
 
@@ -124,7 +126,7 @@ def chromeBrowserOptions():
         options.add_argument("--profile-directory=" + profileDir)
     else:
         options.add_argument("--incognito")
-        
+
     return options
 
 
