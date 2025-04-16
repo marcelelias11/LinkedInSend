@@ -65,7 +65,7 @@ def HTML_to_PDF(FilePath):
     # Initialize Chrome driver
     service = ChromeService(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
-
+    
     try:
         # Load the HTML file
         driver.get(FilePath)
@@ -86,36 +86,35 @@ def HTML_to_PDF(FilePath):
             "generateTaggedPDF": False,
             "transferMode": "ReturnAsBase64"
         })
-
+        
         if time.time() - start_time > 120:
             raise TimeoutError("PDF generation exceeded the specified timeout limit.")
         return pdf_base64['data']
 
     except WebDriverException as e:
         raise RuntimeError(f"WebDriver exception occurred: {e}")
-
+    
     finally:
         # Ensure the driver is closed
         driver.quit()
 
 def chromeBrowserOptions():
-    # Check if Chrome is running
-    import psutil
-    chrome_running = False
-    for proc in psutil.process_iter(['name']):
-        if 'chrome' in proc.info['name'].lower():
-            chrome_running = True
-            break
-    
-    if not chrome_running:
-        raise RuntimeError("No Chrome instance found. Please open Chrome before running the application.")
-
     options = webdriver.ChromeOptions()
-    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument('--no-sandbox')
+    options.add_argument("--ignore-certificate-errors")
+    options.add_argument("--disable-extensions")
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--remote-debugging-port=9222')
+    if headless:
+        options.add_argument("--headless")
+    options.add_argument("--start-maximized")
+    options.add_argument("--disable-blink-features")
     options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+    options.add_experimental_option('useAutomationExtension', False)
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
     
-    # Ensure Chrome profile exists
+    # Assicurati che la directory del profilo Chrome esista
     ensure_chrome_profile()
 
     if len(chromeProfilePath) > 0:
@@ -125,7 +124,7 @@ def chromeBrowserOptions():
         options.add_argument("--profile-directory=" + profileDir)
     else:
         options.add_argument("--incognito")
-
+        
     return options
 
 

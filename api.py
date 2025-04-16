@@ -111,7 +111,8 @@ def linkedin_login():
             session['oauth_state'] = state
             return """
                 <script>
-                    window.location.href = '{}';
+                    window.open('{}', 'LinkedIn Login', 'width=600,height=700');
+                    window.close();
                 </script>
             """.format(authorization_url)
         except Exception as e:
@@ -137,9 +138,22 @@ def linkedin_callback():
         session['linkedin_email'] = profile_data.get('emailAddress', '')
         session.permanent = True  # Make session persistent but with expiry
 
-        return redirect('/')
+        return """
+            <script>
+                window.opener.postMessage({ 
+                    type: 'LINKEDIN_AUTH_SUCCESS',
+                    email: %s
+                }, '*');
+                window.close();
+            </script>
+        """ % json.dumps(profile_data.get('emailAddress', ''))
     except Exception as e:
-        return redirect('/?error=auth_failed')'''
+        return """
+            <script>
+                window.opener.postMessage({ type: 'LINKEDIN_AUTH_ERROR', error: 'Authentication failed' }, '*');
+                window.close();
+            </script>
+        """'''
 
 
 if __name__ == '__main__':
