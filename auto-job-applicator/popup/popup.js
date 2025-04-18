@@ -1,297 +1,175 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Tab Navigation
-  setupTabs();
-
-  // Load saved data
-  loadProfileData();
-  loadSettings();
-  loadApplicationHistory();
-
   // Setup form listeners
   setupFormListeners();
 
-  // Setup button listeners
-  setupButtonListeners();
+  // Load saved data
+  loadConfigData();
 });
 
-// Tab Navigation
-function setupTabs() {
-  const tabs = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
+// Tab Navigation (Removed - replaced with simplified config)
+//function setupTabs() { ... }
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      // Remove active class from all tabs and contents
-      tabs.forEach((t) => t.classList.remove("active"));
-      tabContents.forEach((c) => c.classList.remove("active"));
+// Load saved profile data from storage (Removed - replaced with loadConfigData)
+//function loadProfileData() { ... }
 
-      // Add active class to clicked tab and corresponding content
-      tab.classList.add("active");
-      const targetId = tab.id.replace("Tab", "Section");
-      document.getElementById(targetId).classList.add("active");
-    });
-  });
-}
+// Load application settings (Removed - replaced with loadConfigData)
+//function loadSettings() { ... }
 
-// Load saved profile data from storage
-function loadProfileData() {
-  chrome.storage.sync.get("profileData", function (data) {
-    if (data.profileData) {
-      const profile = data.profileData;
+// Load application history (Removed)
+//function loadApplicationHistory() { ... }
 
-      // Fill basic info
-      document.getElementById("fullName").value = profile.fullName || "";
-      document.getElementById("email").value = profile.email || "";
-      document.getElementById("phone").value = profile.phone || "";
-      document.getElementById("location").value = profile.location || "";
-      document.getElementById("linkedin").value = profile.linkedin || "";
-      document.getElementById("website").value = profile.website || "";
-      document.getElementById("summary").value = profile.summary || "";
-      document.getElementById("skills").value = profile.skills || "";
+function loadConfigData() {
+  chrome.storage.sync.get("configData", function (data) {
+    if (data.configData) {
+      const config = data.configData;
 
-      // Fill work experience
-      if (profile.workExperience && profile.workExperience.length > 0) {
-        const workContainer = document.getElementById("workExperience");
-        // Clear default entry
-        workContainer.innerHTML = "";
+      // Set checkbox values
+      document.getElementById("remote").checked = config.remote;
 
-        profile.workExperience.forEach((work) => {
-          const workEntry = createWorkExperienceEntry();
-          workEntry.querySelector('[name="workTitle[]"]').value =
-            work.title || "";
-          workEntry.querySelector('[name="workCompany[]"]').value =
-            work.company || "";
-          workEntry.querySelector('[name="workDuration[]"]').value =
-            work.duration || "";
-          workEntry.querySelector('[name="workDescription[]"]').value =
-            work.description || "";
-          workContainer.appendChild(workEntry);
-        });
-      }
-
-      // Fill education
-      if (profile.education && profile.education.length > 0) {
-        const eduContainer = document.getElementById("education");
-        // Clear default entry
-        eduContainer.innerHTML = "";
-
-        profile.education.forEach((edu) => {
-          const eduEntry = createEducationEntry();
-          eduEntry.querySelector('[name="eduDegree[]"]').value =
-            edu.degree || "";
-          eduEntry.querySelector('[name="eduInstitution[]"]').value =
-            edu.institution || "";
-          eduEntry.querySelector('[name="eduYear[]"]').value = edu.year || "";
-          eduContainer.appendChild(eduEntry);
-        });
-      }
-    }
-  });
-}
-
-// Load application settings
-function loadSettings() {
-  chrome.storage.sync.get("appSettings", function (data) {
-    if (data.appSettings) {
-      const settings = data.appSettings;
-
-      document.getElementById("autoDetect").checked =
-        settings.autoDetect !== false;
-      document.getElementById("showNotification").checked =
-        settings.showNotification !== false;
-      document.getElementById("oneClickSubmit").checked =
-        settings.oneClickSubmit !== false;
-      document.getElementById("defaultResume").value =
-        settings.defaultResume || "";
-    }
-  });
-}
-
-// Load application history
-function loadApplicationHistory() {
-  chrome.storage.sync.get("applicationHistory", function (data) {
-    const historyContainer = document.getElementById("applicationHistory");
-
-    if (data.applicationHistory && data.applicationHistory.length > 0) {
-      historyContainer.innerHTML = "";
-
-      // Sort by date (newest first)
-      const sortedHistory = data.applicationHistory.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-
-      sortedHistory.forEach((app) => {
-        const historyItem = document.createElement("div");
-        historyItem.className = "history-item";
-
-        const statusClass =
-          app.status === "success" ? "status-success" : "status-error";
-
-        historyItem.innerHTML = `
-          <div class="history-item-title">${app.jobTitle || "Unknown Job"}</div>
-          <div class="history-item-company">${
-            app.company || "Unknown Company"
-          }</div>
-          <div class="history-item-date">${formatDate(app.date)}</div>
-          <div class="history-item-status ${statusClass}">${
-          app.status === "success" ? "Submitted" : "Failed"
-        }</div>
-        `;
-
-        historyContainer.appendChild(historyItem);
-      });
-    } else {
-      // Show empty state
-      historyContainer.innerHTML = `
-        <div class="empty-state">
-          <i class="fas fa-history fa-3x"></i>
-          <p>No application history yet. Your submitted applications will appear here.</p>
-        </div>
-      `;
-    }
-  });
-}
-
-// Format date for display
-function formatDate(dateStr) {
-  const date = new Date(dateStr);
-  return (
-    date.toLocaleDateString() +
-    " " +
-    date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-  );
-}
-
-// Setup form listeners
-function setupFormListeners() {
-  // Profile form submission
-  document
-    .getElementById("profileForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      saveProfileData();
-    });
-
-  // Settings form submission
-  document
-    .getElementById("settingsForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      saveSettings();
-    });
-
-  // Add work experience button
-  document.getElementById("addWorkBtn").addEventListener("click", function () {
-    const workContainer = document.getElementById("workExperience");
-    const workEntry = createWorkExperienceEntry();
-    workContainer.appendChild(workEntry);
-  });
-
-  // Add education button
-  document.getElementById("addEduBtn").addEventListener("click", function () {
-    const eduContainer = document.getElementById("education");
-    const eduEntry = createEducationEntry();
-    eduContainer.appendChild(eduEntry);
-  });
-
-  // Listen for remove buttons (delegated event)
-  document.addEventListener("click", function (e) {
-    if (e.target.closest(".remove-btn")) {
-      const button = e.target.closest(".remove-btn");
-      const entry = button.closest(".work-entry, .education-entry");
-      entry.remove();
-    }
-  });
-
-  // History search
-  document
-    .getElementById("historySearch")
-    .addEventListener("input", function (e) {
-      const searchText = e.target.value.toLowerCase();
-      const historyItems = document.querySelectorAll(".history-item");
-
-      historyItems.forEach((item) => {
-        const title = item
-          .querySelector(".history-item-title")
-          .textContent.toLowerCase();
-        const company = item
-          .querySelector(".history-item-company")
-          .textContent.toLowerCase();
-
-        if (title.includes(searchText) || company.includes(searchText)) {
-          item.style.display = "block";
-        } else {
-          item.style.display = "none";
+      // Set experience levels
+      Object.entries(config.experienceLevel || {}).forEach(
+        ([level, checked]) => {
+          const checkbox = document.querySelector(
+            `input[name="experienceLevel"][value="${level}"]`
+          );
+          if (checkbox) checkbox.checked = checked;
         }
+      );
+
+      // Set job types
+      Object.entries(config.jobTypes || {}).forEach(([type, checked]) => {
+        const checkbox = document.querySelector(
+          `input[name="jobTypes"][value="${type}"]`
+        );
+        if (checkbox) checkbox.checked = checked;
       });
+
+      // Set date filters
+      Object.entries(config.date || {}).forEach(([filter, checked]) => {
+        const checkbox = document.querySelector(
+          `input[name="date"][value="${filter}"]`
+        );
+        if (checkbox) checkbox.checked = checked;
+      });
+
+      // Set text inputs
+      document.getElementById("positions").value =
+        config.positions?.join(", ") || "";
+      document.getElementById("locations").value =
+        config.locations?.join(", ") || "";
+      document.getElementById("distance").value = config.distance || 100;
+      document.getElementById("companyBlacklist").value =
+        config.companyBlacklist?.join(", ") || "";
+      document.getElementById("titleBlacklist").value =
+        config.titleBlacklist?.join(", ") || "";
+    }
+  });
+}
+
+// Setup form listeners (modified)
+function setupFormListeners() {
+  // Config form submission and start
+  document
+    .getElementById("configForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+      try {
+        const configResponse = await fetch("http://localhost:5000/api/config", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            remote: document.getElementById("remote").checked,
+            experienceLevel: Object.fromEntries(
+              Array.from(
+                document.querySelectorAll('input[name="experienceLevel"]')
+              ).map((checkbox) => [checkbox.value, checkbox.checked])
+            ),
+            jobTypes: Object.fromEntries(
+              Array.from(
+                document.querySelectorAll('input[name="jobTypes"]')
+              ).map((checkbox) => [checkbox.value, checkbox.checked])
+            ),
+            date: Object.fromEntries(
+              Array.from(document.querySelectorAll('input[name="date"]')).map(
+                (checkbox) => [checkbox.value, checkbox.checked]
+              )
+            ),
+            positions: document
+              .getElementById("positions")
+              .value.split(",")
+              .map((s) => s.trim()),
+            locations: document
+              .getElementById("locations")
+              .value.split(",")
+              .map((s) => s.trim()),
+            distance: parseInt(document.getElementById("distance").value),
+            companyBlacklist: document
+              .getElementById("companyBlacklist")
+              .value.split(",")
+              .map((s) => s.trim()),
+            titleBlacklist: document.getElementById("titleBlacklist").value
+              ? document
+                  .getElementById("titleBlacklist")
+                  .value.split(",")
+                  .map((s) => s.trim())
+              : [],
+          }),
+        });
+
+        if (configResponse.ok) {
+          // Save to Chrome storage
+          chrome.storage.sync.set({
+            configData: await configResponse.json(),
+          });
+
+          // Start the application
+          const startResponse = await fetch("http://localhost:5000/start", {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          const data = await startResponse.json();
+          if (data.status === "completed") {
+            showNotification(
+              "Configuration saved and application started successfully!"
+            );
+          } else {
+            showNotification("Failed to start application", true);
+          }
+        } else {
+          showNotification("Failed to save configuration", true);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        showNotification("Failed to connect to the server", true);
+      }
     });
 }
 
-// Create a new work experience entry
-function createWorkExperienceEntry() {
-  const entry = document.createElement("div");
-  entry.className = "work-entry";
-  entry.innerHTML = `
-    <div class="form-group">
-      <label>Job Title</label>
-      <input type="text" name="workTitle[]" placeholder="Software Engineer">
-    </div>
-    <div class="form-group">
-      <label>Company</label>
-      <input type="text" name="workCompany[]" placeholder="Company Name">
-    </div>
-    <div class="form-group">
-      <label>Duration</label>
-      <input type="text" name="workDuration[]" placeholder="Jan 2020 - Present">
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea name="workDescription[]" rows="2" placeholder="Brief description of responsibilities and achievements"></textarea>
-    </div>
-    <button type="button" class="remove-btn" title="Remove this entry"><i class="fas fa-trash"></i></button>
-  `;
-  return entry;
-}
+//removed functions: createWorkExperienceEntry, createEducationEntry, saveProfileData, saveSettings, setupButtonListeners, executeContentScript, formatDate, exportData, importData, clearAllData
 
-// Create a new education entry
-function createEducationEntry() {
-  const entry = document.createElement("div");
-  entry.className = "education-entry";
-  entry.innerHTML = `
-    <div class="form-group">
-      <label>Degree</label>
-      <input type="text" name="eduDegree[]" placeholder="Bachelor of Science in Computer Science">
-    </div>
-    <div class="form-group">
-      <label>Institution</label>
-      <input type="text" name="eduInstitution[]" placeholder="University Name">
-    </div>
-    <div class="form-group">
-      <label>Graduation Year</label>
-      <input type="text" name="eduYear[]" placeholder="2019">
-    </div>
-    <button type="button" class="remove-btn" title="Remove this entry"><i class="fas fa-trash"></i></button>
-  `;
-  return entry;
-}
-
-// Save profile data to storage
-function saveProfileData() {
+function saveConfigData() {
   // Collect checkbox values for experience level
   const experienceLevel = {};
-  document.querySelectorAll('input[name="experienceLevel"]').forEach(checkbox => {
-    experienceLevel[checkbox.value] = checkbox.checked;
-  });
+  document
+    .querySelectorAll('input[name="experienceLevel"]')
+    .forEach((checkbox) => {
+      experienceLevel[checkbox.value] = checkbox.checked;
+    });
 
   // Collect checkbox values for job types
   const jobTypes = {};
-  document.querySelectorAll('input[name="jobTypes"]').forEach(checkbox => {
+  document.querySelectorAll('input[name="jobTypes"]').forEach((checkbox) => {
     jobTypes[checkbox.value] = checkbox.checked;
   });
 
   // Collect checkbox values for date
   const date = {};
-  document.querySelectorAll('input[name="date"]').forEach(checkbox => {
+  document.querySelectorAll('input[name="date"]').forEach((checkbox) => {
     date[checkbox.value] = checkbox.checked;
   });
 
@@ -300,154 +178,46 @@ function saveProfileData() {
     experienceLevel,
     jobTypes,
     date,
-    positions: document.getElementById("positions").value.split(',').map(s => s.trim()),
-    locations: document.getElementById("locations").value.split(',').map(s => s.trim()),
+    positions: document
+      .getElementById("positions")
+      .value.split(",")
+      .map((s) => s.trim()),
+    locations: document
+      .getElementById("locations")
+      .value.split(",")
+      .map((s) => s.trim()),
     distance: parseInt(document.getElementById("distance").value),
-    companyBlacklist: document.getElementById("companyBlacklist").value.split(',').map(s => s.trim()),
-    titleBlacklist: document.getElementById("titleBlacklist").value ? 
-      document.getElementById("titleBlacklist").value.split(',').map(s => s.trim()) : 
-      null
+    companyBlacklist: document
+      .getElementById("companyBlacklist")
+      .value.split(",")
+      .map((s) => s.trim()),
+    titleBlacklist: document.getElementById("titleBlacklist").value
+      ? document
+          .getElementById("titleBlacklist")
+          .value.split(",")
+          .map((s) => s.trim())
+      : [],
   };
 
   // Send config to API
-  fetch('http://localhost:5000/api/config', {
-    method: 'POST',
+  fetch("http://localhost:5000/api/config", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(config)
+    body: JSON.stringify(config),
   })
-  .then(response => response.json())
-  .then(data => {
-    showNotification("Configuration saved successfully!");
-  })
-  .catch(error => {
-    showNotification("Error saving configuration", true);
-  });
-
-  const profileData = {
-    fullName: document.getElementById("fullName").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    location: document.getElementById("location").value,
-    linkedin: document.getElementById("linkedin").value,
-    website: document.getElementById("website").value,
-    summary: document.getElementById("summary").value,
-    skills: document.getElementById("skills").value,
-    workExperience: [],
-    education: [],
-  };
-
-  // Get work experience entries
-  const workEntries = document.querySelectorAll(".work-entry");
-  workEntries.forEach((entry) => {
-    profileData.workExperience.push({
-      title: entry.querySelector('[name="workTitle[]"]').value,
-      company: entry.querySelector('[name="workCompany[]"]').value,
-      duration: entry.querySelector('[name="workDuration[]"]').value,
-      description: entry.querySelector('[name="workDescription[]"]').value,
-    });
-  });
-
-  // Get education entries
-  const eduEntries = document.querySelectorAll(".education-entry");
-  eduEntries.forEach((entry) => {
-    profileData.education.push({
-      degree: entry.querySelector('[name="eduDegree[]"]').value,
-      institution: entry.querySelector('[name="eduInstitution[]"]').value,
-      year: entry.querySelector('[name="eduYear[]"]').value,
-    });
-  });
-
-  // Save to Chrome storage
-  chrome.storage.sync.set({ profileData }, function () {
-    showNotification("Profile saved successfully!");
-  });
-}
-
-// Save settings to storage
-function saveSettings() {
-  const settings = {
-    autoDetect: document.getElementById("autoDetect").checked,
-    showNotification: document.getElementById("showNotification").checked,
-    oneClickSubmit: document.getElementById("oneClickSubmit").checked,
-    defaultResume: document.getElementById("defaultResume").value,
-  };
-
-  chrome.storage.sync.set({ appSettings: settings }, function () {
-    showNotification("Settings saved successfully!");
-  });
-}
-
-// Setup button listeners
-function setupButtonListeners() {
-  // Fill current form button
-  document
-    .getElementById("fillCurrentBtn")
-    .addEventListener("click", function () {
-      executeContentScript("fillForm");
-    });
-
-  // Auto submit button
-  document
-    .getElementById("autoSubmitBtn")
-    .addEventListener("click", async function () {
-      try {
-        const response = await fetch("http://localhost:5000/start", {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        const data = await response.json();
-        if (data.status === "completed") {
-          showNotification("Application submitted successfully!");
-        } else {
-          showNotification("Failed to submit application", true);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        showNotification("Failed to connect to the application server", true);
-      }
-    });
-
-  // Export data button
-  document
-    .getElementById("exportDataBtn")
-    .addEventListener("click", function () {
-      exportData();
-    });
-
-  // Import data button
-  document
-    .getElementById("importDataBtn")
-    .addEventListener("click", function () {
-      importData();
-    });
-
-  // Clear data button
-  document
-    .getElementById("clearDataBtn")
-    .addEventListener("click", function () {
-      if (
-        confirm(
-          "Are you sure you want to clear all your saved data? This cannot be undone."
-        )
-      ) {
-        clearAllData();
-      }
+    .then((response) => response.json())
+    .then((data) => {
+      showNotification("Configuration saved successfully!");
+      // Save to Chrome storage
+      chrome.storage.sync.set({ configData: config });
+    })
+    .catch((error) => {
+      showNotification("Error saving configuration", true);
     });
 }
 
-// Execute a content script action on the current tab
-function executeContentScript(action) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { action: action });
-  });
-}
-
-// Show a notification
 function showNotification(message, isError = false) {
   // Create notification element if it doesn't exist
   let notification = document.querySelector(".notification");
@@ -468,93 +238,4 @@ function showNotification(message, isError = false) {
   setTimeout(() => {
     notification.style.display = "none";
   }, 3000);
-}
-
-// Export user data
-function exportData() {
-  chrome.storage.sync.get(
-    ["profileData", "appSettings", "applicationHistory"],
-    function (data) {
-      const exportData = JSON.stringify(data, null, 2);
-      const blob = new Blob([exportData], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "auto-job-applicator-data.json";
-      a.click();
-
-      setTimeout(() => {
-        URL.revokeObjectURL(url);
-      }, 100);
-    }
-  );
-}
-
-// Import user data
-function importData() {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = ".json";
-
-  input.onchange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      try {
-        const data = JSON.parse(event.target.result);
-
-        // Validate imported data
-        if (
-          !data.profileData &&
-          !data.appSettings &&
-          !data.applicationHistory
-        ) {
-          throw new Error("Invalid data format");
-        }
-
-        // Save imported data to storage
-        chrome.storage.sync.set(data, function () {
-          // Reload the data in the UI
-          loadProfileData();
-          loadSettings();
-          loadApplicationHistory();
-
-          showNotification("Data imported successfully!");
-        });
-      } catch (error) {
-        showNotification("Error importing data: " + error.message, true);
-      }
-    };
-
-    reader.readAsText(file);
-  };
-
-  input.click();
-}
-
-// Clear all user data
-function clearAllData() {
-  chrome.storage.sync.clear(function () {
-    // Reset UI to default state
-    document.getElementById("profileForm").reset();
-    document.getElementById("settingsForm").reset();
-
-    // Clear work experience and education entries except for the first one
-    const workContainer = document.getElementById("workExperience");
-    const eduContainer = document.getElementById("education");
-
-    workContainer.innerHTML = "";
-    workContainer.appendChild(createWorkExperienceEntry());
-
-    eduContainer.innerHTML = "";
-    eduContainer.appendChild(createEducationEntry());
-
-    // Reset history
-    loadApplicationHistory();
-
-    showNotification("All data has been cleared");
-  });
 }
