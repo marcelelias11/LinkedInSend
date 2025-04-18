@@ -21,10 +21,11 @@ a = Analysis(
         'xhtml2pdf',
         'webdriver_manager',
         'sqlalchemy',
-        'sqlalchemy.dialects.sqlite',
-        'sqlalchemy.dialects.postgresql',
-        'sqlalchemy.dialects.mysql',
-        'sqlalchemy.orm'
+        'sqlalchemy.orm',
+        'sqlalchemy.dialects',
+        'sqlalchemy.dialects.sqlite.pysqlite',
+        'sqlalchemy.dialects.postgresql.psycopg2',
+        'sqlalchemy.dialects.mysql.pymysql'
     ],
     hookspath=[],
     hooksconfig={},
