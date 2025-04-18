@@ -1,0 +1,2153 @@
+PS C:\Users\Marcelo\Documents\github\LinkedInSend> pyinstaller build.spec
+1250 INFO: PyInstaller: 6.13.0, contrib hooks: 2025.3
+1251 INFO: Python: 3.13.0
+1322 INFO: Platform: Windows-11-10.0.22631-SP0
+1322 INFO: Python environment: C:\Users\Marcelo\AppData\Local\Programs\Python\Python313
+1382 INFO: Module search paths (PYTHONPATH):
+['C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pyinstaller.exe',
+ 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+ 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+ 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+ 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313',
+ 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages',
+ 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\setuptools\\_vendor',
+ 'C:\\Users\\Marcelo\\Documents\\github\\LinkedInSend']
+2014 WARNING: discover_hook_directories: Failed to process hook entry point 'EntryPoint(name='hook-dirs', value='rapidfuzz.__pyinstaller:get_hook_dirs', group='pyinstaller40')': AttributeError: module 'rapidfuzz.__pyinstaller' has no attribute 'get_hook_dirs'
+3956 INFO: Appending 'datas' from .spec
+3962 INFO: checking Analysis
+3963 INFO: Building Analysis because Analysis-00.toc is non existent
+3963 INFO: Running Analysis Analysis-00.toc
+3963 INFO: Target bytecode optimization level: 0
+3964 INFO: Initializing module dependency graph...
+3965 INFO: Initializing module graph hook caches...
+4125 INFO: Analyzing modules for base_library.zip ...
+9620 INFO: Processing standard module hook 'hook-encodings.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+15997 INFO: Processing standard module hook 'hook-pickle.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+19882 INFO: Processing standard module hook 'hook-heapq.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+21781 INFO: Caching module dependency graph...
+22019 INFO: Looking for Python shared library...
+22062 INFO: Using Python shared library: C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\python313.dll
+22062 INFO: Analyzing C:\Users\Marcelo\Documents\github\LinkedInSend\main.py
+22980 INFO: Processing standard module hook 'hook-selenium.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+24765 INFO: Processing standard module hook 'hook-platform.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+26476 INFO: Processing standard module hook 'hook-certifi.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+26546 INFO: Processing standard module hook 'hook-urllib3.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+27433 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+27447 INFO: SetuptoolsInfo: initializing cached setuptools info...
+41842 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+42186 INFO: Processing standard module hook 'hook-xml.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+46692 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+47690 INFO: Processing standard module hook 'hook-charset_normalizer.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+51356 INFO: Processing standard module hook 'hook-cryptography.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+55617 INFO: hook-cryptography: cryptography does not seem to be using dynamically linked OpenSSL.
+58095 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+58155 INFO: Processing standard module hook 'hook-packaging.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+59347 INFO: Processing standard module hook 'hook-difflib.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+59730 INFO: Processing pre-safe-import-module hook 'hook-importlib_metadata.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+59734 INFO: Setuptools: 'importlib_metadata' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.importlib_metadata'!
+59773 INFO: Processing standard module hook 'hook-setuptools.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+59841 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+60047 INFO: Processing standard module hook 'hook-sysconfig.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+60073 INFO: Processing pre-safe-import-module hook 'hook-jaraco.functools.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+60078 INFO: Setuptools: 'jaraco.functools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.functools'!
+60121 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+60124 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+61448 INFO: Processing pre-safe-import-module hook 'hook-jaraco.text.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+61452 INFO: Setuptools: 'jaraco.text' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.text'!
+61501 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+61510 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+61517 INFO: Processing pre-safe-import-module hook 'hook-jaraco.context.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+61520 INFO: Setuptools: 'jaraco.context' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco.context'!
+61554 INFO: Processing pre-safe-import-module hook 'hook-backports.tarfile.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+61558 INFO: Setuptools: 'backports.tarfile' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.backports.tarfile'!
+61942 INFO: Processing standard module hook 'hook-backports.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+63264 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+63268 INFO: Setuptools: 'tomli' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.tomli'!
+65042 INFO: Processing standard module hook 'hook-pkg_resources.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+66625 INFO: Processing pre-safe-import-module hook 'hook-platformdirs.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+66663 INFO: Processing standard module hook 'hook-platformdirs.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+67379 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+67383 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+68250 INFO: Processing standard module hook 'hook-setuptools._vendor.importlib_metadata.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+68260 INFO: Processing pre-safe-import-module hook 'hook-zipp.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+68263 INFO: Setuptools: 'zipp' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.zipp'!
+68757 INFO: Processing standard module hook 'hook-pydantic.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\pydantic\experimental\__init__.py:7: PydanticExperimentalWarning: This module is experimental, its contents are subject to change and deprecation.
+  warnings.warn(
+75627 INFO: Processing standard module hook 'hook-pycparser.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+81749 INFO: Processing standard module hook 'hook-py.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+83421 INFO: Processing standard module hook 'hook-pytest.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+84148 INFO: Processing standard module hook 'hook-numpy.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+87052 INFO: Processing standard module hook 'hook-psutil.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+95441 INFO: Processing standard module hook 'hook-anyio.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+101628 INFO: Processing standard module hook 'hook-dns.rdata.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+105454 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+112306 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+115193 INFO: Processing standard module hook 'hook-lxml.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+117288 INFO: Processing standard module hook 'hook-lxml.etree.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+121998 INFO: Processing standard module hook 'hook-orjson.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+123159 INFO: Processing standard module hook 'hook-langchain.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+129071 INFO: hook-langchain: raising recursion limit to 5000
+129605 INFO: Processing standard module hook 'hook-jinja2.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+132303 INFO: Processing standard module hook 'hook-transformers.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+147765 INFO: Processing standard module hook 'hook-pandas.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+154848 INFO: Processing standard module hook 'hook-pytz.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+156010 INFO: Processing standard module hook 'hook-scipy.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+156639 INFO: Processing standard module hook 'hook-torch.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+7299 WARNING: Failed to collect submodules for 'torch.utils.tensorboard' because importing 'torch.utils.tensorboard' raised: ModuleNotFoundError: No module named 'tensorboard'
+W0418 17:44:08.132000 1380 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\utils\hooks\__init__.py:665: DeprecationWarning: `torch.distributed._sharding_spec` will be deprecated, use `torch.distributed._shard.sharding_spec` instead
+  __import__(name)
+C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\utils\hooks\__init__.py:665: DeprecationWarning: `torch.distributed._sharded_tensor` will be deprecated, use `torch.distributed._shard.sharded_tensor` instead
+  __import__(name)
+C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\utils\hooks\__init__.py:665: DeprecationWarning: `torch.distributed._shard.checkpoint` will be deprecated, use `torch.distributed.checkpoint` instead
+  __import__(name)
+201678 INFO: hook-torch: this torch build does not depend on MKL...
+202185 INFO: Processing standard module hook 'hook-sympy.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+204440 INFO: Processing standard module hook 'hook-matplotlib.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+205516 INFO: Processing pre-safe-import-module hook 'hook-gi.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+205736 INFO: Processing standard module hook 'hook-PIL.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+205941 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+207255 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+209395 INFO: Processing standard module hook 'hook-matplotlib.backends.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+209596 INFO: Processing standard module hook 'hook-matplotlib.pyplot.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+210823 INFO: Processing standard module hook 'hook-matplotlib.backend_bases.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+212132 INFO: Processing standard module hook 'hook-dateutil.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+212328 INFO: Processing pre-safe-import-module hook 'hook-six.moves.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks\\pre_safe_import_module'
+231070 INFO: Processing standard module hook 'hook-scipy.linalg.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+231343 INFO: Processing standard module hook 'hook-scipy.special._ufuncs.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+231589 INFO: Processing standard module hook 'hook-scipy.special._ellip_harm_2.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+236066 INFO: Processing standard module hook 'hook-scipy.spatial.transform.rotation.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+237930 INFO: Processing standard module hook 'hook-scipy.stats._stats.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+239004 INFO: Processing standard module hook 'hook-scipy.sparse.csgraph.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+275642 INFO: Processing pre-safe-import-module hook 'hook-win32com.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\pre_safe_import_module'
+279712 INFO: Processing standard module hook 'hook-fsspec.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\stdhooks'
+283396 INFO: Processing standard module hook 'hook-sqlite3.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+297765 INFO: Processing standard module hook 'hook-scipy.io.matlab.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+305295 INFO: Processing standard module hook 'hook-pandas.io.formats.style.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+309816 INFO: Processing standard module hook 'hook-pandas.plotting.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+312103 INFO: Processing standard module hook 'hook-sqlalchemy.py' from 'C:\\Users\\Marcelo\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages\\PyInstaller\\hooks'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Scripts\pyinstaller.exe\__main__.py", line 7, in <module>
+    sys.exit(_console_script_run())
+             ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\__main__.py", line 231, in _console_script_run
+    run()
+    ~~~^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\__main__.py", line 215, in run
+    run_build(pyi_config, spec_file, **vars(args))
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\__main__.py", line 70, in run_build
+    PyInstaller.building.build_main.main(pyi_config, spec_file, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\building\build_main.py", line 1270, in main
+    build(specfile, distpath, workpath, clean_build)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\building\build_main.py", line 1208, in build
+    exec(code, spec_namespace)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "build.spec", line 6, in <module>
+    a = Analysis(
+        ['main.py'],
+    ...<23 lines>...
+        noarchive=False,
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\building\build_main.py", line 582, in __init__
+    self.__postinit__()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\building\datastruct.py", line 184, in __postinit__
+    self.assemble()
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\building\build_main.py", line 712, in assemble
+    program_scripts.append(self.graph.add_script(script))
+                           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 283, in add_script
+    self._top_script_node = super().add_script(pathname)
+                            ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1177, in add_script
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1249, in import_hook
+    target_package, target_module_partname = self._find_head_package(
+                                             ~~~~~~~~~~~~~~~~~~~~~~~^
+        source_package, target_module_partname, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1428, in _find_head_package
+    target_package = self._safe_import_module(
+        target_module_headname, target_package_name, source_package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2086, in _safe_import_hook
+    target_modules = self.import_hook(
+        target_module_partname, source_module,
+        target_attr_names=None, level=level, edge_attr=edge_attr)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1262, in import_hook
+    submodule = self._safe_import_module(head, mname, submodule)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 454, in _safe_import_hook
+    ret_modules = super()._safe_import_hook(
+        target_module_partname, source_module, target_attr_names, level, edge_attr
+    )
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2295, in _safe_import_hook
+    self.import_hook(
+    ~~~~~~~~~~~~~~~~^
+        target_module_partname, source_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        target_attr_names=[target_submodule_partname],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        level=level,
+        ^^^^^^^^^^^^
+        edge_attr=edge_attr)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1288, in import_hook
+    for target_submodule in self._import_importable_package_submodules(
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        target_module, target_attr_names):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1537, in _import_importable_package_submodules
+    submodule = self._safe_import_module(
+        attr_name, submodule_name, package)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 516, in _safe_import_module
+    return super()._safe_import_module(module_basename, module_name, parent_package)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 1809, in _safe_import_module
+    self._process_imports(n)
+    ~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\lib\modulegraph\modulegraph.py", line 2629, in _process_imports
+    target_modules = self._safe_import_hook(*import_info, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 469, in _safe_import_hook
+    self._find_all_excluded_imports(ret_module.identifier)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\analysis.py", line 373, in _find_all_excluded_imports
+    excluded_imports.update(module_hook.excludedimports)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\imphook.py", line 343, in __getattr__
+    self._load_hook_module()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\depend\imphook.py", line 422, in _load_hook_module
+    self._hook_module = importlib_load_source(self.hook_module_name, self.hook_filename)
+                        ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\compat.py", line 615, in importlib_load_source
+    mod_loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\hooks\hook-sqlalchemy.py", line 42, in <module>
+    hiddenimports += _get_dialect_modules("sqlalchemy.dialects")
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\isolated\_parent.py", line 435, in wrapped
+    return call(function, *args, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\isolated\_parent.py", line 404, in call
+    return isolated.call(function, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\isolated\_parent.py", line 334, in call
+    raise RuntimeError(f"Child process call to {function.__name__}() failed with:\n" + output)
+RuntimeError: Child process call to _get_dialect_modules() failed with:
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\isolated\_child.py", line 63, in run_next_command
+    output = function(*args, **kwargs)
+  File "C:\Users\Marcelo\AppData\Local\Programs\Python\Python313\Lib\site-packages\PyInstaller\hooks\hook-sqlalchemy.py", line 36, in _get_dialect_modules
+    return [f"{module_name}.{submodule_name}" for submodule_name in module.__all__]
+                                                                    ^^^^^^^^^^^^^^
+AttributeError: module 'sqlalchemy.dialects' has no attribute '__all__'. Did you mean: '__file__'?
