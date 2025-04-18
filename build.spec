@@ -19,7 +19,12 @@ a = Analysis(
         'click',
         'reportlab',
         'xhtml2pdf',
-        'webdriver_manager'
+        'webdriver_manager',
+        'sqlalchemy',
+        'sqlalchemy.dialects.sqlite',
+        'sqlalchemy.dialects.postgresql',
+        'sqlalchemy.dialects.mysql',
+        'sqlalchemy.orm'
     ],
     hookspath=[],
     hooksconfig={},
